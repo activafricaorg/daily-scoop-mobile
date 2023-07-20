@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "056bcd2e-9b2e-45fe-a1f5-f128001a8e01"
+      }
+    },
+    "owner": "omeiza"
   }
 }
