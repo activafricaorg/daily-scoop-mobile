@@ -1,0 +1,58 @@
+const SectionStyles = S
+
+.container {
+	margin: 0;
+
+	@media only screen and (max-width: 480px) {
+		margin: 0;
+	}
+}
+
+.wrapper {
+	margin: 40px 0;
+	& > div {
+		margin: 10px 0 15px;
+	}
+}
+
+.title {
+	font-weight: 500;
+	margin-bottom: 0;
+	padding: 0.75rem 0 1rem;
+	text-transform: capitalize;
+	letter-spacing: .01em;
+	line-height: 1;
+	font-size: 1.6em;
+	//border-top: 1px solid rgba(243, 245, 247, 0.15);
+	//border-bottom: 1px solid rgba(243, 245, 247, 0.15);
+	display: flex;
+	align-items: center;
+
+	@media only screen and (max-width: 480px) {
+		padding: 0.75rem;
+	}
+
+	img {
+		margin-right: 10px;
+
+		@media only screen and (max-width: 480px) {
+			width: 18px;
+			height: 18px;
+			margin-top: 2px;
+		}
+	}
+}
+
+.moreLink {
+	font-size: 1.1em;
+	background-color: var(--link-color);
+	text-transform: capitalize;
+	color: black;
+	height: 45px;
+	width: 100%;
+	padding: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	font-weight: 500;
+}
