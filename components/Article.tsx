@@ -26,10 +26,10 @@ const Styles = StyleSheet.create({
 		borderStyle: 'solid',
 		borderRadius: 15,
 		borderColor: 'rgba(243, 245, 247, 0.1)',
-		marginBottom: 10
+		marginBottom: 10,
 	},
 	articleTitle: {
-		fontFamily: 'Poly-Sans-Median',
+		fontFamily: 'Poly-Sans-Neutral',
 		fontSize: 18,
 		color: '#dcdcdc',
 		paddingTop: 10,
@@ -50,7 +50,6 @@ const Styles = StyleSheet.create({
 		borderTopColor: 'rgba(243, 245, 247, 0.1)',
 	},
 	articleSource: {
-		width: 'max-content',
 		fontFamily: 'Poly-Sans-Median',
 		color: '#fdc006',
 		backgroundColor: '#1c1c1c',
