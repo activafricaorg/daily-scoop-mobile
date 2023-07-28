@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import {Dimensions} from 'react-native';
+import { Dimensions } from 'react-native';
 const windowWidth = Dimensions.get('window').width;
 
 export default StyleSheet.create({
@@ -8,11 +8,11 @@ export default StyleSheet.create({
 	},
 	mainContainer: {
 		padding: 10,
-		marginTop: 40,
+		marginTop: 20,
 		width:windowWidth
 	},
 	textView: {
-		// fontFamily: 'Poly-Sans-Neutral',
+		fontFamily: 'Moderat-Regular',
 		fontSize: 16,
 		color: 'white',
 		textDecorationStyle: undefined
@@ -22,11 +22,15 @@ export default StyleSheet.create({
 		borderBottomColor: 'rgba(243, 245, 247, 0.1)',
 		padding: 10,
 	},
+	wrapper: {
+		width: '100%',
+		backgroundColor: '#0f0f0f'
+	},
 	headingText: {
-		fontSize: 30,
+		color: 'white',
+		fontFamily: 'Moderat-Bold',
 		textAlign: 'center',
-		// fontFamily: 'Poly-Sans-Median',
-		color: 'black',
-		marginBottom: 30
+		marginBottom: 20,
+		fontSize: 34
 	}
 })

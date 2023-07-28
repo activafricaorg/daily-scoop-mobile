@@ -1,16 +1,15 @@
-import { StyleSheet, Text, View } from "react-native";
-import Base from "../styles/Base";
+import { ScrollView, View } from "react-native";
+import baseStyles from "../styles/Base";
 
-export default function Layout (props: {children: string | JSX.Element | JSX.Element[], category: string | null}) {
+export default function Layout (props: {children: string | JSX.Element | JSX.Element[]}) {
 	return (
-		<View style={Base.container}>
-			<View style={Base.header}>
-				<Text style={Base.textView}>Daily Scoop</Text>
+		<ScrollView style={baseStyles.wrapper}>
+			<View style={baseStyles.container}>
+				<View style={baseStyles.mainContainer}>
+					{ props.children }
+				</View>
 			</View>
-			<View style={Base.mainContainer}>
-				{ props.children }
-			</View>
-		</View>
+		</ScrollView>
 	)
 }
 

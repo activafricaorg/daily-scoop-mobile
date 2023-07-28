@@ -29,8 +29,8 @@ const Styles = StyleSheet.create({
 		marginBottom: 10,
 	},
 	articleTitle: {
-		fontFamily: 'Poly-Sans-Neutral',
-		fontSize: 18,
+		fontFamily: 'Moderat-Regular',
+		fontSize: 19,
 		color: '#dcdcdc',
 		paddingTop: 10,
 		paddingBottom: 10,
@@ -50,7 +50,7 @@ const Styles = StyleSheet.create({
 		borderTopColor: 'rgba(243, 245, 247, 0.1)',
 	},
 	articleSource: {
-		fontFamily: 'Poly-Sans-Median',
+		fontFamily: 'Moderat-Bold',
 		color: '#fdc006',
 		backgroundColor: '#1c1c1c',
 		borderRadius: 10,
@@ -63,7 +63,7 @@ const Styles = StyleSheet.create({
 	},
 	articleDate: {
 		width: '50%',
-		fontFamily: 'Poly-Sans-Median',
+		fontFamily: 'Moderat-Bold',
 		color: '#707070',
 		fontSize: 12
 	}

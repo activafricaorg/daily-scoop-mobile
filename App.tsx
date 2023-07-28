@@ -1,64 +1,81 @@
-import Layout from "./components/Layout";
-import Article from "./components/Article";
-import { useState, useEffect } from "react";
-import { StatusBar } from 'expo-status-bar';
 import { useFonts } from "expo-font";
-import { ArticleTypes } from "./types/article";
-import {StyleSheet, Text, View} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as SplashScreen from 'expo-splash-screen';
+import HomeScreen from "./screens/HomeScreen";
+import CategoryScreen from "./screens/CategoryScreen";
+import InformationScreen from "./screens/InformationScreen";
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 SplashScreen.preventAutoHideAsync().then(() => { return null; });
 
 export default function App() {
-    const [articles, setArticles] = useState<ArticleTypes[]>([]);
+    const Tab = createBottomTabNavigator();
     const [fontsLoaded] = useFonts({
-        'Poly-Sans-Slim': require('./assets/localWebFonts/polysans-slim.otf'),
-        'Poly-Sans-Slim-Italic': require('./assets/localWebFonts/polysans-slim-italic.otf'),
-        'Poly-Sans-Neutral': require('./assets/localWebFonts/polysans-neutral.otf'),
-        'Poly-Sans-Median': require('./assets/localWebFonts/polysans-median.otf'),
-        'Poly-Sans-Median-Italic': require('./assets/localWebFonts/polysans-median-italic.otf'),
-        'Barlow': require('./assets/localWebFonts/BarlowCondensed-Bold.otf')
+        'Moderat-Regular': require('./assets/fonts/Moderat-Regular.otf'),
+        'Moderat-Bold': require('./assets/fonts/Moderat-Bold.otf')
     });
 
-    useEffect(() => {
-        fetch('https://api.dailyscoop.africa/article')
-            .then(async (res) => {
-                const articles: ArticleTypes[] = await res.json();
-                setArticles(articles);
-
-                if (fontsLoaded) await SplashScreen.hideAsync();
-            });
-    },);
+    if (!fontsLoaded) {
+        SplashScreen.hideAsync().then(() => { return null });
+    }
 
     return (
-        <View>
-            <Layout category={null} >
-                <View>
-                    <Text style={styles.headingText}>All articles</Text>
-                </View>
-                <View style={styles.wrapper}>
-                    {
-                        articles
-                            .map((article: ArticleTypes, index: number) => (
-                                <Article isCategory={ false } key={ index } data={ article } />
-                            ))
-                    }
-                </View>
-                <StatusBar style="auto" />
-            </Layout>
-        </View>
+        <NavigationContainer>
+            <Tab.Navigator
+                screenOptions={({ route }) => ({
+                    headerShown: false,
+                    initialRouteName: 'Home',
+                    tabBarActiveTintColor: 'rgb(253, 192, 6)',
+                    tabBarInactiveTintColor: '#a8a8a8',
+                    tabBarStyle: { padding: 10, borderWidth: 0, backgroundColor: 'rgba(28, 28, 28, 1)'},
+                    tabBarLabelStyle: {marginTop: 5, fontFamily: 'Moderat-Bold'},
+                })}
+            >
+                <Tab.Screen name="HomeScreen" options={{
+                    title: "Home",
+                    tabBarIcon: ({ focused, color, size }) => (
+                        <Ionicons name='md-home-outline' size={16} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
+                    )}}
+                >
+                    {(props) => <HomeScreen {...props} />}
+                </Tab.Screen>
+                <Tab.Screen name="News" options={{
+                    tabBarIcon: ({ focused, color, size }) => (
+                        <Ionicons name='md-newspaper-outline' size={16} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
+                    )}}
+                >
+                    {(props) => <CategoryScreen {...props} category="news" />}
+                </Tab.Screen>
+                <Tab.Screen name="Tech" options={{
+                    tabBarIcon: ({ focused, color, size }) => (
+                        <Ionicons name='rocket-outline' size={16} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
+                    )}}
+                >
+                    {(props) => <CategoryScreen {...props} category="tech" />}
+                </Tab.Screen>
+                <Tab.Screen name="Lifestyle" options={{
+                    tabBarIcon: ({ focused, color, size }) => (
+                        <Ionicons name='musical-notes-outline' size={16} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
+                    )}}
+                >
+                    {(props) => <CategoryScreen {...props} category="entertainment" />}
+                </Tab.Screen>
+                <Tab.Screen name="Sports" options={{
+                    tabBarIcon: ({ focused, color, size }) => (
+                        <Ionicons name='md-football' size={16} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
+                    )}}
+                >
+                    {(props) => <CategoryScreen {...props} category="sports" />}
+                </Tab.Screen>
+                <Tab.Screen name="More" options={{
+                    tabBarIcon: ({ focused, color, size }) => (
+                        <Ionicons name='md-apps' size={16} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
+                    )}}
+                >
+                    {(props) => <InformationScreen {...props} />}
+                </Tab.Screen>
+            </Tab.Navigator>
+        </NavigationContainer>
     );
 }
-
-const styles = StyleSheet.create({
-    wrapper: {
-        width: '100%'
-    },
-    headingText: {
-        color: 'white',
-        fontFamily: 'Barlow',
-        textAlign: 'center',
-        marginBottom: 20,
-        fontSize: 34
-    }
-});

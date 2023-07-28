@@ -1,7 +1,3 @@
-/**
- * Helper functions
- */
-
 export const capitalize = (input: string): string => {
 	const arr = input.split(" ");
 	for (let i = 0; i < arr.length; i++) {
