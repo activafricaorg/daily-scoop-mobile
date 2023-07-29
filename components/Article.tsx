@@ -1,7 +1,8 @@
 import moment from "moment";
 import { ArticleTypes } from "../types/article";
-import {StyleSheet, Text, View} from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { sanitizeTitle, capitalize, slugifyText } from "../util/helper";
+import * as WebBrowser from 'expo-web-browser';
 
 export default function Article (props: { isCategory: boolean, key: number, data: ArticleTypes }) {
 	const realDate = moment(props.data.articleDate).format('ll');
@@ -10,17 +11,22 @@ export default function Article (props: { isCategory: boolean, key: number, data
 	let sourceUrl = `/sources/${slugifyText(props.data.source)}`;
 
 	return (
-		<View style={Styles.articleView}>
-			<Text style={Styles.articleTitle}>{title}</Text>
-			<View style={Styles.articleMeta}>
-				<Text style={Styles.articleSource}>{source}</Text>
-				<Text style={Styles.articleDate}>{realDate}</Text>
+		<View style={styles.articleView}>
+			<Text
+				style={styles.articleTitle}
+				onPress={() => WebBrowser.openBrowserAsync(props.data.url)}
+			>
+				{title}
+			</Text>
+			<View style={styles.articleMeta}>
+				<Text style={styles.articleSource}>{source}</Text>
+				<Text style={styles.articleDate}>{realDate}</Text>
 			</View>
 		</View>
 	)
 }
 
-const Styles = StyleSheet.create({
+const styles = StyleSheet.create({
 	articleView: {
 		borderWidth: 1,
 		borderStyle: 'solid',

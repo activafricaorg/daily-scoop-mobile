@@ -21,9 +21,6 @@ export default function CategoryScreen(props: { category: string, route: any; na
 
 	return (
 		<Layout>
-			<View>
-				<Text style={baseStyles.headingText}>{capitalize(props.category)}</Text>
-			</View>
 			<View style={baseStyles.wrapper}>
 				{
 					articles

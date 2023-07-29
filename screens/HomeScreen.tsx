@@ -19,9 +19,6 @@ export default function HomeScreen(props: { route: any; navigation: any; }) {
 
 	return (
 		<Layout>
-			<View>
-				<Text style={baseStyles.headingText}>All articles</Text>
-			</View>
 			<View style={baseStyles.wrapper}>
 				{
 					articles
