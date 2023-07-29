@@ -3,6 +3,7 @@ import { ArticleTypes } from "../types/article";
 import { StyleSheet, Text, View } from "react-native";
 import { sanitizeTitle, capitalize, slugifyText } from "../util/helper";
 import * as WebBrowser from 'expo-web-browser';
+import { Link } from '@react-navigation/native';
 
 export default function Article (props: { isCategory: boolean, key: number, data: ArticleTypes }) {
 	const realDate = moment(props.data.articleDate).format('ll');
@@ -19,7 +20,9 @@ export default function Article (props: { isCategory: boolean, key: number, data
 				{title}
 			</Text>
 			<View style={styles.articleMeta}>
-				<Text style={styles.articleSource}>{source}</Text>
+				<Link style={styles.articleSource} to={{ screen: 'Info', params: { id: 'jane' } }}>
+					{source}
+				</Link>
 				<Text style={styles.articleDate}>{realDate}</Text>
 			</View>
 		</View>
