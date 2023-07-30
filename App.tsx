@@ -1,5 +1,5 @@
 import { useFonts } from "expo-font";
-import { NavigationContainer } from '@react-navigation/native';
+import { getFocusedRouteNameFromRoute, NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as SplashScreen from 'expo-splash-screen';
@@ -88,9 +88,26 @@ export default function App() {
 
     return (
         <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen name="Home" component={HomeTabs} />
-                <Stack.Screen name="Info" component={InformationScreen} />
+            <Stack.Navigator
+                screenOptions={({ route }) => ({
+                    headerShadowVisible: false,
+                    headerBackTitleVisible: false,
+                })}
+            >
+                <Stack.Screen
+                    name="Home"
+                    component={HomeTabs}
+                    options={({ route }) => ({
+                        headerShown: false,
+                    })}
+                />
+                <Stack.Screen
+                    name="Info"
+                    component={InformationScreen}
+                    options={({ route }) => ({
+                        headerShown: true,
+                    })}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );
