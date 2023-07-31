@@ -65,7 +65,7 @@ function HomeTabs() {
                 {(props) => <CategoryScreen {...props} category="entertainment" />}
             </Tab.Screen>
             <Tab.Screen name="Sports" options={{
-                title: "Lifestyle",
+                title: "Sports",
                 tabBarIcon: ({ focused, color, size }) => (
                     <Ionicons name='md-football' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
                 )}}
