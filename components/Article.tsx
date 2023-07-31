@@ -9,7 +9,6 @@ export default function Article (props: { isCategory: boolean, key: number, data
 	const realDate = moment(props.data.articleDate).format('ll');
 	let title = sanitizeTitle(props.data.title);
 	let source = capitalize(props.data.source);
-	let sourceUrl = `/sources/${slugifyText(props.data.source)}`;
 
 	return (
 		<View style={styles.articleView}>
@@ -20,7 +19,7 @@ export default function Article (props: { isCategory: boolean, key: number, data
 				{title}
 			</Text>
 			<View style={styles.articleMeta}>
-				<Link style={styles.articleSource} to={{ screen: 'Info', params: { id: 'jane' } }}>
+				<Link style={styles.articleSource} to={{ screen: 'Publisher', params: { source: slugifyText(props.data.source), sourceTitle: source }}}>
 					{source}
 				</Link>
 				<Text style={styles.articleDate}>{realDate}</Text>
