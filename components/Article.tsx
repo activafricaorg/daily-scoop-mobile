@@ -1,32 +1,33 @@
+import * as WebBrowser from 'expo-web-browser';
 import moment from "moment";
 import { ArticleTypes } from "../types/article";
 import { StyleSheet, Text, View } from "react-native";
-import { sanitizeTitle, capitalize, slugifyText } from "../util/helper";
-import * as WebBrowser from 'expo-web-browser';
 import { Link } from '@react-navigation/native';
+import { sanitizeTitle, capitalize, slugifyText } from "../util/helper";
 
-export default function Article (props: { isCategory: boolean, key: number, data: ArticleTypes }) {
-	const realDate = moment(props.data.articleDate).format('ll');
+const Article =  (props: { isCategory: boolean, key: number, data: ArticleTypes }) => {
 	let title = sanitizeTitle(props.data.title);
 	let source = capitalize(props.data.source);
+	const realDate = moment(props.data.articleDate).format('ll');
 
 	return (
 		<View style={styles.articleView}>
-			<Text
-				style={styles.articleTitle}
-				onPress={() => WebBrowser.openBrowserAsync(props.data.url)}
-			>
-				{title}
+			<Text style={styles.articleTitle} onPress={() => WebBrowser.openBrowserAsync(props.data.url)}>
+				{ title }
 			</Text>
 			<View style={styles.articleMeta}>
 				<Link style={styles.articleSource} to={{ screen: 'Publisher', params: { source: slugifyText(props.data.source), sourceTitle: source }}}>
-					{source}
+					{ source }
 				</Link>
-				<Text style={styles.articleDate}>{realDate}</Text>
+				<Text style={styles.articleDate}>
+					{ realDate }
+				</Text>
 			</View>
 		</View>
 	)
 }
+
+export default Article;
 
 const styles = StyleSheet.create({
 	articleView: {
@@ -75,4 +76,4 @@ const styles = StyleSheet.create({
 		color: '#707070',
 		fontSize: 12
 	}
-})
+});

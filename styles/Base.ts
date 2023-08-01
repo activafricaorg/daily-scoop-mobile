@@ -1,15 +1,21 @@
-import { StyleSheet } from "react-native";
 import { Dimensions } from 'react-native';
+import { StyleSheet } from "react-native";
+
 const windowWidth = Dimensions.get('window').width;
 
 export default StyleSheet.create({
+	wrapper: {
+		width: '100%',
+		backgroundColor: '#0f0f0f'
+	},
 	container: {
-		backgroundColor: '#0f0f0f',
+		flex: 1,
+		backgroundColor: '#0f0f0f'
 	},
 	mainContainer: {
 		padding: 10,
 		marginTop: 20,
-		width:windowWidth
+		width: windowWidth
 	},
 	textView: {
 		fontFamily: 'Moderat-Regular',
@@ -21,10 +27,6 @@ export default StyleSheet.create({
 		borderBottomWidth: 1,
 		borderBottomColor: 'rgba(243, 245, 247, 0.1)',
 		padding: 10,
-	},
-	wrapper: {
-		width: '100%',
-		backgroundColor: '#0f0f0f'
 	},
 	headingText: {
 		color: 'white',
