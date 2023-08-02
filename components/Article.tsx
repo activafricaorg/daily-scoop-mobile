@@ -16,9 +16,18 @@ const Article =  (props: { isCategory: boolean, key: number, data: ArticleTypes 
 				{ title }
 			</Text>
 			<View style={styles.articleMeta}>
-				<Link style={styles.articleSource} to={{ screen: 'Publisher', params: { source: slugifyText(props.data.source), sourceTitle: source }}}>
-					{ source }
-				</Link>
+				<View style={{
+					alignSelf: 'flex-start',
+					borderTopRightRadius: 20,
+					borderTopLeftRadius: 20,
+					borderBottomLeftRadius: 20,
+					borderBottomRightRadius: 20,
+					overflow: 'hidden'
+				}}>
+					<Link style={styles.articleSource} to={{ screen: 'Publisher', params: { source: slugifyText(props.data.source), sourceTitle: source }}}>
+						{ source }
+					</Link>
+				</View>
 				<Text style={styles.articleDate}>
 					{ realDate }
 				</Text>
@@ -39,7 +48,8 @@ const styles = StyleSheet.create({
 	},
 	articleTitle: {
 		fontFamily: 'Moderat-Regular',
-		fontSize: 19,
+		fontSize: 20,
+		lineHeight: 23,
 		color: '#dcdcdc',
 		paddingTop: 10,
 		paddingBottom: 10,
@@ -63,7 +73,6 @@ const styles = StyleSheet.create({
 		color: '#fdc006',
 		backgroundColor: '#1c1c1c',
 		borderRadius: 10,
-		marginRight: 15,
 		paddingTop: 3,
 		paddingBottom: 3,
 		paddingLeft: 8,
@@ -71,9 +80,10 @@ const styles = StyleSheet.create({
 		fontSize: 12
 	},
 	articleDate: {
+		marginLeft: 15,
 		width: '50%',
 		fontFamily: 'Moderat-Bold',
 		color: '#707070',
-		fontSize: 12
+		fontSize: 14
 	}
 });

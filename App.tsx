@@ -11,6 +11,8 @@ import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { StackNavigatorParamList } from "./types/navigation/StackNavigatorParamList";
 import Ionicons from '@expo/vector-icons/Ionicons';
+import JobScreen from "./screens/JobScreen";
+import BookMarkScreen from "./screens/BookmarkScreen";
 
 SplashScreen.preventAutoHideAsync().then(() => { return null; });
 
@@ -35,48 +37,111 @@ function FeedTabs() {
                 tabBarActiveTintColor: 'rgb(253, 192, 6)',
                 tabBarInactiveTintColor: '#a8a8a8',
                 tabBarStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', paddingBottom: 7, paddingTop: insets.top, paddingLeft: insets.left, paddingRight: insets.right, },
-                tabBarLabelStyle: { marginTop: 2, fontFamily: 'Moderat-Bold', textTransform: 'capitalize', fontWeight: 'bold' },
-                tabBarIndicatorStyle: { backgroundColor: 'rgb(253, 192, 6)', height: 2 },
+                tabBarLabelStyle: { marginTop: 3, fontFamily: 'Moderat-Bold', textTransform: 'capitalize', fontWeight: 'bold', fontSize: 14 },
+                tabBarIndicatorStyle: { backgroundColor: 'rgb(253, 192, 6)', height: 3 },
                 tabBarScrollEnabled: true
             })}
         >
             <NavTab.Screen name="Latest" options={{
                     title: "Latest",
-                    tabBarIcon: ({ focused }) => ( <Ionicons name='ios-logo-rss' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} /> )}
+                    tabBarIcon: ({ focused }) => ( <Ionicons name='ios-logo-rss' size={22} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} /> )}
                 }
             >
                 { (props) => <HomeScreen {...props} /> }
             </NavTab.Screen>
             <NavTab.Screen name="News" options={{
                     title: "News",
-                    tabBarIcon: ({ focused}) => ( <Ionicons name='md-newspaper-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} /> )}
+                    tabBarIcon: ({ focused}) => ( <Ionicons name='md-newspaper-outline' size={22} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} /> )}
                 }
             >
                 { (props) => <CategoryScreen {...props} category="news" /> }
             </NavTab.Screen>
             <NavTab.Screen name="Tech" options={{
                     title: "Tech",
-                    tabBarIcon: ({ focused }) => ( <Ionicons name='rocket-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} /> )}
+                    tabBarIcon: ({ focused }) => ( <Ionicons name='rocket-outline' size={22} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} /> )}
                 }
             >
                 { (props) => <CategoryScreen {...props} category="tech" /> }
             </NavTab.Screen>
             <NavTab.Screen name="Lifestyle" options={{
                     title: "Lifestyle",
-                    tabBarIcon: ({ focused}) => ( <Ionicons name='musical-notes-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} /> )}
+                    tabBarIcon: ({ focused}) => ( <Ionicons name='musical-notes-outline' size={22} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} /> )}
                 }
             >
                 { (props) => <CategoryScreen {...props} category="entertainment" /> }
             </NavTab.Screen>
             <NavTab.Screen name="Sports" options={{
                     title: "Sports",
-                    tabBarIcon: ({ focused}) => ( <Ionicons name='md-football' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} /> )}
+                    tabBarIcon: ({ focused}) => ( <Ionicons name='md-football' size={22} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} /> )}
                 }
             >
                 { (props) => <CategoryScreen {...props} category="sports" /> }
             </NavTab.Screen>
         </NavTab.Navigator>
     );
+}
+
+function BottomTabs() {
+    const insets = useSafeAreaInsets();
+
+    return (
+        <Tab.Navigator
+            screenOptions={() => ({
+                tabBarActiveTintColor: 'rgb(253, 192, 6)',
+                tabBarInactiveTintColor: '#a8a8a8',
+                tabBarStyle: { paddingTop: 10, paddingBottom: insets.bottom, borderTopWidth: 0, backgroundColor: 'rgba(28, 28, 28, 1)' },
+                tabBarLabelStyle: { marginTop: 3, fontFamily: 'Moderat-Regular', fontSize: 11 },
+                headerStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', borderBottomWidth: 0 },
+                headerTintColor: '#fff',
+                headerTitleStyle: { fontFamily: 'Moderat-Bold', fontSize: 20, paddingBottom: 10 },
+                headerShadowVisible: false,
+                headerBackTitleVisible: false,
+                headerTitleAlign: 'center'
+            })}
+        >
+            <Tab.Screen
+                name="Feed"
+                component={FeedTabs}
+                options={() => ({
+                    headerShown: false,
+                    tabBarIcon: ({ focused }) => (
+                        <Ionicons name='md-home-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
+                    )
+                })}
+            />
+            <Tab.Screen
+                name="Jobs"
+                component={ JobScreen }
+                options={({ route }) => ({
+                    headerShown: false,
+                    tabBarIcon: ({ focused }) => (
+                        <Ionicons name='md-briefcase-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
+                    )
+                })}
+            />
+            <Tab.Screen
+                name="Bookmarks"
+                component={ BookMarkScreen }
+                options={({ route }) => ({
+                    headerShown: false,
+                    tabBarIcon: ({ focused }) => (
+                        <Ionicons name='bookmarks-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
+                    )
+                })}
+            />
+            <Tab.Screen
+                name="Settings"
+                component={SourceScreen}
+                options={({ route }) => ({
+                    // headerTitle: route.params?.sourceTitle,
+                    headerShown: true,
+                    tabBarIcon: ({ focused }) => (
+                        <Ionicons name='md-settings-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
+                    )
+                })}
+            />
+        </Tab.Navigator>
+    )
 }
 
 export default function App() {
@@ -115,8 +180,8 @@ export default function App() {
         <NavigationContainer
             onReady={() => onLayoutRootView()}
         >
-            <Tab.Navigator
-                screenOptions={() => ({
+            <Stack.Navigator
+                screenOptions={({ route }) => ({
                     tabBarActiveTintColor: 'rgb(253, 192, 6)',
                     tabBarInactiveTintColor: '#a8a8a8',
                     tabBarStyle: { position: 'absolute', height: 60, paddingTop: 10, paddingBottom: 10, borderTopWidth: 0, backgroundColor: 'rgba(28, 28, 28, 1)' },
@@ -129,50 +194,26 @@ export default function App() {
                     headerTitleAlign: 'center'
                 })}
             >
-                <Tab.Screen
-                    name="Feed"
-                    component={FeedTabs}
-                    options={() => ({
+                <Stack.Screen
+                    name="Home"
+                    component={ BottomTabs }
+                    options={({ route }) => ({
                         headerShown: false,
-                        tabBarIcon: ({ focused }) => (
-                            <Ionicons name='md-home-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
-                        )
                     })}
                 />
-                <Tab.Screen
-                    name="Jobs"
-                    component={SourceScreen}
+                <Stack.Screen
+                    name="Publisher"
+                    component={ SourceScreen }
                     options={({ route }) => ({
-                        // headerTitle: route.params?.sourceTitle,
-                        headerShown: true,
-                        tabBarIcon: ({ focused }) => (
-                            <Ionicons name='md-briefcase-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
-                        )
+                        headerTitle: route.params?.sourceTitle,
+                        headerShown: true
                     })}
                 />
-                <Tab.Screen
-                    name="Bookmarks"
-                    component={SourceScreen}
-                    options={({ route }) => ({
-                        // headerTitle: route.params?.sourceTitle,
-                        headerShown: true,
-                        tabBarIcon: ({ focused }) => (
-                            <Ionicons name='bookmarks-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
-                        )
-                    })}
-                />
-                <Tab.Screen
+                <Stack.Screen
                     name="Settings"
-                    component={SourceScreen}
-                    options={({ route }) => ({
-                        // headerTitle: route.params?.sourceTitle,
-                        headerShown: true,
-                        tabBarIcon: ({ focused }) => (
-                            <Ionicons name='md-settings-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
-                        )
-                    })}
+                    component={ SourceScreen }
                 />
-            </Tab.Navigator>
+            </Stack.Navigator>
         </NavigationContainer>
     );
 }

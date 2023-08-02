@@ -1,4 +1,5 @@
 export type StackNavigatorParamList = {
-	Home: undefined;
+	Home: undefined,
 	Publisher: { source: string, sourceTitle: string  };
+	Settings: undefined
 }

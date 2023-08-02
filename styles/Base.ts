@@ -14,7 +14,8 @@ export default StyleSheet.create({
 	},
 	mainContainer: {
 		padding: 10,
-		marginTop: 20,
+		marginTop: 0,
+		marginBottom: 50,
 		width: windowWidth
 	},
 	textView: {
@@ -29,10 +30,32 @@ export default StyleSheet.create({
 		padding: 10,
 	},
 	headingText: {
-		color: 'white',
+		color: '#dcdcdc',
 		fontFamily: 'Moderat-Bold',
-		textAlign: 'center',
-		marginBottom: 20,
-		fontSize: 34
+		marginBottom: 10,
+		fontSize: 24
+	},
+	paragraphText: {
+		fontFamily: 'Moderat-Regular',
+		fontSize: 18,
+		lineHeight: 23,
+		color: 'rgb(168, 168, 168)',
+	},
+	infoContainer: {
+		marginTop: 10,
+		marginLeft: 20,
+		marginRight: 20
+	},
+	button: {
+		display: 'flex',
+		alignSelf: "flex-start",
+		fontFamily: 'Moderat-Regular',
+		color: '#0f0f0f',
+		backgroundColor: '#fdc006',
+		fontSize: 16,
+		paddingTop: 10,
+		paddingBottom: 10,
+		paddingLeft: 20,
+		paddingRight: 20
 	}
 })
