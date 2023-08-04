@@ -37,14 +37,15 @@ export default StyleSheet.create({
 	},
 	paragraphText: {
 		fontFamily: 'Moderat-Regular',
-		fontSize: 18,
+		marginBottom: 10,
+		fontSize: 17,
 		lineHeight: 23,
 		color: 'rgb(168, 168, 168)',
 	},
 	infoContainer: {
 		marginTop: 10,
-		marginLeft: 20,
-		marginRight: 20
+		marginLeft: 10,
+		marginRight: 10
 	},
 	button: {
 		display: 'flex',
@@ -58,19 +59,7 @@ export default StyleSheet.create({
 		paddingLeft: 20,
 		paddingRight: 20
 	},
-	infoView: {
-		borderWidth: 1,
-		borderStyle: 'solid',
-		borderBottomColor: 'rgba(243, 245, 247, 0.1)',
-	},
-	infoViewText: {
-		fontFamily: 'Moderat-Regular',
-		fontSize: 16,
-		lineHeight: 23,
-		color: '#dcdcdc',
-		paddingTop: 15,
-		paddingBottom: 15,
-		paddingLeft: 15,
-		paddingRight: 15
+	textLink: {
+		color: '#fdc006'
 	}
 })

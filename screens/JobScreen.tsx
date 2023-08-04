@@ -18,7 +18,7 @@ const JobScreen = (props: { route: any; navigation: any; }) => {
 						borderTopLeftRadius: 20,
 						borderBottomLeftRadius: 20,
 						borderBottomRightRadius: 20,
-						marginTop: 30,
+						marginTop: 20,
 						overflow: 'hidden'
 					}}>
 						<Text

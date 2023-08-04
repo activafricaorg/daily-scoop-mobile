@@ -7,16 +7,14 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import HomeScreen from "./screens/HomeScreen";
 import CategoryScreen from "./screens/CategoryScreen";
 import SourceScreen from "./screens/SourceScreen";
+import JobScreen from "./screens/JobScreen";
+import BookMarkScreen from "./screens/BookmarkScreen";
+import InformationScreen from "./screens/InformationScreen";
+import AboutScreen from "./screens/AboutScreen";
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { StackNavigatorParamList } from "./types/navigation/StackNavigatorParamList";
 import Ionicons from '@expo/vector-icons/Ionicons';
-import JobScreen from "./screens/JobScreen";
-import BookMarkScreen from "./screens/BookmarkScreen";
-import {Settings} from "react-native";
-import InformationScreen from "./screens/InformationScreen";
-import About from "./pages/about";
-import AboutScreen from "./screens/AboutScreen";
 
 SplashScreen.preventAutoHideAsync().then(() => { return null; });
 
@@ -134,13 +132,13 @@ function BottomTabs() {
                 })}
             />
             <Tab.Screen
-                name="Settings"
+                name="Info"
                 component={ InformationScreen }
                 options={({ route }) => ({
                     headerShown: true,
                     headerBackTitleVisible: true,
                     tabBarIcon: ({ focused }) => (
-                        <Ionicons name='md-settings-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
+                        <Ionicons name='information-circle-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
                     )
                 })}
             />
