@@ -57,5 +57,20 @@ export default StyleSheet.create({
 		paddingBottom: 10,
 		paddingLeft: 20,
 		paddingRight: 20
+	},
+	infoView: {
+		borderWidth: 1,
+		borderStyle: 'solid',
+		borderBottomColor: 'rgba(243, 245, 247, 0.1)',
+	},
+	infoViewText: {
+		fontFamily: 'Moderat-Regular',
+		fontSize: 16,
+		lineHeight: 23,
+		color: '#dcdcdc',
+		paddingTop: 15,
+		paddingBottom: 15,
+		paddingLeft: 15,
+		paddingRight: 15
 	}
 })

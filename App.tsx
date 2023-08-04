@@ -13,6 +13,10 @@ import { StackNavigatorParamList } from "./types/navigation/StackNavigatorParamL
 import Ionicons from '@expo/vector-icons/Ionicons';
 import JobScreen from "./screens/JobScreen";
 import BookMarkScreen from "./screens/BookmarkScreen";
+import {Settings} from "react-native";
+import InformationScreen from "./screens/InformationScreen";
+import About from "./pages/about";
+import AboutScreen from "./screens/AboutScreen";
 
 SplashScreen.preventAutoHideAsync().then(() => { return null; });
 
@@ -92,7 +96,7 @@ function BottomTabs() {
                 tabBarStyle: { paddingTop: 10, paddingBottom: insets.bottom, borderTopWidth: 0, backgroundColor: 'rgba(28, 28, 28, 1)' },
                 tabBarLabelStyle: { marginTop: 3, fontFamily: 'Moderat-Regular', fontSize: 11 },
                 headerStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', borderBottomWidth: 0 },
-                headerTintColor: '#fff',
+                headerTintColor: '#a8a8a8',
                 headerTitleStyle: { fontFamily: 'Moderat-Bold', fontSize: 20, paddingBottom: 10 },
                 headerShadowVisible: false,
                 headerBackTitleVisible: false,
@@ -131,10 +135,10 @@ function BottomTabs() {
             />
             <Tab.Screen
                 name="Settings"
-                component={SourceScreen}
+                component={ InformationScreen }
                 options={({ route }) => ({
-                    // headerTitle: route.params?.sourceTitle,
                     headerShown: true,
+                    headerBackTitleVisible: true,
                     tabBarIcon: ({ focused }) => (
                         <Ionicons name='md-settings-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
                     )
@@ -186,12 +190,12 @@ export default function App() {
                     tabBarInactiveTintColor: '#a8a8a8',
                     tabBarStyle: { position: 'absolute', height: 60, paddingTop: 10, paddingBottom: 10, borderTopWidth: 0, backgroundColor: 'rgba(28, 28, 28, 1)' },
                     tabBarLabelStyle: { marginTop: 2, fontFamily: 'Moderat-Regular' },
-                    headerStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', borderBottomWidth: 0 },
-                    headerTintColor: '#fff',
+                    headerStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', borderBottomWidth: 1 },
+                    headerTintColor: '#a8a8a8',
                     headerTitleStyle: { fontFamily: 'Moderat-Bold', fontSize: 20 },
                     headerShadowVisible: false,
                     headerBackTitleVisible: false,
-                    headerTitleAlign: 'center'
+                    headerTitleAlign: 'center',
                 })}
             >
                 <Stack.Screen
@@ -209,10 +213,15 @@ export default function App() {
                         headerShown: true
                     })}
                 />
-                <Stack.Screen
-                    name="Settings"
-                    component={ SourceScreen }
-                />
+                <Stack.Group screenOptions={{presentation: "modal"}}>
+                    <Stack.Screen
+                        name="About"
+                        component={ AboutScreen }
+                        options={({ route }) => ({
+                            headerShown: true
+                        })}
+                    />
+                </Stack.Group>
             </Stack.Navigator>
         </NavigationContainer>
     );
