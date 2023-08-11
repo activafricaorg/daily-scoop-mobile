@@ -21,7 +21,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0f0f0f"
-      }
+      },
+      "package": "com.omeiza.dailyscoopmobile"
     },
     "web": {
       "favicon": "./assets/favicon.png",

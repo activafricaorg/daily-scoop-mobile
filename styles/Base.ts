@@ -5,7 +5,6 @@ const windowWidth = Dimensions.get('window').width;
 
 export default StyleSheet.create({
 	wrapper: {
-		width: '100%',
 		backgroundColor: '#0f0f0f'
 	},
 	container: {
@@ -14,9 +13,8 @@ export default StyleSheet.create({
 	},
 	mainContainer: {
 		padding: 10,
-		marginTop: 0,
-		marginBottom: 50,
-		width: windowWidth
+		marginTop: 20,
+		marginBottom: 20
 	},
 	textView: {
 		fontFamily: 'Moderat-Regular',

@@ -91,7 +91,7 @@ function BottomTabs() {
             screenOptions={() => ({
                 tabBarActiveTintColor: 'rgb(253, 192, 6)',
                 tabBarInactiveTintColor: '#a8a8a8',
-                tabBarStyle: { paddingTop: 10, paddingBottom: insets.bottom, borderTopWidth: 0, backgroundColor: 'rgba(28, 28, 28, 1)' },
+                tabBarStyle: { paddingTop: 10, paddingBottom: insets.bottom + 10, borderTopWidth: 0, borderBottomWidth: 0, backgroundColor: 'rgba(28, 28, 28, 1)' },
                 tabBarLabelStyle: { marginTop: 3, fontFamily: 'Moderat-Regular', fontSize: 11 },
                 headerStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', borderBottomWidth: 0 },
                 headerTintColor: '#a8a8a8',
