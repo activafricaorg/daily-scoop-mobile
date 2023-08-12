@@ -10,7 +10,7 @@ import SourceScreen from "./screens/SourceScreen";
 import JobScreen from "./screens/JobScreen";
 import BookMarkScreen from "./screens/BookmarkScreen";
 import InformationScreen from "./screens/InformationScreen";
-import AboutScreen from "./screens/AboutScreen";
+import ArticleScreen from "./screens/ArticleScreen";
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { StackNavigatorParamList } from "./types/navigation/StackNavigatorParamList";
@@ -211,15 +211,14 @@ export default function App() {
                         headerShown: true
                     })}
                 />
-                <Stack.Group screenOptions={{presentation: "modal"}}>
-                    <Stack.Screen
-                        name="About"
-                        component={ AboutScreen }
-                        options={({ route }) => ({
-                            headerShown: true
-                        })}
-                    />
-                </Stack.Group>
+                <Stack.Screen
+                    name="Article"
+                    options={({ route }) => ({
+                        headerShown: true
+                    })}
+                >
+                    { (props) => <ArticleScreen {...props} guid="sports" /> }
+                </Stack.Screen>
             </Stack.Navigator>
         </NavigationContainer>
     );

@@ -1,12 +1,15 @@
 export type ArticleTypes = {
 	title: string,
 	url: string,
-	image: string,
+	image: string | undefined,
 	source: string,
-	sourceImage: string,
-	category: string
+	guid: string,
+	description: string | undefined,
+	related?: ArticleTypes[],
+	category: string,
+	country: string | null,
+	articleDate: string | undefined,
 	tags: string[],
-	articleDate: string,
-	createdAt: string,
-	updatedAt: string
+	createdAt?: string | undefined,
+	updatedAt?: string | undefined
 }

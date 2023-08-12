@@ -13,9 +13,9 @@ export default function (props: { isCategory: boolean, key: number, data: Articl
 
 	return (
 		<View style={ArticleStyles.articleView}>
-			<Text style={ArticleStyles.articleTitle} onPress={() => WebBrowser.openBrowserAsync(props.data.url)}>
+			<Link style={ArticleStyles.articleTitle} to={{ screen: 'Article', params: { guid: props.data.guid }}}>
 				{ title }
-			</Text>
+			</Link>
 			<View style={ArticleStyles.articleMeta}>
 				<View style={{
 					alignSelf: 'flex-start',
