@@ -213,12 +213,11 @@ export default function App() {
                 />
                 <Stack.Screen
                     name="Article"
+                    component={ ArticleScreen }
                     options={({ route }) => ({
                         headerShown: true
                     })}
-                >
-                    { (props) => <ArticleScreen {...props} guid="sports" /> }
-                </Stack.Screen>
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );

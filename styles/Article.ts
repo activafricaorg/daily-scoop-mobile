@@ -47,5 +47,35 @@ export default StyleSheet.create({
 		fontFamily: 'Moderat-Regular',
 		color: '#707070',
 		fontSize: 14
+	},
+	single: {
+		borderWidth: 1,
+		borderStyle: 'solid',
+		borderColor: 'rgba(243, 245, 247, 0.1)',
+		borderRadius: 10,
+		marginTop: 10,
+		marginBottom: 10,
+	},
+	singleTopics: {
+		borderBottomWidth: 1,
+		borderBottomStyle: 'solid',
+		borderBottomColor: 'rgba(243, 245, 247, 0.1)',
+		padding: 15,
+	},
+	content: {
+		padding: 15
+	},
+	singleTitle: {
+		fontSize: 24,
+		lineHeight: 28,
+		marginBottom: 20,
+		color: '#dcdcdc',
+		fontFamily: 'Moderat-Bold'
+	},
+	singleDescription: {
+		fontSize: 16,
+		lineHeight: 22,
+		color: '#dcdcdc',
+		fontFamily: 'Moderat-Regular'
 	}
 });

@@ -2,12 +2,12 @@ import Layout from "../components/Layout";
 import Article from "../components/Article";
 import { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
+import { capitalize } from "../util/helper";
 import * as WebBrowser from "expo-web-browser";
 import { ArticleTypes } from "../types/article";
 import { Text, View } from 'react-native';
 import baseStyles from "../styles/Base";
 import ArticleStyles from "../styles/Article";
-import {capitalize} from "../util/helper";
 
 export default function ArticleScreen (props: { route: any; navigation: any; }) {
 	const [article, setArticle] = useState<ArticleTypes | undefined>(undefined);
@@ -23,18 +23,28 @@ export default function ArticleScreen (props: { route: any; navigation: any; }) 
 			});
 	}, []);
 
+	const pushNav = (guid: string) => {
+		props.navigation.goBack();
+		return props.navigation.push('Article', { guid: guid });
+	}
+
 	return (
 		<Layout>
 			<View style={baseStyles.wrapper}>
 				{
 					article ?
-						<View>
-							<Text style={ArticleStyles.articleTitle} onPress={() => WebBrowser.openBrowserAsync(article.url)}>
-								{ article.title }
-							</Text>
-							<Text style={ArticleStyles.articleTitle}>
-								{ article.description }
-							</Text>
+						<View style={ArticleStyles.single}>
+							<View style={ArticleStyles.singleTopics}>
+								<Text>Hi</Text>
+							</View>
+							<View style={ArticleStyles.content}>
+								<Text style={ArticleStyles.singleTitle} onPress={() => WebBrowser.openBrowserAsync(article.url)}>
+									{ article.title }
+								</Text>
+								<Text style={ArticleStyles.singleDescription}>
+									{ article.description?.split("[…]")[0] }
+								</Text>
+							</View>
 						</View>
 						:
 						null
@@ -48,7 +58,7 @@ export default function ArticleScreen (props: { route: any; navigation: any; }) 
 							{
 								article.related
 									.map((article: ArticleTypes, index: number) => (
-										<Article isCategory={ false } key={ index } data={ article } />
+										<Article isCategory={ false } key={ index }  data={ article } handleNavigation={pushNav} />
 									))
 							}
 						</>
