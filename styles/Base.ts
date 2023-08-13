@@ -1,7 +1,4 @@
-import { Dimensions } from 'react-native';
 import { StyleSheet } from "react-native";
-
-const windowWidth = Dimensions.get('window').width;
 
 export default StyleSheet.create({
 	wrapper: {
@@ -29,35 +26,37 @@ export default StyleSheet.create({
 	},
 	headingText: {
 		color: '#dcdcdc',
-		fontFamily: 'Moderat-Bold',
-		marginBottom: 10,
-		fontSize: 24
-	},
-	paragraphText: {
 		fontFamily: 'Moderat-Regular',
 		marginBottom: 10,
-		fontSize: 17,
-		lineHeight: 23,
-		color: 'rgb(168, 168, 168)',
+		fontSize: 28,
+		lineHeight: 32,
+	},
+	paragraphText: {
+		fontSize: 16,
+		lineHeight: 22,
+		color: '#dcdcdc',
+		fontFamily: 'Moderat-Regular',
+		marginBottom: 10
 	},
 	infoContainer: {
-		marginTop: 10,
+		marginTop: 20,
 		marginLeft: 10,
 		marginRight: 10
 	},
 	button: {
 		display: 'flex',
 		alignSelf: "flex-start",
-		fontFamily: 'Moderat-Regular',
+		fontFamily: 'Moderat-Bold',
 		color: '#0f0f0f',
 		backgroundColor: '#fdc006',
-		fontSize: 16,
+		fontSize: 14,
 		paddingTop: 10,
 		paddingBottom: 10,
 		paddingLeft: 20,
 		paddingRight: 20
 	},
 	textLink: {
+		fontFamily: 'Moderat-Bold',
 		color: '#fdc006'
 	}
 })

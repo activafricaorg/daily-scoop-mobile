@@ -7,7 +7,7 @@ import Layout from "../components/Layout";
 export default function InformationScreen(props: { route: any; navigation: any; }) {
 	return (
 		<Layout>
-			<View style={{ width: '100%', backgroundColor: '#0f0f0f', paddingLeft: 15, paddingRight: 15 }}>
+			<View style={{ width: '100%', backgroundColor: '#0f0f0f' }}>
 				<View style={BaseStyles.infoContainer}>
 					<Text style={BaseStyles.headingText} onPress={() => WebBrowser.openBrowserAsync("https://dailyscoop.com/about")}>
 						About Daily Scoop

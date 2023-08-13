@@ -6,7 +6,7 @@ export default function Layout (props: {children: string | JSX.Element | JSX.Ele
 	const insets = useSafeAreaInsets();
 
 	return (
-		<ScrollView style={{width: '100%', backgroundColor: '#0f0f0f', paddingTop: insets.top, paddingBottom: insets.bottom}}>
+		<ScrollView style={{width: '100%', backgroundColor: '#0f0f0f'}}>
 			<View style={baseStyles.container}>
 				<View style={baseStyles.mainContainer}>
 					{ props.children }

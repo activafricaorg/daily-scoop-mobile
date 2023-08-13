@@ -66,16 +66,23 @@ export default StyleSheet.create({
 		padding: 15
 	},
 	singleTitle: {
-		fontSize: 24,
-		lineHeight: 28,
-		marginBottom: 20,
+		fontSize: 26,
+		lineHeight: 30,
+		marginBottom: 10,
 		color: '#dcdcdc',
-		fontFamily: 'Moderat-Bold'
+		fontFamily: 'Moderat-Regular'
 	},
 	singleDescription: {
 		fontSize: 16,
 		lineHeight: 22,
 		color: '#dcdcdc',
 		fontFamily: 'Moderat-Regular'
+	},
+	readMoreSection: {
+		height: 150,
+		position: "absolute",
+		width: "100%",
+		left: 0,
+		bottom: 0
 	}
 });

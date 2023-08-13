@@ -61,6 +61,7 @@ export default function CategoryScreen(props: { category: string, route: any; na
 							borderBottomLeftRadius: 20,
 							borderBottomRightRadius: 20,
 							marginTop: 20,
+							marginBottom: 20,
 							overflow: 'hidden'}}
 						>
 							<Text
