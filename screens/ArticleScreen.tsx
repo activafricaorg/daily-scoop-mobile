@@ -1,14 +1,15 @@
 import Layout from "../components/Layout";
 import Article from "../components/Article";
+import Topic from "../components/Topic";
 import { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { capitalize } from "../util/helper";
 import * as WebBrowser from "expo-web-browser";
 import { ArticleTypes } from "../types/article";
 import { Text, View } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import baseStyles from "../styles/Base";
 import ArticleStyles from "../styles/Article";
-import { LinearGradient } from 'expo-linear-gradient';
 
 export default function ArticleScreen (props: { route: any; navigation: any; }) {
 	const [article, setArticle] = useState<ArticleTypes | undefined>(undefined);
@@ -36,7 +37,12 @@ export default function ArticleScreen (props: { route: any; navigation: any; }) 
 					article ?
 						<View style={ArticleStyles.single}>
 							<View style={ArticleStyles.singleTopics}>
-								<Text>Hi</Text>
+								{
+									article.tags && article.tags.length > 0 ?
+										<Topic tags={article.tags} />
+										:
+										null
+								}
 							</View>
 							<View style={ArticleStyles.content}>
 								<Text style={ArticleStyles.singleTitle}>

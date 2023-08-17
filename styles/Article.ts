@@ -10,7 +10,7 @@ export default StyleSheet.create({
 	},
 	articleTitle: {
 		fontFamily: 'Moderat-Regular',
-		fontSize: 20,
+		fontSize: 18,
 		lineHeight: 23,
 		color: '#dcdcdc',
 		paddingTop: 10,
@@ -46,7 +46,7 @@ export default StyleSheet.create({
 		width: '50%',
 		fontFamily: 'Moderat-Regular',
 		color: '#707070',
-		fontSize: 14
+		fontSize: 13
 	},
 	single: {
 		borderWidth: 1,
@@ -60,21 +60,25 @@ export default StyleSheet.create({
 		borderBottomWidth: 1,
 		borderBottomStyle: 'solid',
 		borderBottomColor: 'rgba(243, 245, 247, 0.1)',
-		padding: 15,
+		paddingLeft: 15,
+		paddingRight: 15,
+		paddingTop: 10,
+		paddingBottom: 10,
 	},
 	content: {
-		padding: 15
+		padding: 15,
+		overflow: "hidden"
 	},
 	singleTitle: {
-		fontSize: 26,
+		fontSize: 24,
 		lineHeight: 30,
-		marginBottom: 10,
+		marginBottom: 20,
 		color: '#dcdcdc',
-		fontFamily: 'Moderat-Regular'
+		fontFamily: 'Moderat-Medium'
 	},
 	singleDescription: {
 		fontSize: 16,
-		lineHeight: 22,
+		lineHeight: 23,
 		color: '#dcdcdc',
 		fontFamily: 'Moderat-Regular'
 	},

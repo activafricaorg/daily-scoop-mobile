@@ -27,7 +27,7 @@ function FeedTabs() {
 
     return (
         <NavTab.Navigator
-            screenOptions={({ route }) => ({
+            screenOptions={() => ({
                 initialRouteName: 'Latest',
                 headerShown: false,
                 headerShadowVisible: true,
@@ -114,7 +114,7 @@ function BottomTabs() {
             <Tab.Screen
                 name="Jobs"
                 component={ JobScreen }
-                options={({ route }) => ({
+                options={() => ({
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
                         <Ionicons name='md-briefcase-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
@@ -124,7 +124,7 @@ function BottomTabs() {
             <Tab.Screen
                 name="Bookmarks"
                 component={ BookMarkScreen }
-                options={({ route }) => ({
+                options={() => ({
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
                         <Ionicons name='bookmarks-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
@@ -134,7 +134,7 @@ function BottomTabs() {
             <Tab.Screen
                 name="Info"
                 component={ InformationScreen }
-                options={({ route }) => ({
+                options={() => ({
                     headerShown: true,
                     headerBackTitleVisible: true,
                     tabBarIcon: ({ focused }) => (
@@ -154,7 +154,9 @@ export default function App() {
             try {
                 await Font.loadAsync({
                     'Moderat-Regular': require('./assets/fonts/Moderat-Regular.otf'),
-                    'Moderat-Bold': require('./assets/fonts/Moderat-Bold.otf')
+                    'Moderat-Bold': require('./assets/fonts/Moderat-Bold.otf'),
+                    'Moderat-Regular-Italic': require('./assets/fonts/Moderat-Regular-Italic.otf'),
+                    'Moderat-Medium': require('./assets/fonts/Moderat-Medium.otf')
                 });
 
                 await new Promise(resolve => setTimeout(resolve, 2000));
@@ -183,7 +185,7 @@ export default function App() {
             onReady={() => onLayoutRootView()}
         >
             <Stack.Navigator
-                screenOptions={({ route }) => ({
+                screenOptions={() => ({
                     tabBarActiveTintColor: 'rgb(253, 192, 6)',
                     tabBarInactiveTintColor: '#a8a8a8',
                     tabBarStyle: { position: 'absolute', height: 60, paddingTop: 10, paddingBottom: 10, borderTopWidth: 0, backgroundColor: 'rgba(28, 28, 28, 1)' },
@@ -199,7 +201,7 @@ export default function App() {
                 <Stack.Screen
                     name="Home"
                     component={ BottomTabs }
-                    options={({ route }) => ({
+                    options={() => ({
                         headerShown: false,
                     })}
                 />
@@ -214,7 +216,7 @@ export default function App() {
                 <Stack.Screen
                     name="Article"
                     component={ ArticleScreen }
-                    options={({ route }) => ({
+                    options={() => ({
                         headerShown: true
                     })}
                 />
