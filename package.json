@@ -11,13 +11,13 @@
     "@expo/vector-icons": "^13.0.0",
     "@react-navigation/drawer": "^6.6.3",
     "@react-navigation/material-top-tabs": "^6.6.3",
-    "expo": "^49.0.5",
+    "expo": "^49.0.0",
     "expo-blur": "~12.4.1",
-    "expo-constants": "^14.4.2",
+    "expo-constants": "~14.4.2",
     "expo-font": "~11.4.0",
-    "expo-linking": "^5.0.2",
+    "expo-linking": "~5.0.2",
     "expo-router": "2.0.0",
-    "expo-splash-screen": "~0.20.4",
+    "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
     "expo-web-browser": "~12.3.2",
     "moment": "^2.29.4",
@@ -36,7 +36,7 @@
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@types/react": "~18.2.14",
-    "@types/react-native": "~0.64.12",
+    "@types/react-native": "~0.70.6",
     "typescript": "^5.1.3"
   },
   "resolutions": {
