@@ -36,14 +36,14 @@ export default function ArticleScreen (props: { route: any; navigation: any; }) 
 				{
 					article ?
 						<View style={ArticleStyles.single}>
-							<View style={ArticleStyles.singleTopics}>
-								{
-									article.tags && article.tags.length > 0 ?
+							{
+								article.tags && article.tags.length > 0 ?
+									<View style={ArticleStyles.singleTopics}>
 										<Topic tags={article.tags} />
-										:
-										null
-								}
-							</View>
+									</View>
+									:
+									null
+							}
 							<View style={ArticleStyles.content}>
 								<Text style={ArticleStyles.singleTitle}>
 									{ article.title }
@@ -57,6 +57,7 @@ export default function ArticleScreen (props: { route: any; navigation: any; }) 
 										alignContent: "flex-end",
 										justifyContent: "flex-end",
 										display: "flex",
+										width: "100%",
 										marginTop: 0,
 										marginBottom: 0,
 										marginLeft: 15,

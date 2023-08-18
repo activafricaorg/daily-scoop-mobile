@@ -10,8 +10,8 @@ export default StyleSheet.create({
 	},
 	articleTitle: {
 		fontFamily: 'Moderat-Regular',
-		fontSize: 18,
-		lineHeight: 23,
+		fontSize: 20,
+		lineHeight: 26,
 		color: '#dcdcdc',
 		paddingTop: 10,
 		paddingBottom: 10,
@@ -67,19 +67,19 @@ export default StyleSheet.create({
 	},
 	content: {
 		padding: 15,
-		overflow: "hidden"
+		overflow: "hidden",
 	},
 	singleTitle: {
-		fontSize: 24,
-		lineHeight: 30,
-		marginBottom: 20,
+		fontSize: 28,
+		lineHeight: 32,
+		marginBottom: 10,
 		color: '#dcdcdc',
 		fontFamily: 'Moderat-Medium'
 	},
 	singleDescription: {
-		fontSize: 16,
-		lineHeight: 23,
-		color: '#dcdcdc',
+		fontSize: 18,
+		lineHeight: 25,
+		color: '#c6c6c6',
 		fontFamily: 'Moderat-Regular'
 	},
 	readMoreSection: {

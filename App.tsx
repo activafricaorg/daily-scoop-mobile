@@ -15,8 +15,10 @@ import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { StackNavigatorParamList } from "./types/navigation/StackNavigatorParamList";
 import Ionicons from '@expo/vector-icons/Ionicons';
+import * as SystemUI from 'expo-system-ui';
 
 SplashScreen.preventAutoHideAsync().then(() => { return null; });
+SystemUI.setBackgroundColorAsync("black").then(() => { return null; });
 
 const Stack = createNativeStackNavigator<StackNavigatorParamList>();
 const NavTab = createMaterialTopTabNavigator();
@@ -132,13 +134,13 @@ function BottomTabs() {
                 })}
             />
             <Tab.Screen
-                name="Info"
+                name="Settings"
                 component={ InformationScreen }
                 options={() => ({
-                    headerShown: true,
+                    headerShown: false,
                     headerBackTitleVisible: true,
                     tabBarIcon: ({ focused }) => (
-                        <Ionicons name='information-circle-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
+                        <Ionicons name='ios-settings-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
                     )
                 })}
             />
