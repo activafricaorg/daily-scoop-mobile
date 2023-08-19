@@ -2,7 +2,6 @@ import { capitalize, slugifyText } from "../util/helper";
 import { Link } from "@react-navigation/native";
 import { View, ScrollView } from "react-native";
 
-
 export default function Topic (props: {tags: string[]}) {
 	return (
 		<View style={{flexDirection: "row", flexWrap: "nowrap"}}>
@@ -16,6 +15,7 @@ export default function Topic (props: {tags: string[]}) {
 								borderTopLeftRadius: 20,
 								borderBottomLeftRadius: 20,
 								borderBottomRightRadius: 20,
+								marginRight: 10,
 								overflow: 'hidden'
 							}}>
 								<Link style={{
@@ -27,9 +27,8 @@ export default function Topic (props: {tags: string[]}) {
 									paddingBottom: 3,
 									paddingLeft: 8,
 									paddingRight: 8,
-									marginRight: 10,
 									fontSize: 13
-								}} to={{ screen: 'Topic', params: { source: slugifyText(tag), sourceTitle: tag }}}>
+								}} to={{ screen: 'Topic', params: { topic: slugifyText(tag), topicTitle: tag }}}>
 									#{ capitalize(tag) }
 								</Link>
 							</View>

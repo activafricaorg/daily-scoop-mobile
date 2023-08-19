@@ -11,11 +11,13 @@ import JobScreen from "./screens/JobScreen";
 import BookMarkScreen from "./screens/BookmarkScreen";
 import InformationScreen from "./screens/InformationScreen";
 import ArticleScreen from "./screens/ArticleScreen";
+import TopicScreen from "./screens/TopicScreen";
+import * as SystemUI from 'expo-system-ui';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { StackNavigatorParamList } from "./types/navigation/StackNavigatorParamList";
 import Ionicons from '@expo/vector-icons/Ionicons';
-import * as SystemUI from 'expo-system-ui';
+import {capitalize} from "./util/helper";
 
 SplashScreen.preventAutoHideAsync().then(() => { return null; });
 SystemUI.setBackgroundColorAsync("black").then(() => { return null; });
@@ -212,6 +214,14 @@ export default function App() {
                     component={ SourceScreen }
                     options={({ route }) => ({
                         headerTitle: route.params?.sourceTitle,
+                        headerShown: true
+                    })}
+                />
+                <Stack.Screen
+                    name="Topic"
+                    component={ TopicScreen }
+                    options={({ route }) => ({
+                        headerTitle: capitalize(route.params?.topicTitle),
                         headerShown: true
                     })}
                 />
