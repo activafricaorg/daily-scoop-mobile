@@ -116,22 +116,23 @@ function BottomTabs() {
                 })}
             />
             <Tab.Screen
-                name="Jobs"
+                name="Topics"
                 component={ JobScreen }
                 options={() => ({
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
-                        <Ionicons name='md-briefcase-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
+                        <Ionicons name='folder-open-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
                     )
                 })}
             />
             <Tab.Screen
-                name="Bookmarks"
-                component={ BookMarkScreen }
+                name="Info"
+                component={ InformationScreen }
                 options={() => ({
                     headerShown: false,
+                    headerBackTitleVisible: true,
                     tabBarIcon: ({ focused }) => (
-                        <Ionicons name='bookmarks-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
+                        <Ionicons name='md-information-circle-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
                     )
                 })}
             />
