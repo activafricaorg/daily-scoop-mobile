@@ -4,20 +4,18 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { capitalize } from "./util/helper";
 import HomeScreen from "./screens/HomeScreen";
 import CategoryScreen from "./screens/CategoryScreen";
 import SourceScreen from "./screens/SourceScreen";
-import JobScreen from "./screens/JobScreen";
-import BookMarkScreen from "./screens/BookmarkScreen";
 import InformationScreen from "./screens/InformationScreen";
-import ArticleScreen from "./screens/ArticleScreen";
 import TopicScreen from "./screens/TopicScreen";
+import TopicsScreen from "./screens/TopicsScreen";
 import * as SystemUI from 'expo-system-ui';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { StackNavigatorParamList } from "./types/navigation/StackNavigatorParamList";
 import Ionicons from '@expo/vector-icons/Ionicons';
-import {capitalize} from "./util/helper";
 
 SplashScreen.preventAutoHideAsync().then(() => { return null; });
 SystemUI.setBackgroundColorAsync("black").then(() => { return null; });
@@ -39,11 +37,11 @@ function FeedTabs() {
                 headerTitleAlign: 'center',
                 headerTintColor: '#fff',
                 headerStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', borderBottomWidth: 0 },
-                headerTitleStyle: { fontFamily: 'Moderat-Bold', fontSize: 20 },
+                headerTitleStyle: { fontFamily: 'Aeonik-Medium', fontSize: 20 },
                 tabBarActiveTintColor: 'rgb(253, 192, 6)',
                 tabBarInactiveTintColor: '#a8a8a8',
                 tabBarStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', paddingBottom: 7, paddingTop: insets.top, paddingLeft: insets.left, paddingRight: insets.right, },
-                tabBarLabelStyle: { marginTop: 3, fontFamily: 'Moderat-Bold', textTransform: 'capitalize', fontWeight: 'bold', fontSize: 14 },
+                tabBarLabelStyle: { marginTop: 3, fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, textTransform: 'capitalize', fontWeight: 'bold', fontSize: 14 },
                 tabBarIndicatorStyle: { backgroundColor: 'rgb(253, 192, 6)', height: 3 },
                 tabBarScrollEnabled: true
             })}
@@ -96,10 +94,10 @@ function BottomTabs() {
                 tabBarActiveTintColor: 'rgb(253, 192, 6)',
                 tabBarInactiveTintColor: '#a8a8a8',
                 tabBarStyle: { paddingTop: 10, paddingBottom: insets.bottom, borderTopWidth: 0, borderBottomWidth: 0, backgroundColor: 'rgba(28, 28, 28, 1)' },
-                tabBarLabelStyle: { marginTop: 3, fontFamily: 'Moderat-Regular', fontSize: 11 },
+                tabBarLabelStyle: { marginTop: 3, fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 11 },
                 headerStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', borderBottomWidth: 0 },
-                headerTintColor: '#a8a8a8',
-                headerTitleStyle: { fontFamily: 'Moderat-Bold', fontSize: 20, paddingBottom: 10 },
+                headerTintColor: 'white',
+                headerTitleStyle: { fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 20, paddingBottom: 10 },
                 headerShadowVisible: false,
                 headerBackTitleVisible: false,
                 headerTitleAlign: 'center'
@@ -107,7 +105,7 @@ function BottomTabs() {
         >
             <Tab.Screen
                 name="Feed"
-                component={FeedTabs}
+                component={ FeedTabs }
                 options={() => ({
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
@@ -117,7 +115,7 @@ function BottomTabs() {
             />
             <Tab.Screen
                 name="Topics"
-                component={ JobScreen }
+                component={ TopicsScreen }
                 options={() => ({
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
@@ -158,6 +156,7 @@ export default function App() {
         async function prepare() {
             try {
                 await Font.loadAsync({
+                    'Aeonik-Medium': require('./assets/fonts/Aeonik-Medium.otf'),
                     'Moderat-Regular': require('./assets/fonts/Moderat-Regular.otf'),
                     'Moderat-Bold': require('./assets/fonts/Moderat-Bold.otf'),
                     'Moderat-Regular-Italic': require('./assets/fonts/Moderat-Regular-Italic.otf'),
@@ -194,10 +193,10 @@ export default function App() {
                     tabBarActiveTintColor: 'rgb(253, 192, 6)',
                     tabBarInactiveTintColor: '#a8a8a8',
                     tabBarStyle: { position: 'absolute', height: 60, paddingTop: 10, paddingBottom: 10, borderTopWidth: 0, backgroundColor: 'rgba(28, 28, 28, 1)' },
-                    tabBarLabelStyle: { marginTop: 2, fontFamily: 'Moderat-Regular' },
+                    tabBarLabelStyle: { marginTop: 2, fontFamily: 'Aeonik-Medium' },
                     headerStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', borderBottomWidth: 1 },
                     headerTintColor: '#a8a8a8',
-                    headerTitleStyle: { fontFamily: 'Moderat-Bold', fontSize: 20 },
+                    headerTitleStyle: { fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 18 },
                     headerShadowVisible: false,
                     headerBackTitleVisible: false,
                     headerTitleAlign: 'center',
@@ -227,9 +226,9 @@ export default function App() {
                     })}
                 />
                 <Stack.Screen
-                    name="Article"
-                    component={ ArticleScreen }
-                    options={() => ({
+                    name="Topics"
+                    component={ TopicsScreen }
+                    options={({ route }) => ({
                         headerShown: true
                     })}
                 />

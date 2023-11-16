@@ -1,4 +1,5 @@
 import moment from "moment";
+import * as WebBrowser from "expo-web-browser";
 import { ArticleTypes } from "../types/article";
 import { Text, View } from "react-native";
 import { Link } from '@react-navigation/native';
@@ -13,14 +14,9 @@ export default function (props: { isCategory: boolean, key: number, data: Articl
 	return (
 		<View style={ArticleStyles.articleView}>
 			{
-				props.handleNavigation ?
-					<Text style={ArticleStyles.articleTitle} onPress={() => props.handleNavigation ? props.handleNavigation(props.data.guid) : null}>
-						{ title }
-					</Text>
-					:
-					<Link style={ArticleStyles.articleTitle} to={{ screen: 'Article', params: { guid: props.data.guid }}}>
-						{ title }
-					</Link>
+				<Text style={ArticleStyles.articleTitle} onPress={() => WebBrowser.openBrowserAsync(props.data.url)}>
+					{ title }
+				</Text>
 			}
 			<View style={ArticleStyles.articleMeta}>
 				<View style={{

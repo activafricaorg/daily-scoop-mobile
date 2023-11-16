@@ -14,7 +14,8 @@ export default StyleSheet.create({
 		marginBottom: 20
 	},
 	textView: {
-		fontFamily: 'Moderat-Regular',
+		fontFamily: 'Aeonik-Medium',
+		letterSpacing: 0.5,
 		fontSize: 16,
 		color: 'white',
 		textDecorationStyle: undefined
@@ -25,17 +26,19 @@ export default StyleSheet.create({
 		padding: 10,
 	},
 	headingText: {
-		color: '#dcdcdc',
-		fontFamily: 'Moderat-Regular',
-		marginBottom: 10,
-		fontSize: 28,
+		color: '#a8a8a8',
+		fontFamily: 'Aeonik-Medium',
+		letterSpacing: 0.5,
+		marginBottom: 40,
+		fontSize: 26,
 		lineHeight: 32,
 	},
 	paragraphText: {
 		fontSize: 16,
 		lineHeight: 22,
 		color: '#dcdcdc',
-		fontFamily: 'Moderat-Regular',
+		fontFamily: 'Aeonik-Medium',
+		letterSpacing: 0.5,
 		marginBottom: 10
 	},
 	infoContainer: {
@@ -43,19 +46,10 @@ export default StyleSheet.create({
 		marginLeft: 10,
 		marginRight: 10
 	},
-	infoHeading: {
-		alignSelf: 'flex-start',
-		borderTopRightRadius: 20,
-		borderTopLeftRadius: 20,
-		borderBottomLeftRadius: 20,
-		borderBottomRightRadius: 20,
-		overflow: 'hidden'
-	},
 	infoHeader: {
-		fontFamily: 'Moderat-Bold',
+		fontFamily: 'Aeonik-Medium',
+		letterSpacing: 0.5,
 		color: '#fdc006',
-		backgroundColor: '#1c1c1c',
-		borderRadius: 10,
 		paddingTop: 3,
 		paddingBottom: 3,
 		paddingLeft: 8,
@@ -74,7 +68,8 @@ export default StyleSheet.create({
 		borderBottomColor: 'rgba(243, 245, 247, 0.1)'
 	},
 	infoContent: {
-		fontFamily: 'Moderat-Regular',
+		fontFamily: 'Aeonik-Medium',
+		letterSpacing: 0.5,
 		fontSize: 18,
 		lineHeight: 25,
 		color: '#c6c6c6',
@@ -93,7 +88,8 @@ export default StyleSheet.create({
 	button: {
 		display: 'flex',
 		alignSelf: "flex-start",
-		fontFamily: 'Moderat-Bold',
+		fontFamily: 'Aeonik-Medium',
+		letterSpacing: 0.5,
 		color: '#0f0f0f',
 		backgroundColor: '#fdc006',
 		fontSize: 15,
@@ -103,9 +99,10 @@ export default StyleSheet.create({
 		paddingRight: 20
 	},
 	textLink: {
-		fontFamily: 'Moderat-Regular-Italic',
+		fontFamily: 'Aeonik-Medium',
+		letterSpacing: 0.5,
 		textDecorationLine: 'underline',
 		textDecorationStyle: 'solid',
-		textDecorationColor: '#dcdcdc'
+		textDecorationColor: '#fdc006'
 	}
 })

@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { slugifyText } from "../util/helper";
 import { ArticleTypes } from "../types/article";
-import { CategoryArticlesTypes } from "../types/category";
 import { View, Text } from 'react-native';
 import baseStyles from "../styles/Base";
 

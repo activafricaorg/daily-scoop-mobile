@@ -43,8 +43,8 @@ export default function HomeScreen(props: { route: any; navigation: any; }) {
 	};
 
 	return (
-		<Suspense>
-			<Layout>
+		<Layout>
+			<Suspense>
 				<View style={baseStyles.wrapper}>
 					{
 						articles
@@ -75,8 +75,8 @@ export default function HomeScreen(props: { route: any; navigation: any; }) {
 							null
 					}
 				</View>
-				<StatusBar style="auto" />
-			</Layout>
-		</Suspense>
+			</Suspense>
+			<StatusBar style="auto" />
+		</Layout>
 	);
 }

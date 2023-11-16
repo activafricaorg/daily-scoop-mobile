@@ -1,6 +1,6 @@
 import Layout from "../components/Layout";
 import Article from "../components/Article";
-import { useState, useEffect } from "react";
+import {useState, useEffect, Suspense} from "react";
 import { StatusBar } from "expo-status-bar";
 import { ArticleTypes } from "../types/article";
 import { CategoryArticlesTypes } from "../types/category";
@@ -45,36 +45,38 @@ export default function CategoryScreen(props: { category: string, route: any; na
 
 	return (
 		<Layout>
-			<View style={baseStyles.wrapper}>
-				{
-					articles
-						.map((article: ArticleTypes, index: number) => (
-							<Article isCategory={ false } key={ index } data={ article } />
-						))
-				}
-				{
-					articles.length >= count ?
-						<View style={{
-							alignSelf: 'center',
-							borderTopRightRadius: 20,
-							borderTopLeftRadius: 20,
-							borderBottomLeftRadius: 20,
-							borderBottomRightRadius: 20,
-							marginTop: 20,
-							marginBottom: 20,
-							overflow: 'hidden'}}
-						>
-							<Text
-								style={baseStyles.button}
-								onPress={fetchMoreArticles}
+			<Suspense>
+				<View style={baseStyles.wrapper}>
+					{
+						articles
+							.map((article: ArticleTypes, index: number) => (
+								<Article isCategory={ false } key={ index } data={ article } />
+							))
+					}
+					{
+						articles.length >= count ?
+							<View style={{
+								alignSelf: 'center',
+								borderTopRightRadius: 20,
+								borderTopLeftRadius: 20,
+								borderBottomLeftRadius: 20,
+								borderBottomRightRadius: 20,
+								marginTop: 20,
+								marginBottom: 20,
+								overflow: 'hidden'}}
 							>
-								{ loading ? "Loading..." : "Load More" }
-							</Text>
-						</View>
-						:
-						null
-				}
-			</View>
+								<Text
+									style={baseStyles.button}
+									onPress={fetchMoreArticles}
+								>
+									{ loading ? "Loading..." : "Load More" }
+								</Text>
+							</View>
+							:
+							null
+					}
+				</View>
+			</Suspense>
 			<StatusBar style="auto" />
 		</Layout>
 	);

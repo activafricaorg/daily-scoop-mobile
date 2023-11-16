@@ -9,14 +9,15 @@ export default StyleSheet.create({
 		marginBottom: 10,
 	},
 	articleTitle: {
-		fontFamily: 'Moderat-Regular',
-		fontSize: 20,
-		lineHeight: 26,
+		fontFamily: 'Aeonik-Medium',
+		letterSpacing: 0.5,
+		fontSize: 19,
+		lineHeight: 24,
 		color: '#dcdcdc',
-		paddingTop: 10,
-		paddingBottom: 10,
-		paddingLeft: 15,
-		paddingRight: 15
+		paddingTop: 15,
+		paddingBottom: 15,
+		paddingLeft: 20,
+		paddingRight: 20
 	},
 	articleMeta: {
 		flex: 1,
@@ -24,63 +25,32 @@ export default StyleSheet.create({
 		alignItems: 'center',
 		paddingTop: 10,
 		paddingBottom: 10,
-		paddingLeft: 15,
-		paddingRight: 15,
+		paddingLeft: 20,
+		paddingRight: 20,
 		borderTopWidth: 1,
 		borderTopStyle: 'solid',
 		borderTopColor: 'rgba(243, 245, 247, 0.1)',
 	},
 	articleSource: {
-		fontFamily: 'Moderat-Bold',
+		fontFamily: 'Aeonik-Medium',
+		letterSpacing: 0.5,
 		color: '#fdc006',
-		backgroundColor: '#1c1c1c',
-		borderRadius: 10,
 		paddingTop: 3,
 		paddingBottom: 3,
-		paddingLeft: 8,
 		paddingRight: 8,
 		fontSize: 12
 	},
 	articleDate: {
 		marginLeft: 15,
 		width: '50%',
-		fontFamily: 'Moderat-Regular',
+		fontFamily: 'Aeonik-Medium',
+		letterSpacing: 0.5,
 		color: '#707070',
 		fontSize: 13
-	},
-	single: {
-		borderWidth: 1,
-		borderStyle: 'solid',
-		borderColor: 'rgba(243, 245, 247, 0.1)',
-		borderRadius: 10,
-		marginTop: 10,
-		marginBottom: 10,
-	},
-	singleTopics: {
-		borderBottomWidth: 1,
-		borderBottomStyle: 'solid',
-		borderBottomColor: 'rgba(243, 245, 247, 0.1)',
-		paddingLeft: 15,
-		paddingRight: 15,
-		paddingTop: 10,
-		paddingBottom: 10,
 	},
 	content: {
 		padding: 15,
 		overflow: "hidden",
-	},
-	singleTitle: {
-		fontSize: 28,
-		lineHeight: 32,
-		marginBottom: 10,
-		color: '#dcdcdc',
-		fontFamily: 'Moderat-Medium'
-	},
-	singleDescription: {
-		fontSize: 18,
-		lineHeight: 25,
-		color: '#c6c6c6',
-		fontFamily: 'Moderat-Regular'
 	},
 	readMoreSection: {
 		height: 150,

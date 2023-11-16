@@ -22,3 +22,22 @@ export const slugifyText = (input: string): string => {
 	const arr = input.split(" ");
 	return arr.join("-");
 }
+
+export const abbreviateNumber = (num: number): number | string => {
+	const SI_SYMBOL = ["", "k", "M", "G", "T", "P", "E"];
+
+	const tier = Math.log10(Math.abs(num)) / 3 | 0;
+
+	// if zero, we don't need a suffix
+	if (tier == 0) return num;
+
+	// get suffix and determine scale
+	const suffix = SI_SYMBOL[tier];
+	const scale = Math.pow(10, tier * 3);
+
+	// scale the number
+	const scaled = num / scale;
+
+	// format number and add suffix
+	return scaled.toFixed(1) + suffix;
+}
