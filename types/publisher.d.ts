@@ -1,4 +1,4 @@
-import {ArticleTypes} from "@/types/article";
+import { ArticleTypes } from "@/types/article";
 
 export type PublisherTypes = {
 	name: string,

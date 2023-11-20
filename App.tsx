@@ -1,3 +1,8 @@
+import * as SystemUI from 'expo-system-ui';
+import * as Font from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+import { StackNavigatorParamList } from "./types/navigation/StackNavigatorParamList";
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState, useEffect, useCallback } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -11,11 +16,7 @@ import SourceScreen from "./screens/SourceScreen";
 import InformationScreen from "./screens/InformationScreen";
 import TopicScreen from "./screens/TopicScreen";
 import TopicsScreen from "./screens/TopicsScreen";
-import * as SystemUI from 'expo-system-ui';
-import * as Font from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
-import { StackNavigatorParamList } from "./types/navigation/StackNavigatorParamList";
-import Ionicons from '@expo/vector-icons/Ionicons';
+import SettingsScreen from "./screens/SettingScreen";
 
 SplashScreen.preventAutoHideAsync().then(() => { return null; });
 SystemUI.setBackgroundColorAsync("black").then(() => { return null; });
@@ -124,6 +125,17 @@ function BottomTabs() {
                 })}
             />
             <Tab.Screen
+                name="Settings"
+                component={ SettingsScreen }
+                options={() => ({
+                    headerShown: false,
+                    headerBackTitleVisible: true,
+                    tabBarIcon: ({ focused }) => (
+                        <Ionicons name='ios-settings-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
+                    )
+                })}
+            />
+            <Tab.Screen
                 name="Info"
                 component={ InformationScreen }
                 options={() => ({
@@ -131,17 +143,6 @@ function BottomTabs() {
                     headerBackTitleVisible: true,
                     tabBarIcon: ({ focused }) => (
                         <Ionicons name='md-information-circle-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
-                    )
-                })}
-            />
-            <Tab.Screen
-                name="Settings"
-                component={ InformationScreen }
-                options={() => ({
-                    headerShown: false,
-                    headerBackTitleVisible: true,
-                    tabBarIcon: ({ focused }) => (
-                        <Ionicons name='ios-settings-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
                     )
                 })}
             />
@@ -157,10 +158,7 @@ export default function App() {
             try {
                 await Font.loadAsync({
                     'Aeonik-Medium': require('./assets/fonts/Aeonik-Medium.otf'),
-                    'Moderat-Regular': require('./assets/fonts/Moderat-Regular.otf'),
-                    'Moderat-Bold': require('./assets/fonts/Moderat-Bold.otf'),
-                    'Moderat-Regular-Italic': require('./assets/fonts/Moderat-Regular-Italic.otf'),
-                    'Moderat-Medium': require('./assets/fonts/Moderat-Medium.otf')
+                    'Aeonik-Regular': require('./assets/fonts/Aeonik-Regular.otf'),
                 });
 
                 await new Promise(resolve => setTimeout(resolve, 2000));

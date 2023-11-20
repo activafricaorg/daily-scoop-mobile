@@ -5,7 +5,7 @@ export default StyleSheet.create({
 		fontSize: 20,
 		color: '#dcdcdc',
 		textTransform: 'capitalize',
-		marginBottom: 5,
+		marginBottom: 2,
 		fontFamily: 'Aeonik-Medium',
 		letterSpacing: 0.5
 	},

@@ -1,31 +1,34 @@
-import { View, Text } from "react-native";
-import BaseStyles from "../styles/Base";
-import TopicStyles  from "../styles/Topic";
 import { StatusBar } from "expo-status-bar";
+import { useEffect, useState } from "react";
+import { Link } from "@react-navigation/native";
+import {abbreviateNumber, capitalize, slugifyText} from "../util/helper";
 import Layout from "../components/Layout";
+import { View, Text } from "react-native";
+import { TopicTypes } from "../types/topic";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { abbreviateNumber } from "../util/helper";
+import BaseStyles from "../styles/Base";
+import TopicStyles  from "../styles/Topic";
 
 const TopicsScreen = (props: { route: any; navigation: any; }) => {
-	const dummyTopics = [
-		{
-			name: 'nigeria',
-			count: 212
-		},
-		{
-			name: 'nwes',
-			count: 2300
-		},
-		{
-			name: 'ronaldo',
-			count: 6663590
-		},
-		{
-			name: 'messi',
-			count: 435590
+	const [topics, setTopics] = useState<TopicTypes[]>([]);
+
+	useEffect(() => {
+		setTopics([]);
+		getTopics();
+	}, []);
+
+	const getTopics = () => {
+		try {
+			fetch(`https://api.dailyscoop.africa/topic/?page=1&count=12`)
+				.then(async res => {
+					const articleTopics: TopicTypes[] = await res.json();
+					if (articleTopics) setTopics(articleTopics);
+				});
+		} catch (e) {
+			console.error(e);
 		}
-	]
+	}
 
 	return (
 		<Layout>
@@ -33,14 +36,14 @@ const TopicsScreen = (props: { route: any; navigation: any; }) => {
 				<View style={{width: '100%', backgroundColor: '#0f0f0f'}}>
 					<View style={BaseStyles.infoContainer}>
 						<Text style={BaseStyles.headingText}>
-							<Ionicons name='folder-open-outline' size={26} color={'#a8a8a8'} /> Topics
+							<Ionicons name='folder-open-outline' size={24} color={'rgb(253, 192, 6)'} /> Topics
 						</Text>
 						{
-							dummyTopics
+							topics
 								.map ((topic, index: number) => (
 									<View key={index} style={{marginBottom: 25}}>
-										<Text style={TopicStyles.topicView}>{topic.name}</Text>
-										<Text style={TopicStyles.countView}>{abbreviateNumber(topic.count)} scoops</Text>
+										<Link style={TopicStyles.topicView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.name), topicTitle: topic.name }}}>{capitalize(topic.name)}</Link>
+										<Link style={TopicStyles.countView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.name), topicTitle: topic.name }}}>{abbreviateNumber(topic.articleCount)} scoops</Link>
 									</View>
 								))
 						}

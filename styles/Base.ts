@@ -26,11 +26,11 @@ export default StyleSheet.create({
 		padding: 10,
 	},
 	headingText: {
-		color: '#a8a8a8',
+		color: 'rgb(253, 192, 6)',
 		fontFamily: 'Aeonik-Medium',
 		letterSpacing: 0.5,
-		marginBottom: 40,
-		fontSize: 26,
+		marginBottom: 25,
+		fontSize: 24,
 		lineHeight: 32,
 	},
 	paragraphText: {
@@ -68,15 +68,13 @@ export default StyleSheet.create({
 		borderBottomColor: 'rgba(243, 245, 247, 0.1)'
 	},
 	infoContent: {
-		fontFamily: 'Aeonik-Medium',
+		fontFamily: 'Aeonik-Regular',
 		letterSpacing: 0.5,
 		fontSize: 18,
-		lineHeight: 25,
-		color: '#c6c6c6',
-		paddingTop: 10,
+		lineHeight: 26,
+		color: 'rgba(243, 245, 247, 0.7)',
+		paddingTop: 0,
 		paddingBottom: 10,
-		paddingLeft: 15,
-		paddingRight: 15
 	},
 	infoWrapper: {
 		borderWidth: 1,
