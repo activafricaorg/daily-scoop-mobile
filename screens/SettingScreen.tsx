@@ -1,5 +1,5 @@
 import SelectDropdown from 'react-native-select-dropdown'
-import { View, Text, Dimensions } from "react-native";
+import {View, Text, Dimensions, Image} from "react-native";
 import { StatusBar } from "expo-status-bar";
 import Layout from "../components/Layout";
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -8,7 +8,13 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 
 export default function SettingsScreen(props: { route: any; navigation: any; }) {
 	const { width } = Dimensions.get('window');
-	const countries = ["Nigeria", "South Africa", "Ghana", "Kenya", "Egypt"]
+	const countriesWithFlags = [
+		{title: 'Nigeria', image: require('./../assets/flags/nigeria.png')},
+		{title: 'South Africa', image: require('./../assets/flags/south-africa.png')},
+		{title: 'Ghana', image: require('./../assets/flags/ghana.png')},
+		{title: 'Kenya', image: require('./../assets/flags/kenya.png')},
+		{title: 'Egypt', image: require('./../assets/flags/egypt.png')}
+	];
 
 	return (
 		<Layout>
@@ -21,8 +27,7 @@ export default function SettingsScreen(props: { route: any; navigation: any; }) 
 						<View>
 							<Text style={{color: 'rgba(243, 245, 247, 0.7)', marginBottom: 12, fontFamily: 'Aeonik-Regular', fontSize: 16, letterSpacing: 0.5, lineHeight: 20}}>To get customized scoop specific to your country, select your country.</Text>
 							<SelectDropdown
-								// showsVerticalScrollIndicator={true}
-								data={countries}
+								data={countriesWithFlags}
 								defaultButtonText="Select country"
 								dropdownIconPosition={'right'}
 								onSelect={(selectedItem, index) => {
@@ -41,7 +46,7 @@ export default function SettingsScreen(props: { route: any; navigation: any; }) 
 									fontSize: 20,
 									color: '#c6c6c6'
 								}}
-								dropdownOverlayColor='rgba(0, 0, 0, 0.85)'
+								dropdownOverlayColor='rgba(0, 0, 0, 0.3)'
 								rowStyle={{
 									shadowOpacity: 0,
 									borderColor: 'rgba(243, 245, 247, 0.1)',
@@ -66,12 +71,32 @@ export default function SettingsScreen(props: { route: any; navigation: any; }) 
 								buttonTextAfterSelection={(selectedItem, index) => {
 									// text represented after item is selected
 									// if data array is an array of objects then return selectedItem.property to render after item is selected
-									return selectedItem
+									return selectedItem.title
 								}}
 								rowTextForSelection={(item, index) => {
 									// text represented for each item in dropdown
 									// if data array is an array of objects then return item.property to represent item in dropdown
-									return item
+									return item.title
+								}}
+								renderCustomizedButtonChild={(selectedItem, index) => {
+									return (
+										<View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingHorizontal: 10}}>
+											{selectedItem ? (
+												<Image source={selectedItem.image} style={{width: 30, height: 22, resizeMode: 'cover'}} />
+											) : (
+												<Ionicons name="md-earth-sharp" size={32} />
+											)}
+											<Text style={{fontFamily: 'Aeonik-Medium', fontSize: 20, color: '#c6c6c6', textAlign: 'center', fontWeight: 'bold', marginHorizontal: 12}}>{selectedItem ? selectedItem.title : 'Select country'}</Text>
+										</View>
+									);
+								}}
+								renderCustomizedRowChild={(item, index) => {
+									return (
+										<View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingHorizontal: 18}}>
+											<Image source={item.image} style={{width: 30, height: 22, resizeMode: 'cover'}} />
+											<Text style={{fontFamily: 'Aeonik-Medium', fontSize: 20, color: '#c6c6c6', textAlign: 'center', fontWeight: 'bold', marginHorizontal: 12}}>{item.title}</Text>
+										</View>
+									);
 								}}
 							/>
 						</View>
