@@ -9,7 +9,7 @@ export default StyleSheet.create({
 		marginBottom: 10,
 	},
 	articleTitle: {
-		fontFamily: 'Aeonik-Medium',
+		fontFamily: 'Aeonik-Regular',
 		letterSpacing: 0.5,
 		fontSize: 19,
 		lineHeight: 24,

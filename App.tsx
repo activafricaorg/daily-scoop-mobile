@@ -118,7 +118,9 @@ function BottomTabs() {
                 name="Topics"
                 component={ TopicsScreen }
                 options={() => ({
-                    headerShown: false,
+                    headerShown: true,
+                    headerTitle: 'Trending Topics',
+                    headerTintColor: '#a8a8a8',
                     tabBarIcon: ({ focused }) => (
                         <Ionicons name='folder-open-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
                     )
@@ -128,8 +130,8 @@ function BottomTabs() {
                 name="Settings"
                 component={ SettingsScreen }
                 options={() => ({
-                    headerShown: false,
-                    headerBackTitleVisible: true,
+                    headerShown: true,
+                    headerTintColor: '#a8a8a8',
                     tabBarIcon: ({ focused }) => (
                         <Ionicons name='ios-settings-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
                     )
@@ -139,8 +141,9 @@ function BottomTabs() {
                 name="Info"
                 component={ InformationScreen }
                 options={() => ({
-                    headerShown: false,
-                    headerBackTitleVisible: true,
+                    headerShown: true,
+                    headerTitle: 'Information',
+                    headerTintColor: '#a8a8a8',
                     tabBarIcon: ({ focused }) => (
                         <Ionicons name='md-information-circle-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
                     )

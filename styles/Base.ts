@@ -6,11 +6,12 @@ export default StyleSheet.create({
 	},
 	container: {
 		flex: 1,
+		justifyContent: "center",
 		backgroundColor: '#0f0f0f'
 	},
 	mainContainer: {
 		padding: 10,
-		marginTop: 20,
+		// marginTop: 20,
 		marginBottom: 20
 	},
 	textView: {

@@ -1,14 +1,15 @@
 import Layout from "../components/Layout";
 import Article from "../components/Article";
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { ArticleTypes } from "../types/article";
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 import baseStyles from "../styles/Base";
 
 export default function HomeScreen(props: { route: any; navigation: any; }) {
 	const [count] = useState<number>(24);
 	const [articles, setArticles] = useState<ArticleTypes[]>([]);
+	const [initialLoading, setInitialLoading] = useState<boolean>(true);
 	const [loading, setLoading] = useState<boolean>(false);
 
 	useEffect(() => {
@@ -26,6 +27,7 @@ export default function HomeScreen(props: { route: any; navigation: any; }) {
 					const moreArticles: ArticleTypes[] = await res.json();
 					if (moreArticles) {
 						setArticles(keep_existing ? articles.concat(moreArticles) : moreArticles);
+						setInitialLoading(false);
 						setLoading(false);
 					}
 				});
@@ -44,7 +46,10 @@ export default function HomeScreen(props: { route: any; navigation: any; }) {
 
 	return (
 		<Layout>
-			<Suspense>
+			{ initialLoading ?
+				<View style={{flex: 1, alignItems: 'center'}}>
+					<ActivityIndicator size="small" color="#fdc006"/>
+				</View> :
 				<View style={baseStyles.wrapper}>
 					{
 						articles
@@ -75,7 +80,7 @@ export default function HomeScreen(props: { route: any; navigation: any; }) {
 							null
 					}
 				</View>
-			</Suspense>
+			}
 			<StatusBar style="auto" />
 		</Layout>
 	);

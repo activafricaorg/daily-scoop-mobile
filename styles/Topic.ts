@@ -6,13 +6,13 @@ export default StyleSheet.create({
 		color: '#dcdcdc',
 		textTransform: 'capitalize',
 		marginBottom: 2,
-		fontFamily: 'Aeonik-Medium',
+		fontFamily: 'Aeonik-Regular',
 		letterSpacing: 0.5
 	},
 	countView: {
 		fontSize: 15,
 		color: '#707070',
-		fontFamily: 'Aeonik-Medium',
+		fontFamily: 'Aeonik-Regular',
 		letterSpacing: 0.5
 	}
 });
