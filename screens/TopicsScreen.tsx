@@ -44,7 +44,7 @@ const TopicsScreen = (props: { route: any; navigation: any; }) => {
 									.map ((topic, index: number) => (
 										<View key={index} style={{marginBottom: 25}}>
 											<Link style={TopicStyles.topicView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.name), topicTitle: topic.name }}}>{capitalize(topic.name)}</Link>
-											<Link style={TopicStyles.countView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.name), topicTitle: topic.name }}}>{abbreviateNumber(topic.articleCount)} scoops</Link>
+											<Link style={TopicStyles.countView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.name), topicTitle: topic.name }}}>{abbreviateNumber(topic.articleCount)} Scoops</Link>
 										</View>
 									))
 							}

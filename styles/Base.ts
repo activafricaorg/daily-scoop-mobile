@@ -11,8 +11,8 @@ export default StyleSheet.create({
 	},
 	mainContainer: {
 		padding: 10,
-		// marginTop: 20,
-		marginBottom: 20
+		marginTop: 20,
+		marginBottom: 40
 	},
 	textView: {
 		fontFamily: 'Aeonik-Medium',
@@ -27,7 +27,7 @@ export default StyleSheet.create({
 		padding: 10,
 	},
 	headingText: {
-		color: 'rgb(253, 192, 6)',
+		color: '#f28d28',
 		fontFamily: 'Aeonik-Medium',
 		letterSpacing: 0.5,
 		marginBottom: 25,
@@ -43,14 +43,13 @@ export default StyleSheet.create({
 		marginBottom: 10
 	},
 	infoContainer: {
-		marginTop: 20,
 		marginLeft: 10,
 		marginRight: 10
 	},
 	infoHeader: {
 		fontFamily: 'Aeonik-Medium',
 		letterSpacing: 0.5,
-		color: '#fdc006',
+		color: '#f28d28',
 		paddingTop: 3,
 		paddingBottom: 3,
 		paddingLeft: 8,
@@ -90,7 +89,7 @@ export default StyleSheet.create({
 		fontFamily: 'Aeonik-Medium',
 		letterSpacing: 0.5,
 		color: '#0f0f0f',
-		backgroundColor: '#fdc006',
+		backgroundColor: '#f28d28',
 		fontSize: 15,
 		paddingTop: 10,
 		paddingBottom: 10,
@@ -102,6 +101,6 @@ export default StyleSheet.create({
 		letterSpacing: 0.5,
 		textDecorationLine: 'underline',
 		textDecorationStyle: 'solid',
-		textDecorationColor: '#fdc006'
+		textDecorationColor: '#f28d28'
 	}
 })

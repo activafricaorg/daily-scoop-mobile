@@ -11,8 +11,8 @@ export default StyleSheet.create({
 	articleTitle: {
 		fontFamily: 'Aeonik-Regular',
 		letterSpacing: 0.5,
-		fontSize: 19,
-		lineHeight: 24,
+		fontSize: 20,
+		lineHeight: 26,
 		color: '#dcdcdc',
 		paddingTop: 15,
 		paddingBottom: 15,
@@ -34,11 +34,11 @@ export default StyleSheet.create({
 	articleSource: {
 		fontFamily: 'Aeonik-Medium',
 		letterSpacing: 0.5,
-		color: '#fdc006',
+		color: '#f28d28',
 		paddingTop: 3,
 		paddingBottom: 3,
 		paddingRight: 8,
-		fontSize: 12
+		fontSize: 14
 	},
 	articleDate: {
 		marginLeft: 15,
@@ -46,7 +46,8 @@ export default StyleSheet.create({
 		fontFamily: 'Aeonik-Medium',
 		letterSpacing: 0.5,
 		color: '#707070',
-		fontSize: 13
+		fontSize: 14
+
 	},
 	content: {
 		padding: 15,

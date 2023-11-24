@@ -58,6 +58,14 @@ export default function HomeScreen(props: { route: any; navigation: any; }) {
 							))
 					}
 					{
+						loading ?
+							<View style={{flex: 1, alignItems: 'center', marginTop: 20, marginBottom: 20}}>
+								<ActivityIndicator size="small" color="#fdc006"/>
+							</View>
+							:
+							null
+					}
+					{
 						articles.length >= count ?
 							<View style={{
 								alignSelf: 'center',

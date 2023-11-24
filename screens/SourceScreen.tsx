@@ -27,7 +27,6 @@ export default function SourceScreen (props: { route: any; navigation: any; }) {
 			fetch(`https://api.dailyscoop.africa/publisher?search=${slug}&page=${loadPage}`)
 				.then(async res => {
 					const publisher: IPublisherArticles[] = await res.json();
-					console.log(publisher);
 					if (publisher[0].articles) {
 						setArticles(keep_existing ? articles.concat(publisher[0].articles) : publisher[0].articles);
 						setLoading(false);

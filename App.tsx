@@ -13,13 +13,13 @@ import { capitalize } from "./util/helper";
 import HomeScreen from "./screens/HomeScreen";
 import CategoryScreen from "./screens/CategoryScreen";
 import SourceScreen from "./screens/SourceScreen";
-import InformationScreen from "./screens/InformationScreen";
+import JobsScreen from "./screens/JobsScreen";
 import TopicScreen from "./screens/TopicScreen";
 import TopicsScreen from "./screens/TopicsScreen";
 import SettingsScreen from "./screens/SettingScreen";
 
 SplashScreen.preventAutoHideAsync().then(() => { return null; });
-SystemUI.setBackgroundColorAsync("black").then(() => { return null; });
+SystemUI.setBackgroundColorAsync("#f28d28").then(() => { return null; });
 
 const Stack = createNativeStackNavigator<StackNavigatorParamList>();
 const NavTab = createMaterialTopTabNavigator();
@@ -39,45 +39,45 @@ function FeedTabs() {
                 headerTintColor: '#fff',
                 headerStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', borderBottomWidth: 0 },
                 headerTitleStyle: { fontFamily: 'Aeonik-Medium', fontSize: 20 },
-                tabBarActiveTintColor: 'rgb(253, 192, 6)',
+                tabBarActiveTintColor: '#f28d28',
                 tabBarInactiveTintColor: '#a8a8a8',
                 tabBarStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', paddingBottom: 7, paddingTop: insets.top, paddingLeft: insets.left, paddingRight: insets.right, },
                 tabBarLabelStyle: { marginTop: 3, fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, textTransform: 'capitalize', fontWeight: 'bold', fontSize: 14 },
-                tabBarIndicatorStyle: { backgroundColor: 'rgb(253, 192, 6)', height: 3 },
+                tabBarIndicatorStyle: { backgroundColor: '#f28d28', height: 3 },
                 tabBarScrollEnabled: true
             })}
         >
             <NavTab.Screen name="Latest" options={{
                     title: "Latest",
-                    tabBarIcon: ({ focused }) => ( <Ionicons name='ios-logo-rss' size={22} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} /> )}
+                    tabBarIcon: ({ focused }) => ( <Ionicons name='ios-logo-rss' size={22} color={focused ? '#f28d28' : '#a8a8a8'} /> )}
                 }
             >
                 { (props) => <HomeScreen {...props} /> }
             </NavTab.Screen>
             <NavTab.Screen name="News" options={{
                     title: "News",
-                    tabBarIcon: ({ focused}) => ( <Ionicons name='md-newspaper-outline' size={22} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} /> )}
+                    tabBarIcon: ({ focused}) => ( <Ionicons name='md-newspaper-outline' size={22} color={focused ? '#f28d28' : '#a8a8a8'} /> )}
                 }
             >
                 { (props) => <CategoryScreen {...props} category="news" /> }
             </NavTab.Screen>
             <NavTab.Screen name="Tech" options={{
                     title: "Tech",
-                    tabBarIcon: ({ focused }) => ( <Ionicons name='rocket-outline' size={22} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} /> )}
+                    tabBarIcon: ({ focused }) => ( <Ionicons name='rocket-outline' size={22} color={focused ? '#f28d28' : '#a8a8a8'} /> )}
                 }
             >
                 { (props) => <CategoryScreen {...props} category="tech" /> }
             </NavTab.Screen>
             <NavTab.Screen name="Lifestyle" options={{
                     title: "Lifestyle",
-                    tabBarIcon: ({ focused}) => ( <Ionicons name='musical-notes-outline' size={22} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} /> )}
+                    tabBarIcon: ({ focused}) => ( <Ionicons name='musical-notes-outline' size={22} color={focused ? '#f28d28' : '#a8a8a8'} /> )}
                 }
             >
                 { (props) => <CategoryScreen {...props} category="entertainment" /> }
             </NavTab.Screen>
             <NavTab.Screen name="Sports" options={{
                     title: "Sports",
-                    tabBarIcon: ({ focused}) => ( <Ionicons name='md-football' size={22} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} /> )}
+                    tabBarIcon: ({ focused}) => ( <Ionicons name='md-football' size={22} color={focused ? '#f28d28' : '#a8a8a8'} /> )}
                 }
             >
                 { (props) => <CategoryScreen {...props} category="sports" /> }
@@ -92,13 +92,13 @@ function BottomTabs() {
     return (
         <Tab.Navigator
             screenOptions={() => ({
-                tabBarActiveTintColor: 'rgb(253, 192, 6)',
+                tabBarActiveTintColor: '#f28d28',
                 tabBarInactiveTintColor: '#a8a8a8',
                 tabBarStyle: { paddingTop: 10, paddingBottom: insets.bottom, borderTopWidth: 0, borderBottomWidth: 0, backgroundColor: 'rgba(28, 28, 28, 1)' },
                 tabBarLabelStyle: { marginTop: 3, fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 11 },
                 headerStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', borderBottomWidth: 0 },
-                headerTintColor: 'white',
-                headerTitleStyle: { fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 20, paddingBottom: 10 },
+                headerTintColor: '#a8a8a8',
+                headerTitleStyle: { fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 18, paddingBottom: 0 },
                 headerShadowVisible: false,
                 headerBackTitleVisible: false,
                 headerTitleAlign: 'center'
@@ -110,7 +110,7 @@ function BottomTabs() {
                 options={() => ({
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
-                        <Ionicons name='md-home-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
+                        <Ionicons name='md-home-outline' size={20} color={focused ? '#f28d28' : '#a8a8a8'} />
                     )
                 })}
             />
@@ -120,9 +120,20 @@ function BottomTabs() {
                 options={() => ({
                     headerShown: true,
                     headerTitle: 'Trending Topics',
+                    tabBarIcon: ({ focused }) => (
+                        <Ionicons name='folder-open-outline' size={20} color={focused ? '#f28d28' : '#a8a8a8'} />
+                    )
+                })}
+            />
+            <Tab.Screen
+                name="Jobs"
+                component={ JobsScreen }
+                options={() => ({
+                    headerShown: true,
+                    headerTitle: 'Job Opportunities',
                     headerTintColor: '#a8a8a8',
                     tabBarIcon: ({ focused }) => (
-                        <Ionicons name='folder-open-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
+                        <Ionicons name='md-briefcase-outline' size={20} color={focused ? '#f28d28' : '#a8a8a8'} />
                     )
                 })}
             />
@@ -133,19 +144,7 @@ function BottomTabs() {
                     headerShown: true,
                     headerTintColor: '#a8a8a8',
                     tabBarIcon: ({ focused }) => (
-                        <Ionicons name='ios-settings-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
-                    )
-                })}
-            />
-            <Tab.Screen
-                name="Info"
-                component={ InformationScreen }
-                options={() => ({
-                    headerShown: true,
-                    headerTitle: 'Information',
-                    headerTintColor: '#a8a8a8',
-                    tabBarIcon: ({ focused }) => (
-                        <Ionicons name='md-information-circle-outline' size={20} color={focused ? 'rgb(253, 192, 6)' : '#a8a8a8'} />
+                        <Ionicons name='ios-settings-outline' size={20} color={focused ? '#f28d28' : '#a8a8a8'} />
                     )
                 })}
             />
@@ -191,13 +190,13 @@ export default function App() {
         >
             <Stack.Navigator
                 screenOptions={() => ({
-                    tabBarActiveTintColor: 'rgb(253, 192, 6)',
+                    tabBarActiveTintColor: '#f28d28',
                     tabBarInactiveTintColor: '#a8a8a8',
                     tabBarStyle: { position: 'absolute', height: 60, paddingTop: 10, paddingBottom: 10, borderTopWidth: 0, backgroundColor: 'rgba(28, 28, 28, 1)' },
                     tabBarLabelStyle: { marginTop: 2, fontFamily: 'Aeonik-Medium' },
                     headerStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', borderBottomWidth: 1 },
                     headerTintColor: '#a8a8a8',
-                    headerTitleStyle: { fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 18 },
+                    headerTitleStyle: { fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 16 },
                     headerShadowVisible: false,
                     headerBackTitleVisible: false,
                     headerTitleAlign: 'center',
