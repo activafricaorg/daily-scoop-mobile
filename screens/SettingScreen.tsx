@@ -1,5 +1,6 @@
 import SelectDropdown from 'react-native-select-dropdown'
 import {View, Text, Dimensions, Image} from "react-native";
+import storage from "../util/storage";
 import { StatusBar } from "expo-status-bar";
 import Layout from "../components/Layout";
 import BaseStyles from "../styles/Base";
@@ -23,8 +24,18 @@ export default function SettingsScreen(props: { route: any; navigation: any; }) 
 					<SelectDropdown
 						data={countriesWithFlags}
 						defaultButtonText="All African Countries"
-						onSelect={(selectedItem, index) => {
-							// console.log(selectedItem)
+						onSelect={async (selectedItem, index) => {
+							console.log(selectedItem.title);
+							storage.remove({
+								key: 'countryState'
+							})
+								.then(async () => {
+									await storage.save({
+										key: 'countryState',
+										data: selectedItem.title,
+										expires: null
+									});
+								});
 						}}
 						buttonStyle={{
 							width: width - 40,
@@ -59,7 +70,8 @@ export default function SettingsScreen(props: { route: any; navigation: any; }) 
 							borderStyle: 'solid',
 							borderRadius: 5,
 							borderColor: 'rgba(243, 245, 247, 0.1)',
-							shadowOpacity: 0
+							shadowOpacity: 0,
+							marginTop: 10
 						}}
 						buttonTextAfterSelection={(selectedItem, index) => {
 							// text represented after item is selected
@@ -86,7 +98,7 @@ export default function SettingsScreen(props: { route: any; navigation: any; }) 
 						renderCustomizedRowChild={(item, index) => {
 							return (
 								<View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingHorizontal: 18}}>
-									<Image source={item.image} style={{width: 30, height: 22, resizeMode: 'cover'}} />
+									<Image source={item.image} style={{width: 30, height: 22}} />
 									<Text style={{fontFamily: 'Aeonik-Regular', letterSpacing: 0.5, fontSize: 18, color: '#c6c6c6', textAlign: 'center', marginHorizontal: 12}}>{item.title}</Text>
 								</View>
 							);

@@ -5,14 +5,33 @@ import { StatusBar } from "expo-status-bar";
 import { ArticleTypes } from "../types/article";
 import { View, Text, ActivityIndicator } from 'react-native';
 import baseStyles from "../styles/Base";
+import storage from "../util/storage";
+import {slugifyText} from "../util/helper";
 
 export default function HomeScreen(props: { route: any; navigation: any; }) {
 	const [count] = useState<number>(24);
 	const [articles, setArticles] = useState<ArticleTypes[]>([]);
 	const [initialLoading, setInitialLoading] = useState<boolean>(true);
 	const [loading, setLoading] = useState<boolean>(false);
+	const [country, setCountry] = useState<string | null>(null);
 
 	useEffect(() => {
+		storage.load({key:'countryState', autoSync: false})
+			.then((data) => {
+				setCountry(data);
+			})
+			.catch((err) => {
+				switch (err.name) {
+					case 'NotFoundError':
+						setCountry(null);
+						break;
+					case 'ExpiredError':
+						setCountry(null);
+						console.warn('expired: ', err.message);
+						break;
+				}
+			});
+
 		setArticles([]);
 		getArticles(false);
 	}, []);
@@ -22,7 +41,10 @@ export default function HomeScreen(props: { route: any; navigation: any; }) {
 			let loadPage = Math.floor(articles.length / count) + 1;
 			if (!keep_existing) loadPage = 1;
 
-			fetch(`https://api.dailyscoop.africa/article/?page=${loadPage}`)
+			let url = country ?
+				`https://api.dailyscoop.africa/article/?page=${loadPage}&country=${slugifyText(country.toLowerCase())}` :
+				`https://api.dailyscoop.africa/article/?page=${loadPage}`
+			fetch(url)
 				.then(async res => {
 					const moreArticles: ArticleTypes[] = await res.json();
 					if (moreArticles) {
@@ -31,14 +53,13 @@ export default function HomeScreen(props: { route: any; navigation: any; }) {
 						setLoading(false);
 					}
 				});
-		} catch (e) {
-			console.error(e);
+		} catch (err) {
+
 		}
 	}
 
 	const fetchMoreArticles = () => {
 		setLoading(!loading);
-
 		setTimeout(async () => {
 			await getArticles();
 		}, 1500);
