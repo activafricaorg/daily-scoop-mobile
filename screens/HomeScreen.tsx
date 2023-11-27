@@ -7,36 +7,39 @@ import { View, Text, ActivityIndicator } from 'react-native';
 import baseStyles from "../styles/Base";
 import storage from "../util/storage";
 import {slugifyText} from "../util/helper";
+import { useSelector, useDispatch } from 'react-redux';
 
-export default function HomeScreen(props: { route: any; navigation: any; }) {
+export default function HomeScreen(props: { country: string | null, route: any; navigation: any; }) {
+	// console.log(props.country, 'main');
 	const [count] = useState<number>(24);
 	const [articles, setArticles] = useState<ArticleTypes[]>([]);
 	const [initialLoading, setInitialLoading] = useState<boolean>(true);
 	const [loading, setLoading] = useState<boolean>(false);
-	const [country, setCountry] = useState<string | null>(null);
+	const [country] = useState(props.country);
 
 	useEffect(() => {
-		storage.load({key:'countryState', autoSync: false})
-			.then((data) => {
-				setCountry(data);
-			})
-			.catch((err) => {
-				switch (err.name) {
-					case 'NotFoundError':
-						setCountry(null);
-						break;
-					case 'ExpiredError':
-						setCountry(null);
-						console.warn('expired: ', err.message);
-						break;
-				}
-			});
-
+		// storage.load({key:'countryState', autoSync: false})
+		// 	.then((data) => {
+		// 		setCountry(data);
+		// 	})
+		// 	.catch((err) => {
+		// 		switch (err.name) {
+		// 			case 'NotFoundError':
+		// 				setCountry(null);
+		// 				break;
+		// 			case 'ExpiredError':
+		// 				setCountry(null);
+		// 				console.warn('expired: ', err.message);
+		// 				break;
+		// 		}
+		// 	});
 		setArticles([]);
 		getArticles(false);
 	}, []);
 
 	const getArticles = (keep_existing = true) => {
+		// console.log(country, 'b');
+
 		try {
 			let loadPage = Math.floor(articles.length / count) + 1;
 			if (!keep_existing) loadPage = 1;

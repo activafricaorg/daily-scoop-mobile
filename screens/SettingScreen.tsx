@@ -5,8 +5,11 @@ import { StatusBar } from "expo-status-bar";
 import Layout from "../components/Layout";
 import BaseStyles from "../styles/Base";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function SettingsScreen(props: { route: any; navigation: any; }) {
+	const dispatch = useDispatch();
+
 	const { width } = Dimensions.get('window');
 	const countriesWithFlags = [
 		{title: 'Nigeria', image: require('./../assets/flags/nigeria.png')},
@@ -25,17 +28,7 @@ export default function SettingsScreen(props: { route: any; navigation: any; }) 
 						data={countriesWithFlags}
 						defaultButtonText="All African Countries"
 						onSelect={async (selectedItem, index) => {
-							console.log(selectedItem.title);
-							storage.remove({
-								key: 'countryState'
-							})
-								.then(async () => {
-									await storage.save({
-										key: 'countryState',
-										data: selectedItem.title,
-										expires: null
-									});
-								});
+							dispatch({ type: 'UPDATE_COUNTRY', payload: selectedItem.title });
 						}}
 						buttonStyle={{
 							width: width - 40,
@@ -99,7 +92,7 @@ export default function SettingsScreen(props: { route: any; navigation: any; }) 
 							return (
 								<View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingHorizontal: 18}}>
 									<Image source={item.image} style={{width: 30, height: 22}} />
-									<Text style={{fontFamily: 'Aeonik-Regular', letterSpacing: 0.5, fontSize: 18, color: '#c6c6c6', textAlign: 'center', marginHorizontal: 12}}>{item.title}</Text>
+									<Text style={{fontFamily: 'Aeonik-Regular', letterSpacing: 0.5, fontSize: 18, color: '#c6c6c6', textAlign: 'center', marginHorizontal: 12, lineHeight: 16}}>{item.title}</Text>
 								</View>
 							);
 						}}

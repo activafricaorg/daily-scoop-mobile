@@ -7,6 +7,7 @@ import {View, ActivityIndicator} from "react-native";
 import { TopicTypes } from "../types/topic";
 import BaseStyles from "../styles/Base";
 import TopicStyles  from "../styles/Topic";
+import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
 
 const TopicsScreen = (props: { route: any; navigation: any; }) => {
 	const [topics, setTopics] = useState<TopicTypes[]>([]);
