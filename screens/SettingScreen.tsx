@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 export default function SettingsScreen(props: { route: any; navigation: any; }) {
 	const dispatch = useDispatch();
+	let country: string = useSelector((state: any) => state.country);
 
 	const { width } = Dimensions.get('window');
 	const countriesWithFlags = [
@@ -26,7 +27,7 @@ export default function SettingsScreen(props: { route: any; navigation: any; }) 
 					<Text style={{color: '#a8a8a8', marginBottom: 12, fontFamily: 'Aeonik-Regular', fontSize: 16, letterSpacing: 0.5, lineHeight: 20}}>To get customized scoops specific to your country, select your country.</Text>
 					<SelectDropdown
 						data={countriesWithFlags}
-						defaultButtonText="All African Countries"
+						defaultValue={countriesWithFlags.find((countryWithFlag) => countryWithFlag.title === country)}
 						onSelect={async (selectedItem, index) => {
 							dispatch({ type: 'UPDATE_COUNTRY', payload: selectedItem.title });
 						}}

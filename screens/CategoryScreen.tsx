@@ -6,8 +6,9 @@ import { ArticleTypes } from "../types/article";
 import { CategoryArticlesTypes } from "../types/category";
 import { View, Text } from 'react-native';
 import baseStyles from "../styles/Base";
+import {slugifyText} from "../util/helper";
 
-export default function CategoryScreen(props: { category: string, route: any; navigation: any; }) {
+export default function CategoryScreen(props: { country: string | null, category: string, route: any; navigation: any; }) {
 	const [count] = useState<number>(24);
 	const [articles, setArticles] = useState<ArticleTypes[]>([]);
 	const [loading, setLoading] = useState<boolean>(false);
@@ -15,14 +16,18 @@ export default function CategoryScreen(props: { category: string, route: any; na
 	useEffect(() => {
 		setArticles([]);
 		getCategoryArticles(false);
-	}, []);
+	}, [props.country]);
 
 	const getCategoryArticles = (keep_existing = true) => {
 		try {
 			let loadPage = Math.floor(articles.length / count) + 1;
 			if (!keep_existing) loadPage = 1;
 
-			fetch(`https://api.dailyscoop.africa/category/${props.category}/?page=${loadPage}`)
+			let url = props.country ?
+				`https://api.dailyscoop.africa/category/${props.category}/?page=${loadPage}&country=${slugifyText(props.country.toLowerCase())}` :
+				`https://api.dailyscoop.africa/category/${props.category}/?page=${loadPage}`
+
+			fetch(url)
 				.then(async res => {
 					const category: CategoryArticlesTypes = await res.json();
 					if (category.articles) {

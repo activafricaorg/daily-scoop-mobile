@@ -3,24 +3,27 @@ import { useEffect, useState } from "react";
 import { Link } from "@react-navigation/native";
 import { abbreviateNumber, capitalize, slugifyText } from "../util/helper";
 import Layout from "../components/Layout";
-import {View, ActivityIndicator} from "react-native";
+import { View, ActivityIndicator } from "react-native";
 import { TopicTypes } from "../types/topic";
 import BaseStyles from "../styles/Base";
 import TopicStyles  from "../styles/Topic";
-import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
 
-const TopicsScreen = (props: { route: any; navigation: any; }) => {
+const TopicsScreen = (props: { country: string | null}) => {
 	const [topics, setTopics] = useState<TopicTypes[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
 
 	useEffect(() => {
 		setTopics([]);
 		getTopics();
-	}, []);
+	}, [props.country]);
 
 	const getTopics = () => {
 		try {
-			fetch(`https://api.dailyscoop.africa/topic/?page=1&count=12`)
+			let url = props.country ?
+				`https://api.dailyscoop.africa/topic/?page=1&count=12&country=${slugifyText(props.country.toLowerCase())}` :
+				`https://api.dailyscoop.africa/topic/?page=1&count=12`
+
+			fetch(url)
 				.then(async res => {
 					const articleTopics: TopicTypes[] = await res.json();
 					if (articleTopics) setTopics(articleTopics);

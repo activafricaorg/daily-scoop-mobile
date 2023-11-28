@@ -2,7 +2,7 @@ export type StackNavigatorParamList = {
 	Home: undefined,
 	Publisher: { source: string, sourceTitle: string  },
 	Topic: { topic: string, topicTitle: string },
-	Topics: undefined,
+	Topics: { country: string | null  },
 	Settings: undefined,
-	Article:{ guid: string  }
+	Article: { guid: string  }
 }

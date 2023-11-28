@@ -32,7 +32,6 @@ const Tab = createBottomTabNavigator<TabNavigatorParamList>();
 
 function FeedTabs({country}: {country: string}) {
     const insets = useSafeAreaInsets();
-    // console.log(country.country, 'a');
 
     return (
         <NavTab.Navigator
@@ -53,40 +52,50 @@ function FeedTabs({country}: {country: string}) {
                 tabBarScrollEnabled: true
             })}
         >
-            <NavTab.Screen name="Latest" options={{
+            <NavTab.Screen
+                name="Latest"
+                options={{
                     title: "Latest",
                     tabBarIcon: ({ focused }) => ( <Ionicons name='ios-logo-rss' size={22} color={focused ? '#f28d28' : '#a8a8a8'} /> )}
                 }
             >
                 { (props) => <HomeScreen {...props} country={country} /> }
             </NavTab.Screen>
-            <NavTab.Screen name="News" options={{
+            <NavTab.Screen
+                name="News"
+                options={{
                     title: "News",
                     tabBarIcon: ({ focused}) => ( <Ionicons name='md-newspaper-outline' size={22} color={focused ? '#f28d28' : '#a8a8a8'} /> )}
                 }
             >
-                { (props) => <CategoryScreen {...props} category="news" /> }
+                { (props) => <CategoryScreen {...props} category="news" country={country} /> }
             </NavTab.Screen>
-            <NavTab.Screen name="Tech" options={{
+            <NavTab.Screen
+                name="Tech"
+                options={{
                     title: "Tech",
                     tabBarIcon: ({ focused }) => ( <Ionicons name='rocket-outline' size={22} color={focused ? '#f28d28' : '#a8a8a8'} /> )}
                 }
             >
-                { (props) => <CategoryScreen {...props} category="tech" /> }
+                { (props) => <CategoryScreen {...props} category="tech" country={country} /> }
             </NavTab.Screen>
-            <NavTab.Screen name="Lifestyle" options={{
+            <NavTab.Screen
+                name="Lifestyle"
+                options={{
                     title: "Lifestyle",
                     tabBarIcon: ({ focused}) => ( <Ionicons name='musical-notes-outline' size={22} color={focused ? '#f28d28' : '#a8a8a8'} /> )}
                 }
             >
-                { (props) => <CategoryScreen {...props} category="entertainment" /> }
+                { (props) => <CategoryScreen {...props} category="entertainment" country={country} /> }
             </NavTab.Screen>
-            <NavTab.Screen name="Sports" options={{
+            <NavTab.Screen
+                name="Sports"
+                options={{
                     title: "Sports",
                     tabBarIcon: ({ focused}) => ( <Ionicons name='md-football' size={22} color={focused ? '#f28d28' : '#a8a8a8'} /> )}
                 }
             >
-                { (props) => <CategoryScreen {...props} category="sports" /> }
+                { (props) => <CategoryScreen {...props} category="sports" country={country} /> }
             </NavTab.Screen>
         </NavTab.Navigator>
     );
@@ -95,7 +104,6 @@ function FeedTabs({country}: {country: string}) {
 function BottomTabs() {
     const insets = useSafeAreaInsets();
     let country: string = useSelector((state: any) => state.country);
-    console.log(country);
 
     return (
         <Tab.Navigator
@@ -114,7 +122,6 @@ function BottomTabs() {
         >
             <Tab.Screen
                 name="Feed"
-                // component={ FeedTabs }
                 children={()=><FeedTabs country={country}/>}
                 options={() => ({
                     headerShown: false,
@@ -125,7 +132,8 @@ function BottomTabs() {
             />
             <Tab.Screen
                 name="Topics"
-                component={ TopicsScreen }
+                // component={ TopicsScreen }
+                children={()=><TopicsScreen country={country}/>}
                 options={() => ({
                     headerShown: true,
                     headerTitle: 'Trending Topics',
@@ -163,7 +171,6 @@ function BottomTabs() {
 
 export default function App() {
     const [ready, setReady] = useState(false);
-    // const country = useSelector((state: any) => state.country);
 
     useEffect(() => {
         async function prepare() {
@@ -232,13 +239,6 @@ export default function App() {
                             component={ TopicScreen }
                             options={({ route }) => ({
                                 headerTitle: capitalize(route.params?.topicTitle),
-                                headerShown: true
-                            })}
-                        />
-                        <Stack.Screen
-                            name="Topics"
-                            component={ TopicsScreen }
-                            options={({ route }) => ({
                                 headerShown: true
                             })}
                         />
