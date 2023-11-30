@@ -85,7 +85,7 @@ export default function SettingsScreen(props: { route: any; navigation: any; }) 
 									) : (
 										<Ionicons name="md-earth-sharp" size={28} color={'#a8a8a8'} />
 									)}
-									<Text style={{fontFamily: 'Aeonik-Regular', letterSpacing: 0.5, fontSize: 18, color: '#c6c6c6', textAlign: 'center', marginHorizontal: 12}}>{selectedItem ? selectedItem.title : 'All African Countries'}</Text>
+									<Text style={{fontFamily: 'Aeonik-Regular', letterSpacing: 0.5, fontSize: 18, color: '#c6c6c6', textAlign: 'center', marginHorizontal: 12, lineHeight: 16}}>{selectedItem ? selectedItem.title : 'All African Countries'}</Text>
 								</View>
 							);
 						}}

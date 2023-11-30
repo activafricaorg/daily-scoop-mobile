@@ -1,6 +1,7 @@
 import * as SystemUI from 'expo-system-ui';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import { PersistGate } from 'redux-persist/integration/react';
 import { StackNavigatorParamList } from "./types/navigation/StackNavigatorParamList";
 import { TabNavigatorParamList } from "./types/navigation/TabNavigatorParamList";
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -13,7 +14,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import {capitalize, slugifyText} from "./util/helper";
+import { capitalize } from "./util/helper";
 import HomeScreen from "./screens/HomeScreen";
 import CategoryScreen from "./screens/CategoryScreen";
 import SourceScreen from "./screens/SourceScreen";
@@ -21,10 +22,10 @@ import JobsScreen from "./screens/JobsScreen";
 import TopicScreen from "./screens/TopicScreen";
 import TopicsScreen from "./screens/TopicsScreen";
 import SettingsScreen from "./screens/SettingScreen";
-import { PersistGate } from 'redux-persist/integration/react'
+
 
 SplashScreen.preventAutoHideAsync().then(() => { return null; });
-SystemUI.setBackgroundColorAsync("#f28d28").then(() => { return null; });
+SystemUI.setBackgroundColorAsync("rgba(28, 28, 28, 1)").then(() => { return null; });
 
 const Stack = createNativeStackNavigator<StackNavigatorParamList>();
 const NavTab = createMaterialTopTabNavigator<TabNavigatorParamList>();
@@ -47,7 +48,7 @@ function FeedTabs({country}: {country: string}) {
                 tabBarActiveTintColor: '#f28d28',
                 tabBarInactiveTintColor: '#a8a8a8',
                 tabBarStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', paddingBottom: 7, paddingTop: insets.top, paddingLeft: insets.left, paddingRight: insets.right, },
-                tabBarLabelStyle: { marginTop: 3, fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, textTransform: 'capitalize', fontWeight: 'bold', fontSize: 14 },
+                tabBarLabelStyle: { marginTop: 3, fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, textTransform: 'capitalize', fontSize: 14 },
                 tabBarIndicatorStyle: { backgroundColor: '#f28d28', height: 3 },
                 tabBarScrollEnabled: true
             })}
