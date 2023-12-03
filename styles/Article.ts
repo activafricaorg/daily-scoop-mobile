@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
 	articleView: {
+		flex: 1,
 		borderWidth: 1,
 		borderStyle: 'solid',
 		borderRadius: 15,

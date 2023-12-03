@@ -7,7 +7,7 @@ export default StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: "center",
-		backgroundColor: '#0f0f0f'
+		backgroundColor: '#0f0f0f',
 	},
 	mainContainer: {
 		padding: 10,
@@ -43,8 +43,8 @@ export default StyleSheet.create({
 		marginBottom: 10
 	},
 	infoContainer: {
-		marginLeft: 10,
-		marginRight: 10
+		paddingLeft: 10,
+		paddingRight: 10
 	},
 	infoHeader: {
 		fontFamily: 'Aeonik-Medium',
@@ -102,5 +102,9 @@ export default StyleSheet.create({
 		textDecorationLine: 'underline',
 		textDecorationStyle: 'solid',
 		textDecorationColor: '#f28d28'
+	},
+	flatList: {
+		paddingLeft: 20,
+		paddingRight: 20
 	}
 })

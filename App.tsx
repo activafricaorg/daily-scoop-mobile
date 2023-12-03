@@ -133,7 +133,6 @@ function BottomTabs() {
             />
             <Tab.Screen
                 name="Topics"
-                // component={ TopicsScreen }
                 children={()=><TopicsScreen country={country}/>}
                 options={() => ({
                     headerShown: true,

@@ -8,9 +8,7 @@ export const capitalize = (input: string): string => {
 }
 
 export const sanitizeTitle = (input: string): string => {
-	let title = input.split("|").length > 1 ? input.split("|")[0] : input;
-	title = title.split(" --").length > 1 ? title.split(" --")[0] : title;
-	title = title.split(" —").length > 1 ? title.split(" —")[0] : title;
+	let title = input.split(" --").length > 1 ? input.split(" --")[0] : input;
 	title = title.split(" •").length > 1 ? title.split(" •")[0] : title;
 	title = title.split(" –—").length > 1 ? title.split(" –—")[0] : title;
 	title = title.split(" - Punch Newspapers").length > 1 ? title.split(" - Punch Newspapers")[0] : title;

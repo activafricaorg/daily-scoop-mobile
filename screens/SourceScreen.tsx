@@ -1,14 +1,15 @@
 import Layout from "../components/Layout";
 import Article from "../components/Article";
-import { useState, useEffect } from "react";
+import {useState, useEffect, useCallback} from "react";
 import { StatusBar } from "expo-status-bar";
 import { ArticleTypes } from "../types/article";
 import { IPublisherArticles } from "../types/publisher";
-import { Text, View } from 'react-native';
+import {ActivityIndicator, FlatList, ListRenderItemInfo, Text, View} from 'react-native';
 import baseStyles from "../styles/Base";
 export default function SourceScreen (props: { route: any; navigation: any; }) {
-	const [count] = useState<number>(24);
+	const [count] = useState<number>(16);
 	const [articles, setArticles] = useState<ArticleTypes[]>([]);
+	const [initialLoading, setInitialLoading] = useState<boolean>(true);
 	const [loading, setLoading] = useState<boolean>(false);
 
 	useEffect(() => {
@@ -24,11 +25,12 @@ export default function SourceScreen (props: { route: any; navigation: any; }) {
 			let loadPage = Math.floor(articles.length / count) + 1;
 			if (!keep_existing) loadPage = 1;
 
-			fetch(`https://api.dailyscoop.africa/publisher?search=${slug}&page=${loadPage}`)
+			fetch(`https://api.dailyscoop.africa/publisher?search=${slug}&count=${count}&page=${loadPage}`)
 				.then(async res => {
 					const publisher: IPublisherArticles[] = await res.json();
 					if (publisher[0].articles) {
 						setArticles(keep_existing ? articles.concat(publisher[0].articles) : publisher[0].articles);
+						setInitialLoading(false);
 						setLoading(false);
 					}
 				});
@@ -45,37 +47,54 @@ export default function SourceScreen (props: { route: any; navigation: any; }) {
 		}, 1500);
 	};
 
+	const renderItem = useCallback((article: ListRenderItemInfo<ArticleTypes>) =>
+			<Article isCategory={ false } data={ article } />,
+		[articles]
+	)
+
 	return (
 		<Layout>
-			<View style={baseStyles.wrapper}>
-				{
-					articles
-						.map((article: ArticleTypes, index: number) => (
-							<Article isCategory={ false } key={ index } data={ article } />
-						))
-				}
-				{
-					articles.length >= count ?
-						<View style={{
-							alignSelf: 'center',
-							borderTopRightRadius: 20,
-							borderTopLeftRadius: 20,
-							borderBottomLeftRadius: 20,
-							borderBottomRightRadius: 20,
-							marginTop: 20,
-							overflow: 'hidden'}}
-						>
-							<Text
-								style={baseStyles.button}
-								onPress={fetchMoreArticles}
-							>
-								{ loading ? "Loading..." : "Load More" }
-							</Text>
-						</View>
-						:
-						null
-				}
-			</View>
+			{ initialLoading ?
+				<View style={{flex: 1, alignItems: 'center'}}>
+					<ActivityIndicator size="small" color="#fdc006"/>
+				</View> :
+				<View style={baseStyles.wrapper}>
+					<FlatList
+						style={{marginTop: -30, marginBottom: -50, paddingTop: 30, paddingBottom: 100}}
+						data={articles}
+						renderItem={renderItem}
+						keyExtractor={article => article.url}
+						removeClippedSubviews={true}
+						ListFooterComponent={
+							loading ?
+								<View style={{flex: 1, alignItems: 'center', marginTop: 20, marginBottom: 60}}>
+									<ActivityIndicator size="small" color="#fdc006"/>
+								</View>
+								:
+								articles.length >= count ?
+									<View style={{
+										alignSelf: 'center',
+										borderTopRightRadius: 20,
+										borderTopLeftRadius: 20,
+										borderBottomLeftRadius: 20,
+										borderBottomRightRadius: 20,
+										marginTop: 20,
+										marginBottom: 60,
+										overflow: 'hidden'
+									}}>
+										<Text
+											style={baseStyles.button}
+											onPress={fetchMoreArticles}
+										>
+											{ loading ? "Loading..." : "Load More" }
+										</Text>
+									</View>
+									:
+									null
+						}
+					/>
+				</View>
+			}
 			<StatusBar style="auto" />
 		</Layout>
 	);

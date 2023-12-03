@@ -5,7 +5,7 @@ import Layout from "../components/Layout";
 
 export default function JobsScreen(props: { route: any; navigation: any; }) {
 	return (
-		<Layout>
+		<Layout isList={false}>
 			<View style={{ width: '100%', backgroundColor: '#0f0f0f' }}>
 				<View style={BaseStyles.infoContainer}>
 					<View>
@@ -18,6 +18,7 @@ export default function JobsScreen(props: { route: any; navigation: any; }) {
 					</View>
 				</View>
 			</View>
+
 			<StatusBar style="auto" />
 		</Layout>
 	);

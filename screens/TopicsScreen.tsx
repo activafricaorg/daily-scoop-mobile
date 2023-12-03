@@ -1,14 +1,13 @@
 import { StatusBar } from "expo-status-bar";
-import { useEffect, useState } from "react";
+import {useCallback, useEffect, useState} from "react";
 import { Link } from "@react-navigation/native";
 import { abbreviateNumber, capitalize, slugifyText } from "../util/helper";
 import Layout from "../components/Layout";
-import { View, ActivityIndicator } from "react-native";
+import { View, ActivityIndicator, ListRenderItemInfo, FlatList } from "react-native";
 import { TopicTypes } from "../types/topic";
-import BaseStyles from "../styles/Base";
 import TopicStyles  from "../styles/Topic";
 
-const TopicsScreen = (props: { country: string | null}) => {
+export default function (props: { country: string | null}) {
 	const [topics, setTopics] = useState<TopicTypes[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
 
@@ -16,6 +15,15 @@ const TopicsScreen = (props: { country: string | null}) => {
 		setTopics([]);
 		getTopics();
 	}, [props.country]);
+
+	const renderItem = useCallback((topic: ListRenderItemInfo<TopicTypes>) => (
+			<View style={{marginBottom: 25, flex: 1}}>
+				<Link style={TopicStyles.topicView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.item.name), topicTitle: topic.item.name }}}>{capitalize(topic.item.name)}</Link>
+				<Link style={TopicStyles.countView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.item.name), topicTitle: topic.item.name }}}>{abbreviateNumber(topic.item.articleCount)} Scoops</Link>
+			</View>
+		),
+		[topics]
+	)
 
 	const getTopics = () => {
 		try {
@@ -36,29 +44,28 @@ const TopicsScreen = (props: { country: string | null}) => {
 
 	return (
 		<Layout>
-			<View style={{width: '100%', backgroundColor: '#0f0f0f'}}>
-				<View style={BaseStyles.infoContainer}>
+			{ loading ?
+				<View style={{flex: 1, alignItems: 'center'}}>
+					<ActivityIndicator size="small" color="#fdc006"/>
+				</View> :
+				<View>
 					{ loading ?
 						<View style={{flex: 1, alignItems: 'center'}}>
 							<ActivityIndicator size="small" color="#fdc006"/>
 						</View> :
-						<>
-							{
-								topics
-									.map ((topic, index: number) => (
-										<View key={index} style={{marginBottom: 25}}>
-											<Link style={TopicStyles.topicView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.name), topicTitle: topic.name }}}>{capitalize(topic.name)}</Link>
-											<Link style={TopicStyles.countView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.name), topicTitle: topic.name }}}>{abbreviateNumber(topic.articleCount)} Scoops</Link>
-										</View>
-									))
-							}
-						</>
+						<FlatList
+							style={{marginTop: -30, marginBottom: -50, paddingTop: 30, paddingBottom: 100, paddingLeft: 10, paddingRight: 10}}
+							data={topics}
+							keyExtractor={topic => slugifyText(topic.name)}
+							removeClippedSubviews={true}
+							showsVerticalScrollIndicator={false}
+							renderItem={renderItem}
+						/>
 					}
 				</View>
-			</View>
+			}
+
 			<StatusBar style="auto" />
 		</Layout>
 	);
 }
-
-export default TopicsScreen

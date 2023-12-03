@@ -21,7 +21,7 @@ export default function SettingsScreen(props: { route: any; navigation: any; }) 
 	];
 
 	return (
-		<Layout>
+		<Layout isList={false}>
 			<View style={{ width: '100%', backgroundColor: '#0f0f0f' }}>
 				<View style={BaseStyles.infoContainer}>
 					<Text style={{color: '#a8a8a8', marginBottom: 12, fontFamily: 'Aeonik-Regular', fontSize: 16, letterSpacing: 0.5, lineHeight: 20}}>To get customized scoops specific to your country, select your country.</Text>
