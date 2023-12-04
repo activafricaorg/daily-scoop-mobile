@@ -22,7 +22,7 @@ export default function (props: { country: string | null}) {
 				<Link style={TopicStyles.countView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.item.name), topicTitle: topic.item.name }}}>{abbreviateNumber(topic.item.articleCount)} Scoops</Link>
 			</View>
 		),
-		[topics]
+		[]
 	)
 
 	const getTopics = () => {
@@ -48,19 +48,15 @@ export default function (props: { country: string | null}) {
 				<View style={{flex: 1, alignItems: 'center'}}>
 					<ActivityIndicator size="small" color="#fdc006"/>
 				</View> :
-				<View>
-					{ loading ?
-						<View style={{flex: 1, alignItems: 'center'}}>
-							<ActivityIndicator size="small" color="#fdc006"/>
-						</View> :
-						<FlatList
-							style={{marginTop: -30, marginBottom: -50, paddingTop: 30, paddingBottom: 100, paddingLeft: 10, paddingRight: 10}}
-							data={topics}
-							keyExtractor={topic => slugifyText(topic.name)}
-							removeClippedSubviews={true}
-							showsVerticalScrollIndicator={false}
-							renderItem={renderItem}
-						/>
+				<View style={{paddingLeft: 10, paddingRight: 10}}>
+					{
+						topics
+							.map ((topic, index: number) => (
+								<View key={index} style={{marginBottom: 25}}>
+									<Link style={TopicStyles.topicView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.name), topicTitle: topic.name }}}>{capitalize(topic.name)}</Link>
+									<Link style={TopicStyles.countView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.name), topicTitle: topic.name }}}>{abbreviateNumber(topic.articleCount)} Scoops</Link>
+								</View>
+							))
 					}
 				</View>
 			}

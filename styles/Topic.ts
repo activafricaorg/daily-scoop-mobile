@@ -4,15 +4,15 @@ export default StyleSheet.create({
 	topicView: {
 		fontFamily: 'Aeonik-Regular',
 		letterSpacing: 0.5,
-		fontSize: 20,
+		fontSize: 22,
 		lineHeight: 26,
-		color: '#dcdcdc',
+		color: '#bebebe',
 		textTransform: 'capitalize',
 		marginBottom: 2,
 	},
 	countView: {
 		fontSize: 16,
-		color: '#8d8d8d',
+		color: '#f28d28',
 		fontFamily: 'Aeonik-Regular',
 		letterSpacing: 0.5
 	}

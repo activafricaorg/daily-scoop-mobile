@@ -10,9 +10,8 @@ export default StyleSheet.create({
 		backgroundColor: '#0f0f0f',
 	},
 	mainContainer: {
-		padding: 10,
-		marginTop: 20,
-		marginBottom: 40
+		// padding: 10,
+		marginTop: 20
 	},
 	textView: {
 		fontFamily: 'Aeonik-Medium',
@@ -102,9 +101,5 @@ export default StyleSheet.create({
 		textDecorationLine: 'underline',
 		textDecorationStyle: 'solid',
 		textDecorationColor: '#f28d28'
-	},
-	flatList: {
-		paddingLeft: 20,
-		paddingRight: 20
 	}
 })

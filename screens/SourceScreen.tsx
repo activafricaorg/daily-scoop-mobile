@@ -1,10 +1,10 @@
 import Layout from "../components/Layout";
-import Article from "../components/Article";
-import {useState, useEffect, useCallback} from "react";
+import { useState, useEffect, useCallback } from "react";
 import { StatusBar } from "expo-status-bar";
 import { ArticleTypes } from "../types/article";
 import { IPublisherArticles } from "../types/publisher";
-import {ActivityIndicator, FlatList, ListRenderItemInfo, Text, View} from 'react-native';
+import { ActivityIndicator, FlatList, ListRenderItemInfo, Text, View } from 'react-native';
+import Article from "../components/Article";
 import baseStyles from "../styles/Base";
 export default function SourceScreen (props: { route: any; navigation: any; }) {
 	const [count] = useState<number>(16);
@@ -47,52 +47,47 @@ export default function SourceScreen (props: { route: any; navigation: any; }) {
 		}, 1500);
 	};
 
-	const renderItem = useCallback((article: ListRenderItemInfo<ArticleTypes>) =>
-			<Article isCategory={ false } data={ article } />,
-		[articles]
-	)
-
 	return (
 		<Layout>
 			{ initialLoading ?
 				<View style={{flex: 1, alignItems: 'center'}}>
 					<ActivityIndicator size="small" color="#fdc006"/>
-				</View> :
+				</View>
+				:
 				<View style={baseStyles.wrapper}>
-					<FlatList
-						style={{marginTop: -30, marginBottom: -50, paddingTop: 30, paddingBottom: 100}}
-						data={articles}
-						renderItem={renderItem}
-						keyExtractor={article => article.url}
-						removeClippedSubviews={true}
-						ListFooterComponent={
-							loading ?
-								<View style={{flex: 1, alignItems: 'center', marginTop: 20, marginBottom: 60}}>
-									<ActivityIndicator size="small" color="#fdc006"/>
+					{
+						articles
+							.map((article: ArticleTypes, index: number) => (
+								<Article isCategory={ false } key={ index } data={ article } />
+							))
+					}
+					{
+						loading ?
+							<View style={{flex: 1, alignItems: 'center', marginTop: 20, marginBottom: 20}}>
+								<ActivityIndicator size="small" color="#fdc006"/>
+							</View>
+							:
+							articles.length >= count ?
+								<View style={{
+									alignSelf: 'center',
+									borderTopRightRadius: 20,
+									borderTopLeftRadius: 20,
+									borderBottomLeftRadius: 20,
+									borderBottomRightRadius: 20,
+									marginTop: 20,
+									marginBottom: 60,
+									overflow: 'hidden'
+								}}>
+									<Text
+										style={baseStyles.button}
+										onPress={fetchMoreArticles}
+									>
+										{ loading ? "Loading..." : "Load More" }
+									</Text>
 								</View>
 								:
-								articles.length >= count ?
-									<View style={{
-										alignSelf: 'center',
-										borderTopRightRadius: 20,
-										borderTopLeftRadius: 20,
-										borderBottomLeftRadius: 20,
-										borderBottomRightRadius: 20,
-										marginTop: 20,
-										marginBottom: 60,
-										overflow: 'hidden'
-									}}>
-										<Text
-											style={baseStyles.button}
-											onPress={fetchMoreArticles}
-										>
-											{ loading ? "Loading..." : "Load More" }
-										</Text>
-									</View>
-									:
-									null
-						}
-					/>
+								null
+					}
 				</View>
 			}
 			<StatusBar style="auto" />

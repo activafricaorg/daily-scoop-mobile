@@ -1,6 +1,5 @@
 import SelectDropdown from 'react-native-select-dropdown'
-import {View, Text, Dimensions, Image} from "react-native";
-import storage from "../util/storage";
+import { View, Text, Dimensions, Image } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import Layout from "../components/Layout";
 import BaseStyles from "../styles/Base";
@@ -21,10 +20,10 @@ export default function SettingsScreen(props: { route: any; navigation: any; }) 
 	];
 
 	return (
-		<Layout isList={false}>
+		<Layout>
 			<View style={{ width: '100%', backgroundColor: '#0f0f0f' }}>
 				<View style={BaseStyles.infoContainer}>
-					<Text style={{color: '#a8a8a8', marginBottom: 12, fontFamily: 'Aeonik-Regular', fontSize: 16, letterSpacing: 0.5, lineHeight: 20}}>To get customized scoops specific to your country, select your country.</Text>
+					<Text style={{color: '#989898', marginBottom: 12, fontFamily: 'Aeonik-Regular', fontSize: 16, letterSpacing: 0.5, lineHeight: 20}}>To get customized scoops specific to your country, select your country.</Text>
 					<SelectDropdown
 						data={countriesWithFlags}
 						defaultValue={countriesWithFlags.find((countryWithFlag) => countryWithFlag.title === country)}
@@ -42,7 +41,7 @@ export default function SettingsScreen(props: { route: any; navigation: any; }) 
 						buttonTextStyle={{
 							fontFamily: 'Aeonik-Regular',
 							fontSize: 20,
-							color: '#c6c6c6'
+							color: '#989898'
 						}}
 						dropdownOverlayColor='rgba(0, 0, 0, 0.3)'
 						rowStyle={{
@@ -54,7 +53,7 @@ export default function SettingsScreen(props: { route: any; navigation: any; }) 
 							borderTopColor: 'rgba(243, 245, 247, 0.1)',
 						}}
 						rowTextStyle={{
-							color: '#c6c6c6',
+							color: '#989898',
 							fontSize: 19,
 							fontFamily: 'Aeonik-Regular',
 						}}
@@ -83,9 +82,9 @@ export default function SettingsScreen(props: { route: any; navigation: any; }) 
 									{selectedItem ? (
 										<Image source={selectedItem.image} style={{width: 28, height: 21}} />
 									) : (
-										<Ionicons name="md-earth-sharp" size={28} color={'#a8a8a8'} />
+										<Ionicons name="md-earth-sharp" size={28} color={'#989898'} />
 									)}
-									<Text style={{fontFamily: 'Aeonik-Regular', letterSpacing: 0.5, fontSize: 18, color: '#c6c6c6', textAlign: 'center', marginHorizontal: 12, lineHeight: 16}}>{selectedItem ? selectedItem.title : 'All African Countries'}</Text>
+									<Text style={{fontFamily: 'Aeonik-Regular', letterSpacing: 0.5, fontSize: 18, color: '#989898', textAlign: 'center', marginHorizontal: 12, lineHeight: 16}}>{selectedItem ? selectedItem.title : 'All African Countries'}</Text>
 								</View>
 							);
 						}}
@@ -93,12 +92,12 @@ export default function SettingsScreen(props: { route: any; navigation: any; }) 
 							return (
 								<View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingHorizontal: 18}}>
 									<Image source={item.image} style={{width: 30, height: 22}} />
-									<Text style={{fontFamily: 'Aeonik-Regular', letterSpacing: 0.5, fontSize: 18, color: '#c6c6c6', textAlign: 'center', marginHorizontal: 12, lineHeight: 16}}>{item.title}</Text>
+									<Text style={{fontFamily: 'Aeonik-Regular', letterSpacing: 0.5, fontSize: 18, color: '#989898', textAlign: 'center', marginHorizontal: 12, lineHeight: 16}}>{item.title}</Text>
 								</View>
 							);
 						}}
 						renderDropdownIcon={isOpened => {
-							return <Ionicons name={isOpened ? 'chevron-up' : 'chevron-down'} size={28} color={'#a8a8a8'} />
+							return <Ionicons name={isOpened ? 'chevron-up' : 'chevron-down'} size={28} color={'#989898'} />
 						}}
 					/>
 				</View>

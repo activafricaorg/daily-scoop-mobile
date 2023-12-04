@@ -23,7 +23,6 @@ import TopicScreen from "./screens/TopicScreen";
 import TopicsScreen from "./screens/TopicsScreen";
 import SettingsScreen from "./screens/SettingScreen";
 
-
 SplashScreen.preventAutoHideAsync().then(() => { return null; });
 SystemUI.setBackgroundColorAsync("rgba(28, 28, 28, 1)").then(() => { return null; });
 
@@ -42,13 +41,13 @@ function FeedTabs({country}: {country: string}) {
                 headerShadowVisible: true,
                 headerBackTitleVisible: false,
                 headerTitleAlign: 'center',
-                headerTintColor: '#fff',
+                headerTintColor: '#989898',
                 headerStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', borderBottomWidth: 0 },
                 headerTitleStyle: { fontFamily: 'Aeonik-Medium', fontSize: 20 },
                 tabBarActiveTintColor: '#f28d28',
-                tabBarInactiveTintColor: '#a8a8a8',
+                tabBarInactiveTintColor: '#989898',
                 tabBarStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', paddingBottom: 7, paddingTop: insets.top, paddingLeft: insets.left, paddingRight: insets.right, },
-                tabBarLabelStyle: { marginTop: 3, fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, textTransform: 'capitalize', fontSize: 14 },
+                tabBarLabelStyle: { marginTop: 3, fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, textTransform: 'capitalize', fontSize: 16 },
                 tabBarIndicatorStyle: { backgroundColor: '#f28d28', height: 3 },
                 tabBarScrollEnabled: true
             })}
@@ -57,7 +56,7 @@ function FeedTabs({country}: {country: string}) {
                 name="Latest"
                 options={{
                     title: "Latest",
-                    tabBarIcon: ({ focused }) => ( <Ionicons name='ios-logo-rss' size={22} color={focused ? '#f28d28' : '#a8a8a8'} /> )}
+                    tabBarIcon: ({ focused }) => ( <Ionicons name='ios-logo-rss' size={22} color={focused ? '#f28d28' : '#989898'} /> )}
                 }
             >
                 { (props) => <HomeScreen {...props} country={country} /> }
@@ -66,7 +65,7 @@ function FeedTabs({country}: {country: string}) {
                 name="News"
                 options={{
                     title: "News",
-                    tabBarIcon: ({ focused}) => ( <Ionicons name='md-newspaper-outline' size={22} color={focused ? '#f28d28' : '#a8a8a8'} /> )}
+                    tabBarIcon: ({ focused}) => ( <Ionicons name='md-newspaper-outline' size={22} color={focused ? '#f28d28' : '#989898'} /> )}
                 }
             >
                 { (props) => <CategoryScreen {...props} category="news" country={country} /> }
@@ -75,7 +74,7 @@ function FeedTabs({country}: {country: string}) {
                 name="Tech"
                 options={{
                     title: "Tech",
-                    tabBarIcon: ({ focused }) => ( <Ionicons name='rocket-outline' size={22} color={focused ? '#f28d28' : '#a8a8a8'} /> )}
+                    tabBarIcon: ({ focused }) => ( <Ionicons name='rocket-outline' size={22} color={focused ? '#f28d28' : '#989898'} /> )}
                 }
             >
                 { (props) => <CategoryScreen {...props} category="tech" country={country} /> }
@@ -84,7 +83,7 @@ function FeedTabs({country}: {country: string}) {
                 name="Lifestyle"
                 options={{
                     title: "Lifestyle",
-                    tabBarIcon: ({ focused}) => ( <Ionicons name='musical-notes-outline' size={22} color={focused ? '#f28d28' : '#a8a8a8'} /> )}
+                    tabBarIcon: ({ focused}) => ( <Ionicons name='musical-notes-outline' size={22} color={focused ? '#f28d28' : '#989898'} /> )}
                 }
             >
                 { (props) => <CategoryScreen {...props} category="entertainment" country={country} /> }
@@ -93,7 +92,7 @@ function FeedTabs({country}: {country: string}) {
                 name="Sports"
                 options={{
                     title: "Sports",
-                    tabBarIcon: ({ focused}) => ( <Ionicons name='md-football' size={22} color={focused ? '#f28d28' : '#a8a8a8'} /> )}
+                    tabBarIcon: ({ focused}) => ( <Ionicons name='md-football' size={22} color={focused ? '#f28d28' : '#989898'} /> )}
                 }
             >
                 { (props) => <CategoryScreen {...props} category="sports" country={country} /> }
@@ -110,12 +109,12 @@ function BottomTabs() {
         <Tab.Navigator
             screenOptions={() => ({
                 tabBarActiveTintColor: '#f28d28',
-                tabBarInactiveTintColor: '#a8a8a8',
+                tabBarInactiveTintColor: '#989898',
                 tabBarStyle: { paddingTop: 10, paddingBottom: insets.bottom, borderTopWidth: 0, borderBottomWidth: 0, backgroundColor: 'rgba(28, 28, 28, 1)' },
-                tabBarLabelStyle: { marginTop: 3, fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 11, lineHeight: 15 },
+                tabBarLabelStyle: { marginTop: 0, fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 13, lineHeight: 15 },
                 headerStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', borderBottomWidth: 0 },
-                headerTintColor: '#a8a8a8',
-                headerTitleStyle: { fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 18, paddingBottom: 0 },
+                headerTintColor: '#989898',
+                headerTitleStyle: { fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 20, paddingBottom: 0 },
                 headerShadowVisible: false,
                 headerBackTitleVisible: false,
                 headerTitleAlign: 'center'
@@ -127,7 +126,7 @@ function BottomTabs() {
                 options={() => ({
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
-                        <Ionicons name='md-home-outline' size={20} color={focused ? '#f28d28' : '#a8a8a8'} />
+                        <Ionicons name='md-home-outline' size={20} color={focused ? '#f28d28' : '#989898'} />
                     )
                 })}
             />
@@ -138,7 +137,7 @@ function BottomTabs() {
                     headerShown: true,
                     headerTitle: 'Trending Topics',
                     tabBarIcon: ({ focused }) => (
-                        <Ionicons name='folder-open-outline' size={20} color={focused ? '#f28d28' : '#a8a8a8'} />
+                        <Ionicons name='folder-open-outline' size={20} color={focused ? '#f28d28' : '#989898'} />
                     )
                 })}
             />
@@ -150,7 +149,7 @@ function BottomTabs() {
                     headerTitle: 'Job Opportunities',
                     headerTintColor: '#a8a8a8',
                     tabBarIcon: ({ focused }) => (
-                        <Ionicons name='md-briefcase-outline' size={20} color={focused ? '#f28d28' : '#a8a8a8'} />
+                        <Ionicons name='md-briefcase-outline' size={20} color={focused ? '#f28d28' : '#989898'} />
                     )
                 })}
             />
@@ -161,7 +160,7 @@ function BottomTabs() {
                     headerShown: true,
                     headerTintColor: '#a8a8a8',
                     tabBarIcon: ({ focused }) => (
-                        <Ionicons name='ios-settings-outline' size={20} color={focused ? '#f28d28' : '#a8a8a8'} />
+                        <Ionicons name='ios-settings-outline' size={20} color={focused ? '#f28d28' : '#989898'} />
                     )
                 })}
             />
@@ -208,15 +207,15 @@ export default function App() {
                     <Stack.Navigator
                         screenOptions={() => ({
                             tabBarActiveTintColor: '#f28d28',
-                            tabBarInactiveTintColor: '#a8a8a8',
+                            tabBarInactiveTintColor: '#989898',
                             tabBarStyle: { position: 'absolute', height: 60, paddingTop: 10, paddingBottom: 10, borderTopWidth: 0, backgroundColor: 'rgba(28, 28, 28, 1)' },
                             tabBarLabelStyle: { marginTop: 2, fontFamily: 'Aeonik-Medium' },
                             headerStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', borderBottomWidth: 1 },
-                            headerTintColor: '#a8a8a8',
-                            headerTitleStyle: { fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 16 },
+                            headerTintColor: '#989898',
+                            headerTitleStyle: { fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 20 },
                             headerShadowVisible: false,
                             headerBackTitleVisible: false,
-                            headerTitleAlign: 'center',
+                            headerTitleAlign: 'left',
                         })}
                     >
                         <Stack.Screen
@@ -246,6 +245,5 @@ export default function App() {
                 </NavigationContainer>
             </PersistGate>
         </Provider>
-
     );
 }
