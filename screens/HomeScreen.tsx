@@ -1,10 +1,10 @@
 import Layout from "../components/Layout";
-import Article from "../components/Article";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { slugifyText } from "../util/helper";
 import { ArticleTypes } from "../types/article";
 import { View, Text, ActivityIndicator } from 'react-native';
+import Article from "../components/Article";
 import baseStyles from "../styles/Base";
 
 export default function HomeScreen(props: { country: string | null, route: any; navigation: any; }) {
@@ -69,16 +69,7 @@ export default function HomeScreen(props: { country: string | null, route: any; 
 								</View>
 								:
 								articles.length >= count ?
-									<View style={{
-										alignSelf: 'center',
-										borderTopRightRadius: 10,
-										borderTopLeftRadius: 10,
-										borderBottomLeftRadius: 10,
-										borderBottomRightRadius: 10,
-										marginTop: 20,
-										marginBottom: 60,
-										overflow: 'hidden'
-									}}>
+									<View style={baseStyles.buttonWrapper}>
 										<Text
 											style={baseStyles.button}
 											onPress={fetchMoreArticles}

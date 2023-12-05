@@ -71,16 +71,7 @@ export default function CategoryScreen(props: { country: string | null, category
 							</View>
 							:
 							articles.length >= count ?
-								<View style={{
-									alignSelf: 'center',
-									borderTopRightRadius: 20,
-									borderTopLeftRadius: 20,
-									borderBottomLeftRadius: 20,
-									borderBottomRightRadius: 20,
-									marginTop: 20,
-									marginBottom: 60,
-									overflow: 'hidden'
-								}}>
+								<View style={baseStyles.buttonWrapper}>
 									<Text
 										style={baseStyles.button}
 										onPress={fetchMoreArticles}

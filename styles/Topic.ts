@@ -2,18 +2,18 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
 	topicView: {
-		fontFamily: 'Aeonik-Regular',
+		fontFamily: 'Aeonik-Medium',
 		letterSpacing: 0.5,
 		fontSize: 22,
 		lineHeight: 26,
-		color: '#bebebe',
+		color: '#adadad',
 		textTransform: 'capitalize',
-		marginBottom: 2,
+		marginBottom: 3,
 	},
 	countView: {
 		fontSize: 16,
 		color: '#f28d28',
-		fontFamily: 'Aeonik-Regular',
+		fontFamily: 'Aeonik-Medium',
 		letterSpacing: 0.5
 	}
 });

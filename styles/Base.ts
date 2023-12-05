@@ -42,8 +42,8 @@ export default StyleSheet.create({
 		marginBottom: 10
 	},
 	infoContainer: {
-		paddingLeft: 10,
-		paddingRight: 10
+		paddingLeft: 20,
+		paddingRight: 20
 	},
 	infoHeader: {
 		fontFamily: 'Aeonik-Medium',
@@ -82,6 +82,16 @@ export default StyleSheet.create({
 		borderColor: 'rgba(243, 245, 247, 0.1)',
 		marginBottom: 15,
 	},
+	buttonWrapper: {
+		alignSelf: 'center',
+		borderTopRightRadius: 5,
+		borderTopLeftRadius: 5,
+		borderBottomLeftRadius: 5,
+		borderBottomRightRadius: 5,
+		marginTop: 20,
+		overflow: "hidden",
+		marginBottom: 60
+	},
 	button: {
 		display: 'flex',
 		alignSelf: "flex-start",
@@ -89,7 +99,7 @@ export default StyleSheet.create({
 		letterSpacing: 0.5,
 		color: '#0f0f0f',
 		backgroundColor: '#f28d28',
-		fontSize: 15,
+		fontSize: 18,
 		paddingTop: 10,
 		paddingBottom: 10,
 		paddingLeft: 20,

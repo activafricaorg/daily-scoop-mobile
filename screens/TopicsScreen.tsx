@@ -5,7 +5,8 @@ import { abbreviateNumber, capitalize, slugifyText } from "../util/helper";
 import Layout from "../components/Layout";
 import { View, ActivityIndicator, ListRenderItemInfo, FlatList } from "react-native";
 import { TopicTypes } from "../types/topic";
-import TopicStyles  from "../styles/Topic";
+import topicStyles  from "../styles/Topic";
+import baseStyles from "../styles/Base";
 
 export default function (props: { country: string | null}) {
 	const [topics, setTopics] = useState<TopicTypes[]>([]);
@@ -18,8 +19,8 @@ export default function (props: { country: string | null}) {
 
 	const renderItem = useCallback((topic: ListRenderItemInfo<TopicTypes>) => (
 			<View style={{marginBottom: 25, flex: 1}}>
-				<Link style={TopicStyles.topicView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.item.name), topicTitle: topic.item.name }}}>{capitalize(topic.item.name)}</Link>
-				<Link style={TopicStyles.countView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.item.name), topicTitle: topic.item.name }}}>{abbreviateNumber(topic.item.articleCount)} Scoops</Link>
+				<Link style={topicStyles.topicView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.item.name), topicTitle: topic.item.name }}}>{capitalize(topic.item.name)}</Link>
+				<Link style={topicStyles.countView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.item.name), topicTitle: topic.item.name }}}>{abbreviateNumber(topic.item.articleCount)} Scoops</Link>
 			</View>
 		),
 		[]
@@ -48,13 +49,13 @@ export default function (props: { country: string | null}) {
 				<View style={{flex: 1, alignItems: 'center'}}>
 					<ActivityIndicator size="small" color="#fdc006"/>
 				</View> :
-				<View style={{paddingLeft: 10, paddingRight: 10}}>
+				<View style={baseStyles.infoContainer}>
 					{
 						topics
 							.map ((topic, index: number) => (
 								<View key={index} style={{marginBottom: 25}}>
-									<Link style={TopicStyles.topicView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.name), topicTitle: topic.name }}}>{capitalize(topic.name)}</Link>
-									<Link style={TopicStyles.countView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.name), topicTitle: topic.name }}}>{abbreviateNumber(topic.articleCount)} Scoops</Link>
+									<Link style={topicStyles.topicView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.name), topicTitle: topic.name }}}>{capitalize(topic.name)}</Link>
+									<Link style={topicStyles.countView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.name), topicTitle: topic.name }}}>{abbreviateNumber(topic.articleCount)} Scoops</Link>
 								</View>
 							))
 					}

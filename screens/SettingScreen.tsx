@@ -78,26 +78,26 @@ export default function SettingsScreen(props: { route: any; navigation: any; }) 
 						}}
 						renderCustomizedButtonChild={(selectedItem, index) => {
 							return (
-								<View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingHorizontal: 10}}>
+								<View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingHorizontal: 10}}>
 									{selectedItem ? (
 										<Image source={selectedItem.image} style={{width: 28, height: 21}} />
 									) : (
 										<Ionicons name="md-earth-sharp" size={28} color={'#989898'} />
 									)}
-									<Text style={{fontFamily: 'Aeonik-Regular', letterSpacing: 0.5, fontSize: 18, color: '#989898', textAlign: 'center', marginHorizontal: 12, lineHeight: 16}}>{selectedItem ? selectedItem.title : 'All African Countries'}</Text>
+									<Text style={{fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 18, color: '#989898', textAlign: 'center', marginHorizontal: 12, lineHeight: 16, marginTop: 3}}>{selectedItem ? selectedItem.title : 'All African Countries'}</Text>
 								</View>
 							);
 						}}
 						renderCustomizedRowChild={(item, index) => {
 							return (
-								<View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingHorizontal: 18}}>
+								<View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingHorizontal: 18}}>
 									<Image source={item.image} style={{width: 30, height: 22}} />
-									<Text style={{fontFamily: 'Aeonik-Regular', letterSpacing: 0.5, fontSize: 18, color: '#989898', textAlign: 'center', marginHorizontal: 12, lineHeight: 16}}>{item.title}</Text>
+									<Text style={{fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 18, color: '#989898', textAlign: 'center', marginHorizontal: 12, lineHeight: 16, marginTop: 3}}>{item.title}</Text>
 								</View>
 							);
 						}}
 						renderDropdownIcon={isOpened => {
-							return <Ionicons name={isOpened ? 'chevron-up' : 'chevron-down'} size={28} color={'#989898'} />
+							return <Ionicons name={isOpened ? 'chevron-up' : 'chevron-down'} size={28} color={'#545454'} />
 						}}
 					/>
 				</View>
