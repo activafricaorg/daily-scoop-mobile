@@ -95,11 +95,11 @@ export default StyleSheet.create({
 	button: {
 		display: 'flex',
 		alignSelf: "flex-start",
-		fontFamily: 'Aeonik-Medium',
+		fontFamily: 'Aeonik-Bold',
 		letterSpacing: 0.5,
 		color: '#0f0f0f',
 		backgroundColor: '#f28d28',
-		fontSize: 18,
+		fontSize: 16,
 		paddingTop: 10,
 		paddingBottom: 10,
 		paddingLeft: 20,

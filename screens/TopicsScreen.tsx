@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import { Link } from "@react-navigation/native";
 import { abbreviateNumber, capitalize, slugifyText } from "../util/helper";
 import Layout from "../components/Layout";
@@ -7,6 +7,7 @@ import { View, ActivityIndicator, ListRenderItemInfo, FlatList } from "react-nat
 import { TopicTypes } from "../types/topic";
 import topicStyles  from "../styles/Topic";
 import baseStyles from "../styles/Base";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 export default function (props: { country: string | null}) {
 	const [topics, setTopics] = useState<TopicTypes[]>([]);
@@ -55,7 +56,9 @@ export default function (props: { country: string | null}) {
 							.map ((topic, index: number) => (
 								<View key={index} style={{marginBottom: 25}}>
 									<Link style={topicStyles.topicView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.name), topicTitle: topic.name }}}>{capitalize(topic.name)}</Link>
-									<Link style={topicStyles.countView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.name), topicTitle: topic.name }}}>{abbreviateNumber(topic.articleCount)} Scoops</Link>
+									<Link style={topicStyles.countView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.name), topicTitle: topic.name }}}>
+										{abbreviateNumber(topic.articleCount)} Scoops
+									</Link>
 								</View>
 							))
 					}

@@ -4,46 +4,45 @@ export default StyleSheet.create({
 	articleView: {
 		flex: 1,
 		backgroundColor: '#151515',
-		marginBottom: 8,
-		paddingTop: 15,
-		paddingBottom: 15,
-		paddingLeft: 20,
-		paddingRight: 20,
-		shadowColor: "#000",
-		shadowOffset: { width: 0, height: 1 },
-		shadowOpacity: 0.20,
-		shadowRadius: 1.41,
-		elevation: 50,
+		marginBottom: 10,
+		marginLeft: 10,
+		marginRight: 10,
+		borderRadius: 10,
+		borderColor: 'rgba(241,154,61,0.04)',
+		borderWidth: 1
 	},
 	articleTitle: {
-		fontFamily: 'Aeonik-Medium',
+		paddingLeft: 15,
+		paddingRight: 15,
+		paddingTop: 10,
+		paddingBottom: 10,
+		fontFamily: 'Aeonik-Bold',
 		letterSpacing: 0.5,
-		fontSize: 23,
+		fontSize: 24,
 		lineHeight: 28,
 		color: '#adadad'
 	},
 	articleMeta: {
-		flexDirection: 'row',
-		// paddingTop: 20,
+		paddingLeft: 15,
+		paddingRight: 15,
 		paddingBottom: 10,
-		// borderTopWidth: 1,
-		borderTopStyle: 'solid',
-		borderTopColor: 'rgba(241,154,61,0.04)',
+		flexDirection: 'row',
+		justifyContent: 'space-between'
 	},
 	articleSource: {
 		marginLeft: 5,
 		alignItems: 'center',
-		fontFamily: 'Aeonik-Medium',
+		fontFamily: 'Aeonik-Bold',
 		color: '#f28d28',
 		letterSpacing: 0.5,
-		fontSize: 15
+		fontSize: 16
 	},
 	articleDate: {
 		marginLeft: 5,
-		fontFamily: 'Aeonik-Medium',
+		fontFamily: 'Aeonik-Bold',
 		letterSpacing: 0.5,
-		color: '#989898',
-		fontSize: 15
+		color: '#696868',
+		fontSize: 16
 	},
 	content: {
 		padding: 15,

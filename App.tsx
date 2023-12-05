@@ -46,8 +46,8 @@ function FeedTabs({country}: {country: string}) {
                 headerTitleStyle: { fontFamily: 'Aeonik-Medium', fontSize: 20 },
                 tabBarActiveTintColor: '#f28d28',
                 tabBarInactiveTintColor: '#989898',
-                tabBarStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', paddingBottom: 7, paddingTop: insets.top, paddingLeft: insets.left, paddingRight: insets.right, },
-                tabBarLabelStyle: { marginTop: 3, fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, textTransform: 'capitalize', fontSize: 16 },
+                tabBarStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', fontFamily: 'Aeonik-Bold',  paddingBottom: 7, paddingTop: insets.top, paddingLeft: insets.left, paddingRight: insets.right, },
+                tabBarLabelStyle: { marginTop: 3, fontFamily: 'Aeonik-Bold', letterSpacing: 0.5, textTransform: 'capitalize', fontSize: 18 },
                 tabBarIndicatorStyle: { backgroundColor: '#f28d28', height: 3 },
                 tabBarScrollEnabled: true
             })}
@@ -111,10 +111,10 @@ function BottomTabs() {
                 tabBarActiveTintColor: '#f28d28',
                 tabBarInactiveTintColor: '#989898',
                 tabBarStyle: { paddingTop: 10, paddingBottom: insets.bottom, borderTopWidth: 0, borderBottomWidth: 0, backgroundColor: 'rgba(28, 28, 28, 1)' },
-                tabBarLabelStyle: { marginTop: 0, fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 13, lineHeight: 15 },
+                tabBarLabelStyle: { marginTop: 0, fontFamily: 'Aeonik-Bold', letterSpacing: 0.5, fontSize: 13, lineHeight: 15 },
                 headerStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', borderBottomWidth: 0 },
                 headerTintColor: '#989898',
-                headerTitleStyle: { fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 20, paddingBottom: 0 },
+                headerTitleStyle: { fontFamily: 'Aeonik-Bold', letterSpacing: 0.5, fontSize: 20, paddingBottom: 0 },
                 headerShadowVisible: false,
                 headerBackTitleVisible: false,
                 headerTitleAlign: 'center'
@@ -175,6 +175,7 @@ export default function App() {
         async function prepare() {
             try {
                 await Font.loadAsync({
+                    'Aeonik-Bold': require('./assets/fonts/Aeonik-Bold.otf'),
                     'Aeonik-Medium': require('./assets/fonts/Aeonik-Medium.otf'),
                     'Aeonik-Regular': require('./assets/fonts/Aeonik-Regular.otf'),
                 });

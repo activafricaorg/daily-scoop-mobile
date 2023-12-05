@@ -15,64 +15,49 @@ const Article = (props: { isCategory: boolean, data: ArticleTypes, handleNavigat
 
 	return (
 		<View style={ArticleStyles.articleView}>
+			<View style={{
+				flexDirection: 'row',
+				alignItems: 'center',
+				paddingLeft: 15,
+				paddingRight: 15,
+				paddingTop: 15,
+				marginRight: 10,
+
+			}}>
+				<Ionicons name='albums-outline' size={16} color={'#f28d28'} />
+				<Link style={ArticleStyles.articleSource} to={{ screen: 'Publisher', params: { source: slugifyText(props.data.source), sourceTitle: source }}}>
+					{ source }
+				</Link>
+			</View>
+			<Text style={ArticleStyles.articleTitle} onPress={() => WebBrowser.openBrowserAsync(props.data.url)}>
+				{ title }
+			</Text>
 			<View style={ArticleStyles.articleMeta}>
 				<View style={{
-					// flex: 1,
 					flexDirection: 'row',
 					alignItems: 'center',
-					backgroundColor: 'rgba(28, 28, 28, 1)',
 					paddingTop: 5,
 					paddingBottom: 5,
-					paddingLeft: 8,
-					paddingRight: 7,
-					marginRight: 10,
-					borderTopRightRadius: 5,
-					borderTopLeftRadius: 5,
-					borderBottomLeftRadius: 5,
-					borderBottomRightRadius: 5,
-					shadowColor: "#000",
-					shadowOffset: { width: 0, height: 1 },
-					shadowOpacity: 0.20,
-					shadowRadius: 1.41,
-					elevation: 10,
+					marginRight: 10
 				}}>
-					<Ionicons name='albums-outline' size={15} color={'#f28d28'} />
-					<Link style={ArticleStyles.articleSource} to={{ screen: 'Publisher', params: { source: slugifyText(props.data.source), sourceTitle: source }}}>
-						{ source }
-					</Link>
-				</View>
-				<View style={{
-					flexDirection: 'row',
-					alignItems: 'center',
-					backgroundColor: 'rgba(28, 28, 28, 1)',
-					paddingTop: 5,
-					paddingBottom: 5,
-					paddingLeft: 8,
-					paddingRight: 7,
-					marginRight: 10,
-					alignSelf: 'center',
-					borderColor: 'rgba(241,154,61,0.12)',
-					borderTopRightRadius: 5,
-					borderTopLeftRadius: 5,
-					borderBottomLeftRadius: 5,
-					borderBottomRightRadius: 5,
-					shadowColor: "#000",
-					shadowOffset: { width: 0, height: 1 },
-					shadowOpacity: 0.20,
-					shadowRadius: 1.41,
-					elevation: 10,
-				}}>
-					<Ionicons name='time-outline' size={15} color={'#989898'} />
+					<Ionicons name='hourglass-outline' size={16} color={'#4b4b4b'} />
 					<Text style={ArticleStyles.articleDate}>
 						{ realDate }
 					</Text>
 				</View>
+				<View style={{
+					flexDirection: 'row',
+					alignItems: 'center',
+					paddingTop: 5,
+					paddingBottom: 5,
+					alignSelf: 'center',
+				}}>
+					<Ionicons name='share-social-sharp' size={16} color={'#4b4b4b'} />
+					<Text style={ArticleStyles.articleDate}>
+						Share
+					</Text>
+				</View>
 			</View>
-			{
-				<Text style={ArticleStyles.articleTitle} onPress={() => WebBrowser.openBrowserAsync(props.data.url)}>
-					{ title }
-				</Text>
-			}
 		</View>
 	)
 }
