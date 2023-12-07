@@ -46,8 +46,8 @@ function FeedTabs({country}: {country: string}) {
                 headerTitleStyle: { fontFamily: 'Aeonik-Medium', fontSize: 20 },
                 tabBarActiveTintColor: '#f28d28',
                 tabBarInactiveTintColor: '#989898',
-                tabBarStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', fontFamily: 'Aeonik-Bold',  paddingBottom: 7, paddingTop: insets.top, paddingLeft: insets.left, paddingRight: insets.right, },
-                tabBarLabelStyle: { marginTop: 3, fontFamily: 'Aeonik-Bold', letterSpacing: 0.5, textTransform: 'capitalize', fontSize: 18 },
+                tabBarStyle: { backgroundColor: 'rgba(28, 28, 28, 1)',  paddingBottom: 7, paddingTop: insets.top, paddingLeft: insets.left, paddingRight: insets.right, },
+                tabBarLabelStyle: { marginTop: 3, fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, textTransform: 'capitalize', fontSize: 18 },
                 tabBarIndicatorStyle: { backgroundColor: '#f28d28', height: 3 },
                 tabBarScrollEnabled: true
             })}
@@ -110,11 +110,11 @@ function BottomTabs() {
             screenOptions={() => ({
                 tabBarActiveTintColor: '#f28d28',
                 tabBarInactiveTintColor: '#989898',
-                tabBarStyle: { paddingTop: 10, paddingBottom: insets.bottom, borderTopWidth: 0, borderBottomWidth: 0, backgroundColor: 'rgba(28, 28, 28, 1)' },
-                tabBarLabelStyle: { marginTop: 0, fontFamily: 'Aeonik-Bold', letterSpacing: 0.5, fontSize: 13, lineHeight: 15 },
+                tabBarStyle: { paddingTop: 5, paddingBottom: insets.bottom, borderTopWidth: 0, borderBottomWidth: 0, backgroundColor: 'rgba(28, 28, 28, 1)' },
+                tabBarLabelStyle: { marginTop: 0, marginBottom: 5, fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 13, lineHeight: 15 },
                 headerStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', borderBottomWidth: 0 },
                 headerTintColor: '#989898',
-                headerTitleStyle: { fontFamily: 'Aeonik-Bold', letterSpacing: 0.5, fontSize: 20, paddingBottom: 0 },
+                headerTitleStyle: { fontFamily: 'Aeonik-Bold', letterSpacing: 0.5, fontSize: 20, paddingBottom: 0, lineHeight: 24 },
                 headerShadowVisible: false,
                 headerBackTitleVisible: false,
                 headerTitleAlign: 'center'
@@ -126,7 +126,7 @@ function BottomTabs() {
                 options={() => ({
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
-                        <Ionicons name='md-home-outline' size={20} color={focused ? '#f28d28' : '#989898'} />
+                        <Ionicons name='md-home-outline' size={18} color={focused ? '#f28d28' : '#989898'} />
                     )
                 })}
             />
@@ -137,7 +137,7 @@ function BottomTabs() {
                     headerShown: true,
                     headerTitle: 'Trending Topics',
                     tabBarIcon: ({ focused }) => (
-                        <Ionicons name='folder-open-outline' size={20} color={focused ? '#f28d28' : '#989898'} />
+                        <Ionicons name='folder-open-outline' size={18} color={focused ? '#f28d28' : '#989898'} />
                     )
                 })}
             />
@@ -149,7 +149,7 @@ function BottomTabs() {
                     headerTitle: 'Job Opportunities',
                     headerTintColor: '#a8a8a8',
                     tabBarIcon: ({ focused }) => (
-                        <Ionicons name='md-briefcase-outline' size={20} color={focused ? '#f28d28' : '#989898'} />
+                        <Ionicons name='md-briefcase-outline' size={18} color={focused ? '#f28d28' : '#989898'} />
                     )
                 })}
             />
@@ -160,7 +160,7 @@ function BottomTabs() {
                     headerShown: true,
                     headerTintColor: '#a8a8a8',
                     tabBarIcon: ({ focused }) => (
-                        <Ionicons name='ios-settings-outline' size={20} color={focused ? '#f28d28' : '#989898'} />
+                        <Ionicons name='ios-settings-outline' size={18} color={focused ? '#f28d28' : '#989898'} />
                     )
                 })}
             />
@@ -207,16 +207,16 @@ export default function App() {
                 <NavigationContainer onReady={() => onLayoutRootView()}>
                     <Stack.Navigator
                         screenOptions={() => ({
-                            tabBarActiveTintColor: '#f28d28',
-                            tabBarInactiveTintColor: '#989898',
-                            tabBarStyle: { position: 'absolute', height: 60, paddingTop: 10, paddingBottom: 10, borderTopWidth: 0, backgroundColor: 'rgba(28, 28, 28, 1)' },
-                            tabBarLabelStyle: { marginTop: 2, fontFamily: 'Aeonik-Medium' },
-                            headerStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', borderBottomWidth: 1 },
+                            // tabBarActiveTintColor: '#f28d28',
+                            // tabBarInactiveTintColor: '#989898',
+                            // tabBarStyle: { position: 'absolute', height: 60, paddingTop: 10, paddingBottom: 10, borderTopWidth: 0, backgroundColor: 'rgba(28, 28, 28, 1)' },
+                            // tabBarLabelStyle: { marginTop: 2, fontFamily: 'Aeonik-Bold' },
+                            headerStyle: { backgroundColor: 'rgba(28, 28, 28, 1)'},
                             headerTintColor: '#989898',
-                            headerTitleStyle: { fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 20 },
+                            headerTitleStyle: { fontFamily: 'Aeonik-Bold', letterSpacing: 0.5, fontSize: 20, paddingBottom: 0, lineHeight: 32 },
                             headerShadowVisible: false,
                             headerBackTitleVisible: false,
-                            headerTitleAlign: 'left',
+                            headerTitleAlign: 'center'
                         })}
                     >
                         <Stack.Screen

@@ -1,9 +1,19 @@
-import { ScrollView, View } from "react-native";
+import {ScrollView, Text, View} from "react-native";
 import baseStyles from "../styles/Base";
-import {useOnlineStatus} from "../hooks/useOnlineStatus";
+import checkConnection from "../util/checkConnection";
+import { MaterialIcons } from '@expo/vector-icons';
+import React from "react";
 
-export default function Layout (props: {children: string | JSX.Element | JSX.Element[] | any, isList?: boolean}) {
-	const isOnline = useOnlineStatus();
+export default function Layout (props: {children: string | JSX.Element | JSX.Element[] | any}) {
+	let network = checkConnection();
+
+	if (!network) return (
+		<View style={{flex: 1, justifyContent: "center", backgroundColor: '#0f0f0f', alignItems: 'center', paddingLeft: 20, paddingRight: 20}}>
+			<MaterialIcons name="wifi-off" size={48} color={"#646464"} style={{marginBottom: 10}} />
+			<Text style={{fontFamily: 'Aeonik-Bold', fontSize: 24, color: '#646464', marginBottom: 3, letterSpacing: 0.5}}>Connection Error</Text>
+			<Text style={{fontFamily: 'Aeonik-Medium', fontSize: 18, color: '#646464', letterSpacing: 0.5}}>Please check your connectivity</Text>
+		</View>
+	);
 
 	return (
 		<ScrollView style={{width: '100%', backgroundColor: '#0f0f0f'}}>
@@ -14,8 +24,4 @@ export default function Layout (props: {children: string | JSX.Element | JSX.Ele
 			</View>
 		</ScrollView>
 	)
-};
-
-Layout.defaultProps = {
-	isList: true
 };

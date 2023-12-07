@@ -35,14 +35,16 @@ export default StyleSheet.create({
 		fontFamily: 'Aeonik-Bold',
 		color: '#f28d28',
 		letterSpacing: 0.5,
-		fontSize: 16
+		fontSize: 16,
+		lineHeight: 24,
 	},
 	articleDate: {
 		marginLeft: 5,
 		fontFamily: 'Aeonik-Bold',
 		letterSpacing: 0.5,
 		color: '#696868',
-		fontSize: 16
+		fontSize: 16,
+		lineHeight: 24
 	},
 	content: {
 		padding: 15,

@@ -23,7 +23,7 @@ export default function SettingsScreen(props: { route: any; navigation: any; }) 
 		<Layout>
 			<View style={{ width: '100%', backgroundColor: '#0f0f0f' }}>
 				<View style={BaseStyles.infoContainer}>
-					<Text style={{color: '#989898', marginBottom: 12, fontFamily: 'Aeonik-Regular', fontSize: 16, letterSpacing: 0.5, lineHeight: 20}}>To get customized scoops specific to your country, select your country.</Text>
+					<Text style={{color: '#989898', marginBottom: 12, fontFamily: 'Aeonik-Medium', fontSize: 16, letterSpacing: 0.5, lineHeight: 20}}>To get customized scoops specific to your country, select your country.</Text>
 					<SelectDropdown
 						data={countriesWithFlags}
 						defaultValue={countriesWithFlags.find((countryWithFlag) => countryWithFlag.title === country)}
@@ -46,16 +46,12 @@ export default function SettingsScreen(props: { route: any; navigation: any; }) 
 						dropdownOverlayColor='rgba(0, 0, 0, 0.3)'
 						rowStyle={{
 							shadowOpacity: 0,
-							borderColor: 'rgba(243, 245, 247, 0.1)',
-							borderBottomColor: 'rgba(243, 245, 247, 0.1)',
-							borderTopWidth: 0.5,
-							borderBottomWidth: 0.5,
-							borderTopColor: 'rgba(243, 245, 247, 0.1)',
-						}}
-						rowTextStyle={{
-							color: '#989898',
-							fontSize: 19,
-							fontFamily: 'Aeonik-Regular',
+							backgroundColor: '#151515',
+							borderColor: 'rgba(241,154,61,0.04)',
+							borderBottomColor: 'rgba(241,154,61,0.04)',
+							borderTopWidth: 1,
+							borderBottomWidth: 1,
+							borderTopColor: 'rgba(241,154,61,0.04)',
 						}}
 						dropdownStyle={{
 							backgroundColor: 'transparent',
@@ -67,13 +63,9 @@ export default function SettingsScreen(props: { route: any; navigation: any; }) 
 							marginTop: 10
 						}}
 						buttonTextAfterSelection={(selectedItem, index) => {
-							// text represented after item is selected
-							// if data array is an array of objects then return selectedItem.property to render after item is selected
 							return selectedItem.title
 						}}
 						rowTextForSelection={(item, index) => {
-							// text represented for each item in dropdown
-							// if data array is an array of objects then return item.property to represent item in dropdown
 							return item.title
 						}}
 						renderCustomizedButtonChild={(selectedItem, index) => {
@@ -84,7 +76,7 @@ export default function SettingsScreen(props: { route: any; navigation: any; }) 
 									) : (
 										<Ionicons name="md-earth-sharp" size={28} color={'#989898'} />
 									)}
-									<Text style={{fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 18, color: '#989898', textAlign: 'center', marginHorizontal: 12, lineHeight: 16, marginTop: 3}}>{selectedItem ? selectedItem.title : 'All African Countries'}</Text>
+									<Text style={{fontFamily: 'Aeonik-Bold', letterSpacing: 0.5, fontSize: 18, color: '#989898', textAlign: 'center', marginHorizontal: 12, lineHeight: 16, marginTop: 3}}>{selectedItem ? selectedItem.title : 'All African Countries'}</Text>
 								</View>
 							);
 						}}
@@ -92,7 +84,7 @@ export default function SettingsScreen(props: { route: any; navigation: any; }) 
 							return (
 								<View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingHorizontal: 18}}>
 									<Image source={item.image} style={{width: 30, height: 22}} />
-									<Text style={{fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 18, color: '#989898', textAlign: 'center', marginHorizontal: 12, lineHeight: 16, marginTop: 3}}>{item.title}</Text>
+									<Text style={{fontFamily: 'Aeonik-Bold', letterSpacing: 0.5, fontSize: 18, color: '#989898', textAlign: 'center', marginHorizontal: 12, lineHeight: 16, marginTop: 3}}>{item.title}</Text>
 								</View>
 							);
 						}}
