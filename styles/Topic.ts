@@ -12,6 +12,7 @@ export default StyleSheet.create({
 	},
 	countView: {
 		fontSize: 18,
+		lineHeight: 24,
 		color: '#5d5d5d',
 		fontFamily: 'Aeonik-Bold',
 		letterSpacing: 0.5

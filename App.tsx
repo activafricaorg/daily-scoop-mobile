@@ -47,7 +47,7 @@ function FeedTabs({country}: {country: string}) {
                 tabBarActiveTintColor: '#f28d28',
                 tabBarInactiveTintColor: '#989898',
                 tabBarStyle: { backgroundColor: 'rgba(28, 28, 28, 1)',  paddingBottom: 7, paddingTop: insets.top, paddingLeft: insets.left, paddingRight: insets.right, },
-                tabBarLabelStyle: { marginTop: 3, fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, textTransform: 'capitalize', fontSize: 18 },
+                tabBarLabelStyle: { marginTop: 3, fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, textTransform: 'capitalize', fontSize: 18, lineHeight: 24 },
                 tabBarIndicatorStyle: { backgroundColor: '#f28d28', height: 3 },
                 tabBarScrollEnabled: true
             })}
@@ -146,7 +146,7 @@ function BottomTabs() {
                 component={ JobsScreen }
                 options={() => ({
                     headerShown: true,
-                    headerTitle: 'Job Opportunities',
+                    headerTitle: 'Jobs',
                     headerTintColor: '#a8a8a8',
                     tabBarIcon: ({ focused }) => (
                         <Ionicons name='md-briefcase-outline' size={18} color={focused ? '#f28d28' : '#989898'} />
@@ -207,16 +207,12 @@ export default function App() {
                 <NavigationContainer onReady={() => onLayoutRootView()}>
                     <Stack.Navigator
                         screenOptions={() => ({
-                            // tabBarActiveTintColor: '#f28d28',
-                            // tabBarInactiveTintColor: '#989898',
-                            // tabBarStyle: { position: 'absolute', height: 60, paddingTop: 10, paddingBottom: 10, borderTopWidth: 0, backgroundColor: 'rgba(28, 28, 28, 1)' },
-                            // tabBarLabelStyle: { marginTop: 2, fontFamily: 'Aeonik-Bold' },
-                            headerStyle: { backgroundColor: 'rgba(28, 28, 28, 1)'},
+                            headerStyle: { backgroundColor: 'rgba(28, 28, 28, 1)' },
                             headerTintColor: '#989898',
-                            headerTitleStyle: { fontFamily: 'Aeonik-Bold', letterSpacing: 0.5, fontSize: 20, paddingBottom: 0, lineHeight: 32 },
+                            headerTitleStyle: { fontFamily: 'Aeonik-Bold', letterSpacing: 0.5, fontSize: 20, paddingBottom: 0, alignItem: 'center' },
                             headerShadowVisible: false,
                             headerBackTitleVisible: false,
-                            headerTitleAlign: 'center'
+                           //  headerTitleAlign: 'center'
                         })}
                     >
                         <Stack.Screen

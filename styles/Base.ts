@@ -100,6 +100,7 @@ export default StyleSheet.create({
 		color: '#0f0f0f',
 		backgroundColor: '#f28d28',
 		fontSize: 16,
+		lineHeight: 24,
 		paddingTop: 10,
 		paddingBottom: 10,
 		paddingLeft: 20,
