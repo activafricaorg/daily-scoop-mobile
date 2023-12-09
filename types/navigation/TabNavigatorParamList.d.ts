@@ -6,7 +6,7 @@ export type TabNavigatorParamList = {
 	Sports: { country: string | null  },
 	Feed: { country: string | null  },
 	Topics: { country: string | null  },
-	Jobs: { country: string | null  },
+	Career: { country: string | null  },
 	Settings: undefined,
 	Info: undefined
 }

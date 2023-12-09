@@ -46,25 +46,22 @@ export default function (props: { country: string | null}) {
 
 	return (
 		<Layout>
-			{ loading ?
-				<View style={{flex: 1, alignItems: 'center'}}>
-					<ActivityIndicator size="small" color="#fdc006"/>
-				</View> :
-				<View style={baseStyles.infoContainer}>
-					{
-						topics
-							.map ((topic, index: number) => (
-								<View key={index} style={{marginBottom: 25}}>
-									<Link style={topicStyles.topicView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.name), topicTitle: topic.name }}}>{capitalize(topic.name)}</Link>
-									<Link style={topicStyles.countView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.name), topicTitle: topic.name }}}>
-										{abbreviateNumber(topic.articleCount)} Scoops
-									</Link>
-								</View>
-							))
-					}
-				</View>
-			}
-
+			<View style={baseStyles.infoContainer}>
+				{ loading ?
+					<View style={{flex: 1, justifyContent: "center", alignItems: 'center'}}>
+						<ActivityIndicator size="small" color="#fdc006"/>
+					</View> :
+					topics
+						.map ((topic, index: number) => (
+							<View key={index} style={{marginBottom: 25}}>
+								<Link style={topicStyles.topicView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.name), topicTitle: topic.name }}}>{capitalize(topic.name)}</Link>
+								<Link style={topicStyles.countView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.name), topicTitle: topic.name }}}>
+									{ abbreviateNumber(topic.articleCount) } Scoops
+								</Link>
+							</View>
+						))
+				}
+			</View>
 			<StatusBar style="auto" />
 		</Layout>
 	);

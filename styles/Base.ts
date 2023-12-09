@@ -1,4 +1,5 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+const  { width, height } = Dimensions.get('window');
 
 export default StyleSheet.create({
 	wrapper: {
@@ -43,7 +44,8 @@ export default StyleSheet.create({
 	},
 	infoContainer: {
 		paddingLeft: 20,
-		paddingRight: 20
+		paddingRight: 20,
+		minHeight: height / 2
 	},
 	infoHeader: {
 		fontFamily: 'Aeonik-Medium',

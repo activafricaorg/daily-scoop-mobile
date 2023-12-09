@@ -1,5 +1,5 @@
 import Layout from "../components/Layout";
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { StatusBar } from "expo-status-bar";
 import { ArticleTypes } from "../types/article";
 import { IPublisherArticles } from "../types/publisher";
@@ -50,8 +50,10 @@ export default function SourceScreen (props: { route: any; navigation: any; }) {
 	return (
 		<Layout>
 			{ initialLoading ?
-				<View style={{flex: 1, alignItems: 'center'}}>
-					<ActivityIndicator size="small" color="#fdc006"/>
+				<View style={baseStyles.infoContainer}>
+					<View style={{flex: 1, justifyContent: "center", alignItems: 'center'}}>
+						<ActivityIndicator size="small" color="#fdc006"/>
+					</View>
 				</View>
 				:
 				<View style={baseStyles.wrapper}>

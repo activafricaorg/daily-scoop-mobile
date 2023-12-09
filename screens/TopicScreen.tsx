@@ -1,5 +1,5 @@
 import Layout from "../components/Layout";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { slugifyText } from "../util/helper";
 import { ArticleTypes } from "../types/article";
@@ -49,9 +49,12 @@ export default function TopicScreen(props: { route: any; navigation: any; }) {
 	return (
 		<Layout>
 			{ initialLoading ?
-				<View style={{flex: 1, alignItems: 'center'}}>
-					<ActivityIndicator size="small" color="#fdc006"/>
-				</View> :
+				<View style={baseStyles.infoContainer}>
+					<View style={{flex: 1, justifyContent: "center", alignItems: 'center'}}>
+						<ActivityIndicator size="small" color="#fdc006"/>
+					</View>
+				</View>
+				:
 				<View style={baseStyles.wrapper}>
 					{
 						articles

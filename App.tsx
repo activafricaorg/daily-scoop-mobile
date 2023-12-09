@@ -18,7 +18,7 @@ import { capitalize } from "./util/helper";
 import HomeScreen from "./screens/HomeScreen";
 import CategoryScreen from "./screens/CategoryScreen";
 import SourceScreen from "./screens/SourceScreen";
-import JobsScreen from "./screens/JobsScreen";
+import CareerScreen from "./screens/CareerScreen";
 import TopicScreen from "./screens/TopicScreen";
 import TopicsScreen from "./screens/TopicsScreen";
 import SettingsScreen from "./screens/SettingScreen";
@@ -142,11 +142,10 @@ function BottomTabs() {
                 })}
             />
             <Tab.Screen
-                name="Jobs"
-                component={ JobsScreen }
+                name="Career"
+                component={ CareerScreen }
                 options={() => ({
                     headerShown: true,
-                    headerTitle: 'Jobs',
                     headerTintColor: '#a8a8a8',
                     tabBarIcon: ({ focused }) => (
                         <Ionicons name='md-briefcase-outline' size={18} color={focused ? '#f28d28' : '#989898'} />
