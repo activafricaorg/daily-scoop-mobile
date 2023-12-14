@@ -20,7 +20,7 @@ export default StyleSheet.create({
 		letterSpacing: 0.5,
 		fontSize: 24,
 		lineHeight: 28,
-		color: '#adadad'
+		color: '#b4b4b4'
 	},
 	articleMeta: {
 		paddingLeft: 15,
