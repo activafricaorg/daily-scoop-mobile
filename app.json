@@ -27,8 +27,7 @@
       "googleServicesFile": "./google-services.json"
     },
     "plugins": [
-      "@react-native-firebase/app",
-      "@react-native-firebase/crashlytics"
+      "@react-native-firebase/app"
     ],
     "web": {
       "favicon": "./assets/favicon.png",
