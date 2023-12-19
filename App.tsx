@@ -222,9 +222,9 @@ export default function App() {
             console.log('Message handled in the background!', remoteMessage);
         });
 
-        messaging().onMessage(async remoteMessage => {
-            Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
-        });
+        // messaging().onMessage(async remoteMessage => {
+        //     Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+        // });
 
         async function prepare() {
             try {
