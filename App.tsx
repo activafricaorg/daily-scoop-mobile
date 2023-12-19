@@ -4,17 +4,18 @@ import * as SplashScreen from 'expo-splash-screen';
 import { PersistGate } from 'redux-persist/integration/react';
 import { StackNavigatorParamList } from "./types/navigation/StackNavigatorParamList";
 import { TabNavigatorParamList } from "./types/navigation/TabNavigatorParamList";
+import store, { persistor } from "./state/store";
+import { Alert, PermissionsAndroid } from 'react-native';
+import messaging from '@react-native-firebase/messaging';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import store from "./state/store";
-import { persistor } from './state/store';
-import { Provider, useSelector } from "react-redux";
-import { useState, useEffect, useCallback } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { capitalize } from "./util/helper";
+import {Provider, useSelector} from "react-redux";
+import {useCallback, useEffect, useState} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {capitalize} from "./util/helper";
 import HomeScreen from "./screens/HomeScreen";
 import CategoryScreen from "./screens/CategoryScreen";
 import SourceScreen from "./screens/SourceScreen";
@@ -170,7 +171,61 @@ function BottomTabs() {
 export default function App() {
     const [ready, setReady] = useState(false);
 
+    const requestUserPermission = async() => {
+        // Cloud messaging permission for Android API level 33+
+        await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
+
+        // Cloud messaging permission for IOS users
+        const authStatus = await messaging().requestPermission();
+        const enabled =
+            authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+            authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+        if (enabled) {
+            console.log('Authorization status:', authStatus);
+        }
+    }
+
     useEffect(() => {
+        requestUserPermission()
+            .then(() => {
+                // FCM get token
+                messaging().getToken().then(token => {
+                    console.log(token);
+                });
+        });
+
+        // Assume a message-notification contains a "type" property in the data payload of the screen to open
+        messaging().onNotificationOpenedApp(remoteMessage => {
+            console.log(
+                'Notification caused app to open from background state:',
+                remoteMessage.notification,
+            );
+            // navigation.navigate(remoteMessage.data.type);
+        });
+
+        // Check whether an initial notification is available
+        messaging()
+            .getInitialNotification()
+            .then(remoteMessage => {
+                if (remoteMessage) {
+                    console.log(
+                        'Notification caused app to open from quit state:',
+                        remoteMessage.notification,
+                    );
+                    // setInitialRoute(remoteMessage.data.type); // e.g. "Settings"
+                }
+            });
+
+        // Register background handler
+        messaging().setBackgroundMessageHandler(async remoteMessage => {
+            console.log('Message handled in the background!', remoteMessage);
+        });
+
+        messaging().onMessage(async remoteMessage => {
+            Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+        });
+
         async function prepare() {
             try {
                 await Font.loadAsync({
