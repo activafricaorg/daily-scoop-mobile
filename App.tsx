@@ -9,8 +9,7 @@ import store, { persistor } from "./state/store";
 import { PermissionsAndroid } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { v4 as uuidv4 } from 'uuid';
-import { polyfillWebCrypto } from "expo-standard-web-crypto";
+import * as Crypto from 'expo-crypto';
 import {Provider, useSelector} from "react-redux";
 import {useCallback, useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
@@ -26,7 +25,6 @@ import CareerScreen from "./screens/CareerScreen";
 import TopicScreen from "./screens/TopicScreen";
 import TopicsScreen from "./screens/TopicsScreen";
 import SettingsScreen from "./screens/SettingScreen";
-polyfillWebCrypto();
 
 SplashScreen.preventAutoHideAsync().then(() => { return null; });
 SystemUI.setBackgroundColorAsync("rgba(28, 28, 28, 1)").then(() => { return null; });
@@ -195,8 +193,9 @@ export default function App() {
         Storage.getData('applicationId')
             .then(async (data) => {
                 if (!data) {
-                    let uuid = uuidv4();
-                    await Storage.storeData('applicationId', JSON.stringify(uuid));
+                    const array = new Uint8Array([1, 2, 3, 4, 5]);
+                    const digest = await Crypto.digest(Crypto.CryptoDigestAlgorithm.SHA512, array);
+                    await Storage.storeData('applicationId', JSON.stringify(digest));
                 }
             });
 
