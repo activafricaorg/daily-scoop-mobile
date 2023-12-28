@@ -10,6 +10,7 @@ import { PermissionsAndroid } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { v4 as uuidv4 } from 'uuid';
+import { polyfillWebCrypto } from "expo-standard-web-crypto";
 import {Provider, useSelector} from "react-redux";
 import {useCallback, useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
@@ -25,7 +26,7 @@ import CareerScreen from "./screens/CareerScreen";
 import TopicScreen from "./screens/TopicScreen";
 import TopicsScreen from "./screens/TopicsScreen";
 import SettingsScreen from "./screens/SettingScreen";
-import 'react-native-get-random-values';
+polyfillWebCrypto();
 
 SplashScreen.preventAutoHideAsync().then(() => { return null; });
 SystemUI.setBackgroundColorAsync("rgba(28, 28, 28, 1)").then(() => { return null; });
