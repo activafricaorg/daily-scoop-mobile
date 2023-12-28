@@ -5,11 +5,11 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { StackNavigatorParamList } from "./types/navigation/StackNavigatorParamList";
 import { TabNavigatorParamList } from "./types/navigation/TabNavigatorParamList";
 import Storage from "./util/storage";
+import crypto from 'crypto';
 import store, { persistor } from "./state/store";
 import { PermissionsAndroid } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import * as Crypto from 'expo-crypto';
 import {Provider, useSelector} from "react-redux";
 import {useCallback, useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
@@ -192,11 +192,7 @@ export default function App() {
         // Check if applicationId exists and if not, create one and save it in asyncStorage
         Storage.getData('applicationId')
             .then(async (data) => {
-                if (!data) {
-                    const array = new Uint8Array([1, 2, 3, 4, 5]);
-                    const digest = await Crypto.digest(Crypto.CryptoDigestAlgorithm.SHA512, array);
-                    await Storage.storeData('applicationId', JSON.stringify(digest));
-                }
+                if (!data) await Storage.storeData('applicationId', crypto.randomBytes(16).toString('hex'));
             });
 
             // Request permission and add fcmToken. This should happen only after first_open
