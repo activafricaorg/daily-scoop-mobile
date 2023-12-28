@@ -4,10 +4,12 @@ import * as SplashScreen from 'expo-splash-screen';
 import { PersistGate } from 'redux-persist/integration/react';
 import { StackNavigatorParamList } from "./types/navigation/StackNavigatorParamList";
 import { TabNavigatorParamList } from "./types/navigation/TabNavigatorParamList";
+import Storage from "./util/storage";
 import store, { persistor } from "./state/store";
-import { Alert, PermissionsAndroid } from 'react-native';
+import { PermissionsAndroid } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { v4 as uuidv4 } from 'uuid';
 import {Provider, useSelector} from "react-redux";
 import {useCallback, useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
@@ -23,6 +25,7 @@ import CareerScreen from "./screens/CareerScreen";
 import TopicScreen from "./screens/TopicScreen";
 import TopicsScreen from "./screens/TopicsScreen";
 import SettingsScreen from "./screens/SettingScreen";
+import 'react-native-get-random-values';
 
 SplashScreen.preventAutoHideAsync().then(() => { return null; });
 SystemUI.setBackgroundColorAsync("rgba(28, 28, 28, 1)").then(() => { return null; });
@@ -187,22 +190,50 @@ export default function App() {
     }
 
     useEffect(() => {
-        requestUserPermission()
-            .then(() => {
-                // FCM get token
-                messaging().getToken().then(token => {
-                    console.log(token);
+        // Check if applicationId exists and if not, create one and save it in asyncStorage
+        Storage.getData('applicationId')
+            .then(async (data) => {
+                if (!data) {
+                    let uuid = uuidv4();
+                    await Storage.storeData('applicationId', JSON.stringify(uuid));
+                }
+            });
+
+            // Request permission and add fcmToken. This should happen only after first_open
+            requestUserPermission()
+                .then(() => {
+                    // FCM get token and save it to the backend and asyncStorage
+                    messaging().getToken()
+                        .then(async token => {
+                            await Storage.storeData('fcmToken', token);
+                            return token;
+                        })
+                        .then(async token => {
+                            const applicationId = await Storage.getData('applicationId');
+                            await fetch('https://api.dailyscoop.com/token', {
+                                method: 'POST',
+                                headers: {
+                                    Accept: 'application/json',
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                    applicationId: applicationId,
+                                    fcmToken: token
+                                })
+                            });
+
+                            console.log(applicationId, token);
+                        });
                 });
-        });
 
         // Assume a message-notification contains a "type" property in the data payload of the screen to open
-        messaging().onNotificationOpenedApp(remoteMessage => {
-            console.log(
-                'Notification caused app to open from background state:',
-                remoteMessage.notification,
-            );
-            // navigation.navigate(remoteMessage.data.type);
-        });
+        // messaging().onNotificationOpenedApp(remoteMessage => {
+        //     console.log(
+        //         'Notification caused app to open from background state:',
+        //         remoteMessage.notification,
+        //     );
+        //     // navigation.navigate(remoteMessage.data.type);
+        // });
 
         // Check whether an initial notification is available
         messaging()
@@ -221,10 +252,6 @@ export default function App() {
         messaging().setBackgroundMessageHandler(async remoteMessage => {
             console.log('Message handled in the background!', remoteMessage);
         });
-
-        // messaging().onMessage(async remoteMessage => {
-        //     Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
-        // });
 
         async function prepare() {
             try {
