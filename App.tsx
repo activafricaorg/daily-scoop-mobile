@@ -177,14 +177,14 @@ export default function App() {
         await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
 
         // Cloud messaging permission for IOS users
-        const authStatus = await messaging().requestPermission();
-        const enabled =
-            authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-            authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-
-        if (enabled) {
-            console.log('Authorization status:', authStatus);
-        }
+        // const authStatus = await messaging().requestPermission();
+        // const enabled =
+        //     authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+        //     authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+        //
+        // if (enabled) {
+        //     console.log('Authorization status:', authStatus);
+        // }
     }
 
     useEffect(() => {
