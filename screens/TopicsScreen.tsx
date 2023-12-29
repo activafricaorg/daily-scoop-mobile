@@ -7,7 +7,6 @@ import { View, ActivityIndicator, ListRenderItemInfo, FlatList } from "react-nat
 import { TopicTypes } from "../types/topic";
 import topicStyles  from "../styles/Topic";
 import baseStyles from "../styles/Base";
-import Ionicons from "@expo/vector-icons/Ionicons";
 
 export default function (props: { country: string | null}) {
 	const [topics, setTopics] = useState<TopicTypes[]>([]);
@@ -17,15 +16,6 @@ export default function (props: { country: string | null}) {
 		setTopics([]);
 		getTopics();
 	}, [props.country]);
-
-	const renderItem = useCallback((topic: ListRenderItemInfo<TopicTypes>) => (
-			<View style={{marginBottom: 25, flex: 1}}>
-				<Link style={topicStyles.topicView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.item.name), topicTitle: topic.item.name }}}>{capitalize(topic.item.name)}</Link>
-				<Link style={topicStyles.countView} to={{ screen: 'Topic', params: { topic: slugifyText(topic.item.name), topicTitle: topic.item.name }}}>{abbreviateNumber(topic.item.articleCount)} Scoops</Link>
-			</View>
-		),
-		[]
-	)
 
 	const getTopics = () => {
 		try {

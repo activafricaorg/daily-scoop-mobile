@@ -9,6 +9,8 @@ import { View, Text, ActivityIndicator } from 'react-native';
 import baseStyles from "../styles/Base";
 
 export default function CategoryScreen(props: { country: string | null, category: string, route: any; navigation: any; }) {
+	console.log(props.route);
+
 	const [count] = useState<number>(16);
 	const [articles, setArticles] = useState<ArticleTypes[]>([]);
 	const [initialLoading, setInitialLoading] = useState<boolean>(true);

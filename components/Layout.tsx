@@ -1,8 +1,7 @@
-import {ScrollView, Text, View} from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import baseStyles from "../styles/Base";
 import checkConnection from "../util/checkConnection";
 import { MaterialIcons } from '@expo/vector-icons';
-import React from "react";
 
 export default function Layout (props: {children: string | JSX.Element | JSX.Element[] | any}) {
 	let network = checkConnection();

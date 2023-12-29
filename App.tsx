@@ -5,11 +5,12 @@ import * as Crypto from 'expo-crypto';
 import { PersistGate } from 'redux-persist/integration/react';
 import { StackNavigatorParamList } from "./types/navigation/StackNavigatorParamList";
 import { TabNavigatorParamList } from "./types/navigation/TabNavigatorParamList";
+import { navigationRef, navigateTo } from "./util/navigations/RootNavigation";
 import Storage from "./util/storage";
 import store, { persistor } from "./state/store";
-import { PermissionsAndroid, Platform } from 'react-native';
-// import messaging from '@react-native-firebase/messaging';
+import { Platform } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import Constants from 'expo-constants';
 import {Provider, useSelector} from "react-redux";
 import {useCallback, useEffect, useState, useRef} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
@@ -27,36 +28,35 @@ import TopicsScreen from "./screens/TopicsScreen";
 import SettingsScreen from "./screens/SettingScreen";
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
-import Constants from 'expo-constants';
 
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
         shouldShowAlert: true,
-        shouldPlaySound: false,
-        shouldSetBadge: false,
+        shouldPlaySound: true,
+        shouldSetBadge: true,
     }),
 });
 
 // Can use this function below or use Expo's Push Notification Tool from: https://expo.dev/notifications
-async function sendPushNotification(expoPushToken: string) {
-    const message = {
-        to: expoPushToken,
-        sound: 'default',
-        title: 'Test 1',
-        body: 'Hollla',
-        data: { someData: 'goes here' },
-    };
-
-    await fetch('https://exp.host/--/api/v2/push/send', {
-        method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'Accept-encoding': 'gzip, deflate',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(message),
-    });
-}
+// async function sendPushNotification(expoPushToken: string) {
+//     const message = {
+//         to: expoPushToken,
+//         sound: 'default',
+//         title: 'Test 1',
+//         body: 'Hollla',
+//         data: { someData: 'goes here' },
+//     };
+//
+//     await fetch('https://exp.host/--/api/v2/push/send', {
+//         method: 'POST',
+//         headers: {
+//             Accept: 'application/json',
+//             'Accept-encoding': 'gzip, deflate',
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(message),
+//     });
+// }
 
 async function registerForPushNotificationsAsync() {
     let token: any;
@@ -84,7 +84,7 @@ async function registerForPushNotificationsAsync() {
         token = await Notifications.getExpoPushTokenAsync({
             projectId: Constants.expoConfig.extra.eas.projectId,
         });
-        console.log(token);
+
     } else {
         alert('Must use physical device for Push Notifications');
     }
@@ -238,97 +238,52 @@ function BottomTabs() {
 
 export default function App() {
     const [ready, setReady] = useState(false);
-    const [expoPushToken, setExpoPushToken] = useState('');
-    const [notification, setNotification] = useState<any>(false);
-    const notificationListener: any = useRef();
-    const responseListener: any = useRef();
-    // const requestUserPermission = async() => {
-    //     // Cloud messaging permission for Android API level 33+
-    //     await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
-    //
-    //     // Cloud messaging permission for IOS users
-    //     // const authStatus = await messaging().requestPermission();
-    //     // const enabled =
-    //     //     authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-    //     //     authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-    //     //
-    //     // if (enabled) {
-    //     //     console.log('Authorization status:', authStatus);
-    //     // }
-    // }
+    // const [expoPushToken, setExpoPushToken] = useState('');
+    // const [notification, setNotification] = useState<any>(false);
+    // const notificationListener: any = useRef();
+    // const responseListener: any = useRef();
 
     useEffect(() => {
         // Check if applicationId exists and if not, create one and save it in asyncStorage
         Storage.getData('applicationId')
             .then(async (data) => {
-                await sendPushNotification(expoPushToken);
                 if (!data) {
-                    const array = new Uint8Array([1, 2, 3, 4, 5]);
-                    const digest = await Crypto.digest(Crypto.CryptoDigestAlgorithm.SHA512, array);
-                    await Storage.storeData('applicationId', JSON.stringify(digest));
+                    const digest = Crypto.randomUUID();
+                    await Storage.storeData('applicationId', digest);
                 }
             });
 
-        registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+        registerForPushNotificationsAsync()
+            .then(async token => {
+                const applicationId = await Storage.getData('applicationId');
+                await Storage.storeData('fcmToken', JSON.stringify(token));
 
-        notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
-            setNotification(notification);
-        });
+                console.log(JSON.stringify({
+                    applicationId: applicationId,
+                    fcmToken: token
+                }));
 
-        responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-            console.log(response);
-        });
 
-        // Request permission and add fcmToken. This should happen only after first_open
-        // requestUserPermission()
-        //     .then(() => {
-        //         console.log("bammmm")
-        //         // FCM get token and save it to the backend and asyncStorage
-        //         // messaging().getToken()
-        //         //     .then(async token => {
-        //         //         await Storage.storeData('fcmToken', token);
-        //         //         const applicationId = await Storage.getData('applicationId');
-        //         //         // await fetch('https://api.dailyscoop.com/token', {
-        //         //         //     method: 'POST',
-        //         //         //     headers: {
-        //         //         //         Accept: 'application/json',
-        //         //         //         'Content-Type': 'application/json',
-        //         //         //     },
-        //         //         //     body: JSON.stringify({
-        //         //         //         applicationId: applicationId,
-        //         //         //         fcmToken: token
-        //         //         //     })
-        //         //         // });
-        //         //
-        //         //         console.log(applicationId, token);
-        //         //     });
-        //     });
 
-        // Assume a message-notification contains a "type" property in the data payload of the screen to open
-        // messaging().onNotificationOpenedApp(remoteMessage => {
-        //     console.log(
-        //         'Notification caused app to open from background state:',
-        //         remoteMessage.notification,
-        //     );
-        //     // navigation.navigate(remoteMessage.data.type);
+                // await fetch('https://dailyscoop.africa/token', {
+                //     method: 'POST',
+                //     headers: {
+                //         Accept: 'application/json',
+                //         'Content-Type': 'application/json',
+                //     },
+                //     body: JSON.stringify({
+                //         applicationId: applicationId,
+                //         fcmToken: token
+                //     })
+                // });
+            });
+
+        // notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+        //     setNotification(notification);
         // });
-
-        // Check whether an initial notification is available
-        // messaging()
-        //     .getInitialNotification()
-        //     .then(remoteMessage => {
-        //         if (remoteMessage) {
-        //             console.log(
-        //                 'Notification caused app to open from quit state:',
-        //                 remoteMessage.notification,
-        //             );
-        //             // setInitialRoute(remoteMessage.data.type); // e.g. "Settings"
-        //         }
-        //     });
-
-        // Register background handler
-        // messaging().setBackgroundMessageHandler(async remoteMessage => {
-        //     console.log('Message handled in the background!', remoteMessage);
+        //
+        // responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+        //     console.log(response);
         // });
 
         async function prepare() {
@@ -347,7 +302,10 @@ export default function App() {
             }
         }
 
-        prepare().then(() => { return null; });
+        prepare().then(() => { navigateTo("Feed", { screen: 'News' }); });
+        // prepare().then(() => { navigateTo("Topic", { topic: "news", topicTitle: "news" }); });
+        // prepare().then(() => { navigateTo("Publisher", { source: "guardian nigeria", sourceTitle: "Guardian Nigeria" }); });
+
     }, []);
 
     const onLayoutRootView = useCallback(async () => {
@@ -363,7 +321,7 @@ export default function App() {
     return (
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
-                <NavigationContainer onReady={() => onLayoutRootView()}>
+                <NavigationContainer onReady={() => onLayoutRootView()} ref={ navigationRef }>
                     <Stack.Navigator
                         screenOptions={() => ({
                             headerStyle: { backgroundColor: 'rgba(28, 28, 28, 1)' },

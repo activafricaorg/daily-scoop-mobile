@@ -1,5 +1,5 @@
 import moment from "moment";
-import React, { memo } from 'react';
+import { memo } from 'react';
 import * as WebBrowser from "expo-web-browser";
 import { ArticleTypes } from "../types/article";
 import { Text, View, Share, Alert } from "react-native";
