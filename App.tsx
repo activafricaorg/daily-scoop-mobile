@@ -1,11 +1,11 @@
 import * as SystemUI from 'expo-system-ui';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import * as Crypto from 'expo-crypto';
 import { PersistGate } from 'redux-persist/integration/react';
 import { StackNavigatorParamList } from "./types/navigation/StackNavigatorParamList";
 import { TabNavigatorParamList } from "./types/navigation/TabNavigatorParamList";
 import Storage from "./util/storage";
-import crypto from 'crypto';
 import store, { persistor } from "./state/store";
 import { PermissionsAndroid } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
@@ -172,7 +172,6 @@ function BottomTabs() {
 
 export default function App() {
     const [ready, setReady] = useState(false);
-
     const requestUserPermission = async() => {
         // Cloud messaging permission for Android API level 33+
         await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
@@ -192,57 +191,58 @@ export default function App() {
         // Check if applicationId exists and if not, create one and save it in asyncStorage
         Storage.getData('applicationId')
             .then(async (data) => {
-                if (!data) await Storage.storeData('applicationId', crypto.randomBytes(16).toString('hex'));
-            });
-
-            // Request permission and add fcmToken. This should happen only after first_open
-            requestUserPermission()
-                .then(() => {
-                    // FCM get token and save it to the backend and asyncStorage
-                    messaging().getToken()
-                        .then(async token => {
-                            await Storage.storeData('fcmToken', token);
-                            return token;
-                        })
-                        .then(async token => {
-                            const applicationId = await Storage.getData('applicationId');
-                            await fetch('https://api.dailyscoop.com/token', {
-                                method: 'POST',
-                                headers: {
-                                    Accept: 'application/json',
-                                    'Content-Type': 'application/json',
-                                },
-                                body: JSON.stringify({
-                                    applicationId: applicationId,
-                                    fcmToken: token
-                                })
-                            });
-
-                            console.log(applicationId, token);
-                        });
-                });
-
-        // Assume a message-notification contains a "type" property in the data payload of the screen to open
-        // messaging().onNotificationOpenedApp(remoteMessage => {
-        //     console.log(
-        //         'Notification caused app to open from background state:',
-        //         remoteMessage.notification,
-        //     );
-        //     // navigation.navigate(remoteMessage.data.type);
-        // });
-
-        // Check whether an initial notification is available
-        messaging()
-            .getInitialNotification()
-            .then(remoteMessage => {
-                if (remoteMessage) {
-                    console.log(
-                        'Notification caused app to open from quit state:',
-                        remoteMessage.notification,
-                    );
-                    // setInitialRoute(remoteMessage.data.type); // e.g. "Settings"
+                if (!data) {
+                    const array = new Uint8Array([1, 2, 3, 4, 5]);
+                    const digest = await Crypto.digest(Crypto.CryptoDigestAlgorithm.SHA512, array);
+                    await Storage.storeData('applicationId', JSON.stringify(digest));
                 }
             });
+
+        // Request permission and add fcmToken. This should happen only after first_open
+        requestUserPermission()
+            .then(() => {
+                // FCM get token and save it to the backend and asyncStorage
+                messaging().getToken()
+                    .then(async token => {
+                        await Storage.storeData('fcmToken', token);
+                        const applicationId = await Storage.getData('applicationId');
+                        // await fetch('https://api.dailyscoop.com/token', {
+                        //     method: 'POST',
+                        //     headers: {
+                        //         Accept: 'application/json',
+                        //         'Content-Type': 'application/json',
+                        //     },
+                        //     body: JSON.stringify({
+                        //         applicationId: applicationId,
+                        //         fcmToken: token
+                        //     })
+                        // });
+
+                        console.log(applicationId, token);
+                    });
+            });
+
+        // Assume a message-notification contains a "type" property in the data payload of the screen to open
+        messaging().onNotificationOpenedApp(remoteMessage => {
+            console.log(
+                'Notification caused app to open from background state:',
+                remoteMessage.notification,
+            );
+            // navigation.navigate(remoteMessage.data.type);
+        });
+
+        // Check whether an initial notification is available
+        // messaging()
+        //     .getInitialNotification()
+        //     .then(remoteMessage => {
+        //         if (remoteMessage) {
+        //             console.log(
+        //                 'Notification caused app to open from quit state:',
+        //                 remoteMessage.notification,
+        //             );
+        //             // setInitialRoute(remoteMessage.data.type); // e.g. "Settings"
+        //         }
+        //     });
 
         // Register background handler
         messaging().setBackgroundMessageHandler(async remoteMessage => {
