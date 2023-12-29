@@ -28,8 +28,6 @@
       "googleServicesFile": "./google-services.json"
     },
     "plugins": [
-      "@react-native-firebase/app",
-      "@react-native-firebase/messaging",
       [
         "expo-build-properties",
         {

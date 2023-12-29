@@ -7,11 +7,11 @@ import { StackNavigatorParamList } from "./types/navigation/StackNavigatorParamL
 import { TabNavigatorParamList } from "./types/navigation/TabNavigatorParamList";
 import Storage from "./util/storage";
 import store, { persistor } from "./state/store";
-import { PermissionsAndroid } from 'react-native';
-import messaging from '@react-native-firebase/messaging';
+import { PermissionsAndroid, Platform } from 'react-native';
+// import messaging from '@react-native-firebase/messaging';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import {Provider, useSelector} from "react-redux";
-import {useCallback, useEffect, useState} from 'react';
+import {useCallback, useEffect, useState, useRef} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
@@ -25,6 +25,72 @@ import CareerScreen from "./screens/CareerScreen";
 import TopicScreen from "./screens/TopicScreen";
 import TopicsScreen from "./screens/TopicsScreen";
 import SettingsScreen from "./screens/SettingScreen";
+import * as Device from 'expo-device';
+import * as Notifications from 'expo-notifications';
+import Constants from 'expo-constants';
+
+Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+        shouldShowAlert: true,
+        shouldPlaySound: false,
+        shouldSetBadge: false,
+    }),
+});
+
+// Can use this function below or use Expo's Push Notification Tool from: https://expo.dev/notifications
+async function sendPushNotification(expoPushToken: string) {
+    const message = {
+        to: expoPushToken,
+        sound: 'default',
+        title: 'Test 1',
+        body: 'Hollla',
+        data: { someData: 'goes here' },
+    };
+
+    await fetch('https://exp.host/--/api/v2/push/send', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Accept-encoding': 'gzip, deflate',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(message),
+    });
+}
+
+async function registerForPushNotificationsAsync() {
+    let token: any;
+
+    if (Platform.OS === 'android') {
+        await Notifications.setNotificationChannelAsync('default', {
+            name: 'default',
+            importance: Notifications.AndroidImportance.MAX,
+            vibrationPattern: [0, 250, 250, 250],
+            lightColor: '#FF231F7C',
+        });
+    }
+
+    if (Device.isDevice && Constants.expoConfig && Constants.expoConfig.extra) {
+        const { status: existingStatus } = await Notifications.getPermissionsAsync();
+        let finalStatus = existingStatus;
+        if (existingStatus !== 'granted') {
+            const { status } = await Notifications.requestPermissionsAsync();
+            finalStatus = status;
+        }
+        if (finalStatus !== 'granted') {
+            alert('Failed to get push token for push notification!');
+            return;
+        }
+        token = await Notifications.getExpoPushTokenAsync({
+            projectId: Constants.expoConfig.extra.eas.projectId,
+        });
+        console.log(token);
+    } else {
+        alert('Must use physical device for Push Notifications');
+    }
+
+    return token.data;
+}
 
 SplashScreen.preventAutoHideAsync().then(() => { return null; });
 SystemUI.setBackgroundColorAsync("rgba(28, 28, 28, 1)").then(() => { return null; });
@@ -172,25 +238,30 @@ function BottomTabs() {
 
 export default function App() {
     const [ready, setReady] = useState(false);
-    const requestUserPermission = async() => {
-        // Cloud messaging permission for Android API level 33+
-        await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
-
-        // Cloud messaging permission for IOS users
-        // const authStatus = await messaging().requestPermission();
-        // const enabled =
-        //     authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-        //     authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-        //
-        // if (enabled) {
-        //     console.log('Authorization status:', authStatus);
-        // }
-    }
+    const [expoPushToken, setExpoPushToken] = useState('');
+    const [notification, setNotification] = useState<any>(false);
+    const notificationListener: any = useRef();
+    const responseListener: any = useRef();
+    // const requestUserPermission = async() => {
+    //     // Cloud messaging permission for Android API level 33+
+    //     await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
+    //
+    //     // Cloud messaging permission for IOS users
+    //     // const authStatus = await messaging().requestPermission();
+    //     // const enabled =
+    //     //     authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+    //     //     authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+    //     //
+    //     // if (enabled) {
+    //     //     console.log('Authorization status:', authStatus);
+    //     // }
+    // }
 
     useEffect(() => {
         // Check if applicationId exists and if not, create one and save it in asyncStorage
         Storage.getData('applicationId')
             .then(async (data) => {
+                await sendPushNotification(expoPushToken);
                 if (!data) {
                     const array = new Uint8Array([1, 2, 3, 4, 5]);
                     const digest = await Crypto.digest(Crypto.CryptoDigestAlgorithm.SHA512, array);
@@ -198,30 +269,40 @@ export default function App() {
                 }
             });
 
+        registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+
+        notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+            setNotification(notification);
+        });
+
+        responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+            console.log(response);
+        });
+
         // Request permission and add fcmToken. This should happen only after first_open
-        requestUserPermission()
-            .then(() => {
-                console.log("bammmm")
-                // FCM get token and save it to the backend and asyncStorage
-                // messaging().getToken()
-                //     .then(async token => {
-                //         await Storage.storeData('fcmToken', token);
-                //         const applicationId = await Storage.getData('applicationId');
-                //         // await fetch('https://api.dailyscoop.com/token', {
-                //         //     method: 'POST',
-                //         //     headers: {
-                //         //         Accept: 'application/json',
-                //         //         'Content-Type': 'application/json',
-                //         //     },
-                //         //     body: JSON.stringify({
-                //         //         applicationId: applicationId,
-                //         //         fcmToken: token
-                //         //     })
-                //         // });
-                //
-                //         console.log(applicationId, token);
-                //     });
-            });
+        // requestUserPermission()
+        //     .then(() => {
+        //         console.log("bammmm")
+        //         // FCM get token and save it to the backend and asyncStorage
+        //         // messaging().getToken()
+        //         //     .then(async token => {
+        //         //         await Storage.storeData('fcmToken', token);
+        //         //         const applicationId = await Storage.getData('applicationId');
+        //         //         // await fetch('https://api.dailyscoop.com/token', {
+        //         //         //     method: 'POST',
+        //         //         //     headers: {
+        //         //         //         Accept: 'application/json',
+        //         //         //         'Content-Type': 'application/json',
+        //         //         //     },
+        //         //         //     body: JSON.stringify({
+        //         //         //         applicationId: applicationId,
+        //         //         //         fcmToken: token
+        //         //         //     })
+        //         //         // });
+        //         //
+        //         //         console.log(applicationId, token);
+        //         //     });
+        //     });
 
         // Assume a message-notification contains a "type" property in the data payload of the screen to open
         // messaging().onNotificationOpenedApp(remoteMessage => {
