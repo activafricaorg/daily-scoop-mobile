@@ -32,8 +32,8 @@ import * as Notifications from 'expo-notifications';
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
         shouldShowAlert: true,
-        shouldPlaySound: true,
-        shouldSetBadge: true,
+        shouldPlaySound: false,
+        shouldSetBadge: false,
     }),
 });
 
@@ -239,9 +239,7 @@ function BottomTabs() {
 export default function App() {
     const [ready, setReady] = useState(false);
     // const [expoPushToken, setExpoPushToken] = useState('');
-    // const [notification, setNotification] = useState<any>(false);
-    // const notificationListener: any = useRef();
-    // const responseListener: any = useRef();
+    const responseListener: any = useRef();
 
     useEffect(() => {
         // Check if applicationId exists and if not, create one and save it in asyncStorage
@@ -278,13 +276,15 @@ export default function App() {
                 // });
             });
 
-        // notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
-        //     setNotification(notification);
-        // });
-        //
-        // responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-        //     console.log(response);
-        // });
+        responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+            // console.log(response.notification.request.content)
+            const data = response.notification.request.content.data;
+            if (data.name && data.params) navigateTo(data.name, data.params);
+
+            // navigateTo("Feed", { screen: 'News' });
+            // navigateTo("Topic", { topic: "news", topicTitle: "news" });
+            // navigateTo("Publisher", { source: "guardian nigeria", sourceTitle: "Guardian Nigeria" });
+        });
 
         async function prepare() {
             try {
@@ -302,10 +302,7 @@ export default function App() {
             }
         }
 
-        prepare().then(() => { navigateTo("Feed", { screen: 'News' }); });
-        // prepare().then(() => { navigateTo("Topic", { topic: "news", topicTitle: "news" }); });
-        // prepare().then(() => { navigateTo("Publisher", { source: "guardian nigeria", sourceTitle: "Guardian Nigeria" }); });
-
+        prepare().then(() => { return null; });
     }, []);
 
     const onLayoutRootView = useCallback(async () => {

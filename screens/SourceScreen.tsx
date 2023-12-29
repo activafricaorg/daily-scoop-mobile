@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { StatusBar } from "expo-status-bar";
 import { ArticleTypes } from "../types/article";
 import { IPublisherArticles } from "../types/publisher";
-import { ActivityIndicator, FlatList, ListRenderItemInfo, Text, View } from 'react-native';
+import { ActivityIndicator, Text, View } from 'react-native';
 import Article from "../components/Article";
 import baseStyles from "../styles/Base";
 export default function SourceScreen (props: { route: any; navigation: any; }) {

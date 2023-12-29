@@ -2,15 +2,13 @@ import Layout from "../components/Layout";
 import Article from "../components/Article";
 import { StatusBar } from "expo-status-bar";
 import { slugifyText } from "../util/helper";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { ArticleTypes } from "../types/article";
 import { CategoryArticlesTypes } from "../types/category";
 import { View, Text, ActivityIndicator } from 'react-native';
 import baseStyles from "../styles/Base";
 
 export default function CategoryScreen(props: { country: string | null, category: string, route: any; navigation: any; }) {
-	console.log(props.route);
-
 	const [count] = useState<number>(16);
 	const [articles, setArticles] = useState<ArticleTypes[]>([]);
 	const [initialLoading, setInitialLoading] = useState<boolean>(true);

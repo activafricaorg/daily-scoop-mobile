@@ -3,7 +3,7 @@ import React, {useCallback, useEffect, useState} from "react";
 import { Link } from "@react-navigation/native";
 import { abbreviateNumber, capitalize, slugifyText } from "../util/helper";
 import Layout from "../components/Layout";
-import { View, ActivityIndicator, ListRenderItemInfo, FlatList } from "react-native";
+import { View, ActivityIndicator } from "react-native";
 import { TopicTypes } from "../types/topic";
 import topicStyles  from "../styles/Topic";
 import baseStyles from "../styles/Base";
