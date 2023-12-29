@@ -201,35 +201,36 @@ export default function App() {
         // Request permission and add fcmToken. This should happen only after first_open
         requestUserPermission()
             .then(() => {
+                console.log("bammmm")
                 // FCM get token and save it to the backend and asyncStorage
-                messaging().getToken()
-                    .then(async token => {
-                        await Storage.storeData('fcmToken', token);
-                        const applicationId = await Storage.getData('applicationId');
-                        // await fetch('https://api.dailyscoop.com/token', {
-                        //     method: 'POST',
-                        //     headers: {
-                        //         Accept: 'application/json',
-                        //         'Content-Type': 'application/json',
-                        //     },
-                        //     body: JSON.stringify({
-                        //         applicationId: applicationId,
-                        //         fcmToken: token
-                        //     })
-                        // });
-
-                        console.log(applicationId, token);
-                    });
+                // messaging().getToken()
+                //     .then(async token => {
+                //         await Storage.storeData('fcmToken', token);
+                //         const applicationId = await Storage.getData('applicationId');
+                //         // await fetch('https://api.dailyscoop.com/token', {
+                //         //     method: 'POST',
+                //         //     headers: {
+                //         //         Accept: 'application/json',
+                //         //         'Content-Type': 'application/json',
+                //         //     },
+                //         //     body: JSON.stringify({
+                //         //         applicationId: applicationId,
+                //         //         fcmToken: token
+                //         //     })
+                //         // });
+                //
+                //         console.log(applicationId, token);
+                //     });
             });
 
         // Assume a message-notification contains a "type" property in the data payload of the screen to open
-        messaging().onNotificationOpenedApp(remoteMessage => {
-            console.log(
-                'Notification caused app to open from background state:',
-                remoteMessage.notification,
-            );
-            // navigation.navigate(remoteMessage.data.type);
-        });
+        // messaging().onNotificationOpenedApp(remoteMessage => {
+        //     console.log(
+        //         'Notification caused app to open from background state:',
+        //         remoteMessage.notification,
+        //     );
+        //     // navigation.navigate(remoteMessage.data.type);
+        // });
 
         // Check whether an initial notification is available
         // messaging()
@@ -245,9 +246,9 @@ export default function App() {
         //     });
 
         // Register background handler
-        messaging().setBackgroundMessageHandler(async remoteMessage => {
-            console.log('Message handled in the background!', remoteMessage);
-        });
+        // messaging().setBackgroundMessageHandler(async remoteMessage => {
+        //     console.log('Message handled in the background!', remoteMessage);
+        // });
 
         async function prepare() {
             try {
