@@ -48,7 +48,9 @@
     "redux": "^4.2.1",
     "redux-persist": "^6.0.0",
     "semver": "^7.5.4",
-    "expo-crypto": "~12.4.1"
+    "expo-crypto": "~12.4.1",
+    "expo-notifications": "~0.20.1",
+    "expo-device": "~5.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
