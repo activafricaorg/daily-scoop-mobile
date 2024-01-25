@@ -1,3 +1,4 @@
+import React from "react";
 import * as SystemUI from 'expo-system-ui';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -28,7 +29,9 @@ import TopicsScreen from "./screens/TopicsScreen";
 import SettingsScreen from "./screens/SettingScreen";
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
+import * as amplitude from '@amplitude/analytics-react-native';
 
+amplitude.init('33a7082e1ce0f0ef2537efba687ec11b');
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
         shouldShowAlert: true,
@@ -239,6 +242,7 @@ function BottomTabs() {
 export default function App() {
     const [ready, setReady] = useState(false);
     // const [expoPushToken, setExpoPushToken] = useState('');
+    const routeNameRef: any = useRef();
     const responseListener: any = useRef();
 
     useEffect(() => {
@@ -256,12 +260,10 @@ export default function App() {
                 const applicationId = await Storage.getData('applicationId');
                 await Storage.storeData('fcmToken', JSON.stringify(token));
 
-                console.log(JSON.stringify({
-                    applicationId: applicationId,
-                    fcmToken: token
-                }));
-
-
+                // console.log(JSON.stringify({
+                //     applicationId: applicationId,
+                //     fcmToken: token
+                // }));
 
                 // await fetch('https://dailyscoop.africa/token', {
                 //     method: 'POST',
@@ -277,9 +279,8 @@ export default function App() {
             });
 
         responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-            // console.log(response.notification.request.content)
             const data = response.notification.request.content.data;
-            if (data.name && data.params) navigateTo(data.name, data.params);
+            if (data) navigateTo(data.route, data.params);
 
             // navigateTo("Feed", { screen: 'News' });
             // navigateTo("Topic", { topic: "news", topicTitle: "news" });
@@ -306,27 +307,43 @@ export default function App() {
     }, []);
 
     const onLayoutRootView = useCallback(async () => {
-        if (ready) {
-            await SplashScreen.hideAsync();
-        }
+        if (ready) await SplashScreen.hideAsync();
     }, [ready]);
 
-    if (!ready) {
-        return null;
-    }
+    if (!ready) return null;
 
     return (
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
-                <NavigationContainer onReady={() => onLayoutRootView()} ref={ navigationRef }>
+                <NavigationContainer
+                    ref={ navigationRef }
+                    onReady={
+                        async () => {
+                            await onLayoutRootView();
+                            routeNameRef.current = navigationRef.getCurrentRoute()?.name;
+                        }
+                    }
+                    onStateChange={async () => {
+                        const previousRouteName = routeNameRef.current;
+                        const currentRouteName = navigationRef.getCurrentRoute()?.name;
+
+                        if (previousRouteName !== currentRouteName) {
+                            amplitude.track('Page View', {
+                                screen_name: currentRouteName,
+                                screen_class: currentRouteName,
+                            });
+                        }
+
+                        routeNameRef.current = currentRouteName;
+                    }}
+                >
                     <Stack.Navigator
                         screenOptions={() => ({
                             headerStyle: { backgroundColor: 'rgba(28, 28, 28, 1)' },
                             headerTintColor: '#989898',
                             headerTitleStyle: { fontFamily: 'Aeonik-Bold', letterSpacing: 0.5, fontSize: 20, paddingBottom: 0, alignItem: 'center' },
                             headerShadowVisible: false,
-                            headerBackTitleVisible: false,
-                           //  headerTitleAlign: 'center'
+                            headerBackTitleVisible: false
                         })}
                     >
                         <Stack.Screen
