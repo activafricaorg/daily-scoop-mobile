@@ -260,22 +260,22 @@ export default function App() {
                 const applicationId = await Storage.getData('applicationId');
                 await Storage.storeData('fcmToken', JSON.stringify(token));
 
-                // console.log(JSON.stringify({
-                //     applicationId: applicationId,
-                //     fcmToken: token
-                // }));
+                console.log(JSON.stringify({
+                    applicationId: applicationId,
+                    fcmToken: token
+                }));
 
-                // await fetch('https://dailyscoop.africa/token', {
-                //     method: 'POST',
-                //     headers: {
-                //         Accept: 'application/json',
-                //         'Content-Type': 'application/json',
-                //     },
-                //     body: JSON.stringify({
-                //         applicationId: applicationId,
-                //         fcmToken: token
-                //     })
-                // });
+                await fetch('https://dailyscoop.africa/token', {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        applicationId: applicationId,
+                        fcmToken: token
+                    })
+                });
             });
 
         responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
