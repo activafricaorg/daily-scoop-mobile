@@ -265,7 +265,7 @@ export default function App() {
                     fcmToken: token
                 }));
 
-                await fetch('https://dailyscoop.africa/token', {
+                await fetch('https://api.dailyscoop.africa/token', {
                     method: 'POST',
                     headers: {
                         Accept: 'application/json',
