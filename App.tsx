@@ -260,10 +260,10 @@ export default function App() {
                 const applicationId = await Storage.getData('applicationId');
                 await Storage.storeData('fcmToken', JSON.stringify(token));
 
-                console.log(JSON.stringify({
-                    applicationId: applicationId,
-                    fcmToken: token
-                }));
+                // console.log(JSON.stringify({
+                //     applicationId: applicationId,
+                //     fcmToken: token
+                // }));
 
                 await fetch('https://api.dailyscoop.africa/token', {
                     method: 'POST',

@@ -16,16 +16,14 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.omeiza.dailyscoopmobile",
-      "googleServicesFile": "./GoogleService-Info.plist"
+      "bundleIdentifier": "com.omeiza.dailyscoopmobile"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0f0f0f"
       },
-      "package": "com.omeiza.dailyscoopmobile",
-      "googleServicesFile": "./google-services.json"
+      "package": "com.omeiza.dailyscoopmobile"
     },
     "plugins": [
       [
