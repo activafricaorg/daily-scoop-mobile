@@ -9,7 +9,7 @@ export default function Layout (props: {children: string | JSX.Element | JSX.Ele
 	if (!network) return (
 		<View style={{flex: 1, justifyContent: "center", backgroundColor: '#0f0f0f', alignItems: 'center', paddingLeft: 20, paddingRight: 20}}>
 			<MaterialIcons name="wifi-off" size={48} color={"#646464"} style={{marginBottom: 10}} />
-			<Text style={{fontFamily: 'Aeonik-Bold', fontSize: 24, color: '#646464', marginBottom: 3, letterSpacing: 0.5}}>Connection Error</Text>
+			<Text style={{fontFamily: 'Aeonik-Medium', fontSize: 24, color: '#646464', marginBottom: 3, letterSpacing: 0.5}}>Connection Error</Text>
 			<Text style={{fontFamily: 'Aeonik-Medium', fontSize: 18, color: '#646464', letterSpacing: 0.5}}>Please check your connectivity</Text>
 		</View>
 	);

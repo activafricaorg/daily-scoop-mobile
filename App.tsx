@@ -92,7 +92,7 @@ async function registerForPushNotificationsAsync() {
         alert('Must use physical device for Push Notifications');
     }
 
-    return token.data;
+    return token?.data;
 }
 
 SplashScreen.preventAutoHideAsync().then(() => { return null; });
@@ -186,7 +186,7 @@ function BottomTabs() {
                 tabBarLabelStyle: { marginTop: 0, marginBottom: 5, fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 13, lineHeight: 15 },
                 headerStyle: { backgroundColor: 'rgba(28, 28, 28, 1)', borderBottomWidth: 0 },
                 headerTintColor: '#989898',
-                headerTitleStyle: { fontFamily: 'Aeonik-Bold', letterSpacing: 0.5, fontSize: 20, paddingBottom: 0, lineHeight: 24 },
+                headerTitleStyle: { fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 20, paddingBottom: 0, lineHeight: 24 },
                 headerShadowVisible: false,
                 headerBackTitleVisible: false,
                 headerTitleAlign: 'center'
@@ -257,40 +257,43 @@ export default function App() {
 
         registerForPushNotificationsAsync()
             .then(async token => {
-                const applicationId = await Storage.getData('applicationId');
-                await Storage.storeData('fcmToken', JSON.stringify(token));
+                if (token) {
+                    const applicationId = await Storage.getData('applicationId');
+                    await Storage.storeData('fcmToken', JSON.stringify(token));
 
-                // console.log(JSON.stringify({
-                //     applicationId: applicationId,
-                //     fcmToken: token
-                // }));
+                    // console.log(JSON.stringify({
+                    //     applicationId: applicationId,
+                    //     fcmToken: token
+                    // }));
 
-                await fetch('https://api.dailyscoop.africa/token', {
-                    method: 'POST',
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        applicationId: applicationId,
-                        fcmToken: token
-                    })
-                });
+                    await fetch('https://api.dailyscoop.africa/token', {
+                        method: 'POST',
+                        headers: {
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            applicationId: applicationId,
+                            fcmToken: token
+                        })
+                    });
+                }
             });
 
         responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-            const data = response.notification.request.content.data;
-            if (data) navigateTo(data.route, data.params);
+            if (response.notification.request.content) {
+                const data = response.notification.request.content.data;
+                if (data) navigateTo(data.route, data.params);
 
-            // navigateTo("Feed", { screen: 'News' });
-            // navigateTo("Topic", { topic: "news", topicTitle: "news" });
-            // navigateTo("Publisher", { source: "guardian nigeria", sourceTitle: "Guardian Nigeria" });
+                // navigateTo("Feed", { screen: 'News' });
+                // navigateTo("Topic", { topic: "news", topicTitle: "news" });
+                // navigateTo("Publisher", { source: "guardian nigeria", sourceTitle: "Guardian Nigeria" });
+            }
         });
 
         async function prepare() {
             try {
                 await Font.loadAsync({
-                    'Aeonik-Bold': require('./assets/fonts/Aeonik-Bold.otf'),
                     'Aeonik-Medium': require('./assets/fonts/Aeonik-Medium.otf'),
                     'Aeonik-Regular': require('./assets/fonts/Aeonik-Regular.otf'),
                 });
@@ -341,7 +344,7 @@ export default function App() {
                         screenOptions={() => ({
                             headerStyle: { backgroundColor: 'rgba(28, 28, 28, 1)' },
                             headerTintColor: '#989898',
-                            headerTitleStyle: { fontFamily: 'Aeonik-Bold', letterSpacing: 0.5, fontSize: 20, paddingBottom: 0, alignItem: 'center' },
+                            headerTitleStyle: { fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 20, paddingBottom: 0, alignItem: 'center' },
                             headerShadowVisible: false,
                             headerBackTitleVisible: false
                         })}

@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import { Link } from "@react-navigation/native";
 import { abbreviateNumber, capitalize, slugifyText } from "../util/helper";
 import Layout from "../components/Layout";

@@ -76,7 +76,7 @@ export default function SettingsScreen(props: { route: any; navigation: any; }) 
 									) : (
 										<Ionicons name="md-earth-sharp" size={28} color={'#989898'} />
 									)}
-									<Text style={{fontFamily: 'Aeonik-Bold', letterSpacing: 0.5, fontSize: 18, color: '#989898', textAlign: 'center', marginHorizontal: 12, lineHeight: 16, marginTop: 3}}>{selectedItem ? selectedItem.title : 'All African Countries'}</Text>
+									<Text style={{fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 18, color: '#989898', textAlign: 'center', marginHorizontal: 12, lineHeight: 16, marginTop: 3}}>{selectedItem ? selectedItem.title : 'All African Countries'}</Text>
 								</View>
 							);
 						}}
@@ -84,7 +84,7 @@ export default function SettingsScreen(props: { route: any; navigation: any; }) 
 							return (
 								<View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingHorizontal: 18}}>
 									<Image source={item.image} style={{width: 30, height: 22}} />
-									<Text style={{fontFamily: 'Aeonik-Bold', letterSpacing: 0.5, fontSize: 18, color: '#989898', textAlign: 'center', marginHorizontal: 12, lineHeight: 16, marginTop: 3}}>{item.title}</Text>
+									<Text style={{fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 18, color: '#989898', textAlign: 'center', marginHorizontal: 12, lineHeight: 16, marginTop: 3}}>{item.title}</Text>
 								</View>
 							);
 						}}

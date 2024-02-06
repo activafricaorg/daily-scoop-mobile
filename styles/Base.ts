@@ -97,7 +97,7 @@ export default StyleSheet.create({
 	button: {
 		display: 'flex',
 		alignSelf: "flex-start",
-		fontFamily: 'Aeonik-Bold',
+		fontFamily: 'Aeonik-Medium',
 		letterSpacing: 0.5,
 		color: '#0f0f0f',
 		backgroundColor: '#f28d28',
