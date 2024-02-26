@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Daily Scoop",
-    "slug": "daily-scoop-africa",
+    "slug": "daily-scoop-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
