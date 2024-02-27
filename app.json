@@ -16,7 +16,8 @@
     ],
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.omeiza.dailyscoop"
+      "bundleIdentifier": "com.omeiza.dailyscoop",
+      "buildNumber": "1"
     },
     "android": {
       "adaptiveIcon": {
@@ -24,7 +25,7 @@
         "backgroundColor": "#0f0f0f"
       },
       "package": "com.omeiza.dailyscoop",
-      "versionCode": 2
+      "versionCode": 1
     },
     "plugins": [
       [
