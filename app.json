@@ -23,7 +23,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0f0f0f"
       },
-      "package": "com.omeiza.dailyscoop"
+      "package": "com.omeiza.dailyscoop",
+      "versionCode": 2
     },
     "plugins": [
       [
