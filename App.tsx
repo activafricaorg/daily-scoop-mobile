@@ -96,7 +96,7 @@ function FeedTabs({country}: {country: string}) {
                 headerTitleStyle: { fontFamily: 'Aeonik-Medium', fontSize: 20 },
                 tabBarActiveTintColor: '#f28d28',
                 tabBarInactiveTintColor: '#989898',
-                tabBarStyle: { backgroundColor: '#1f1f1f', paddingBottom: 8, paddingTop: insets.top + 10, paddingLeft: insets.left, paddingRight: insets.right, borderBottomWidth: 1, borderBottomColor: 'rgba(241,154,61,0.04)' },
+                tabBarStyle: { backgroundColor: '#1f1f1f', paddingBottom: 8, paddingTop: insets.top + 10, paddingLeft: insets.left, paddingRight: insets.right, borderBottomWidth: 1, borderBottomColor: 'rgba(241,154,61,0.08)' },
                 tabBarLabelStyle: { marginTop: 3, fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, textTransform: 'capitalize', fontSize: 18, lineHeight: 24 },
                 tabBarIndicatorStyle: { backgroundColor: '#f28d28', height: 3 },
                 tabBarScrollEnabled: true
@@ -160,9 +160,9 @@ function BottomTabs() {
             screenOptions={() => ({
                 tabBarActiveTintColor: '#f28d28',
                 tabBarInactiveTintColor: '#989898',
-                tabBarStyle: { paddingTop: 12, height: 62, paddingBottom: insets.bottom, borderTopWidth: 1, borderTopColor: 'rgba(241,154,61,0.04)', borderBottomWidth: 0, backgroundColor: '#1f1f1f' },
+                tabBarStyle: { paddingTop: 12, height: 62, paddingBottom: insets.bottom, borderTopWidth: 1, borderTopColor: 'rgba(241,154,61,0.08)', borderBottomWidth: 0, backgroundColor: '#1f1f1f' },
                 tabBarLabelStyle: { marginTop: 4, marginBottom: 12, fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 13, lineHeight: 15 },
-                headerStyle: { backgroundColor: '#1f1f1f', borderBottomWidth: 1, borderTopColor: 'rgba(241,154,61,0.04)' },
+                headerStyle: { backgroundColor: '#1f1f1f', borderBottomWidth: 1, borderBottomColor: 'rgba(241,154,61,0.08)' },
                 headerTintColor: '#989898',
                 headerTitleStyle: { fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 20, paddingBottom: 0, lineHeight: 24 },
                 headerShadowVisible: false,
@@ -319,7 +319,7 @@ export default function App() {
                 >
                     <Stack.Navigator
                         screenOptions={() => ({
-                            headerStyle: { backgroundColor: '#1f1f1f' },
+                            headerStyle: { backgroundColor: '#1f1f1f', borderBottomWidth: 1, borderBottomColor: 'rgba(241,154,61,0.08)' },
                             headerTintColor: '#989898',
                             headerTitleStyle: { fontFamily: 'Aeonik-Medium', letterSpacing: 0.5, fontSize: 20, paddingBottom: 0, alignItem: 'center' },
                             headerShadowVisible: false,
